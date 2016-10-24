@@ -36,11 +36,23 @@
 # limitations under the License.
 # ============================================================================
 #
-from pyAttribute import Attribute, AttributeHelperMixin
+from . import Attribute, AttributeHelperMixin
+
+
+class CommandGroupAttribute(Attribute):
+	__groupName = ""
+	
+	def __init__(self, groupName):
+		super().__init__()
+		self.__groupName = groupName
+	
+	@property
+	def GroupName(self):
+		return self.__groupName
 
 
 class DefaultAttribute(Attribute):
-	__handler =	None
+	__handler = None
 	
 	def __call__(self, func):
 		self.__handler = func
@@ -52,14 +64,14 @@ class DefaultAttribute(Attribute):
 
 
 class CommandAttribute(Attribute):
-	__command =	""
-	__handler =	None
-	__kwargs =	None
-
+	__command = ""
+	__handler = None
+	__kwargs =  None
+	
 	def __init__(self, command, **kwargs):
 		super().__init__()
-		self.__command =	command
-		self.__kwargs =		kwargs
+		self.__command = command
+		self.__kwargs = kwargs
 	
 	def __call__(self, func):
 		self.__handler = func
@@ -68,7 +80,7 @@ class CommandAttribute(Attribute):
 	@property
 	def Command(self):
 		return self.__command
-		
+	
 	@property
 	def Handler(self):
 		return self.__handler
@@ -76,16 +88,16 @@ class CommandAttribute(Attribute):
 	@property
 	def KWArgs(self):
 		return self.__kwargs
-		
-		
-class ArgumentAttribute(Attribute):
-	__args =		None
-	__kwargs =	None
 
+
+class ArgumentAttribute(Attribute):
+	__args =    None
+	__kwargs =  None
+	
 	def __init__(self, *args, **kwargs):
 		super().__init__()
-		self.__args =		args
-		self.__kwargs =	kwargs
+		self.__args =   args
+		self.__kwargs = kwargs
 	
 	@property
 	def Args(self):
@@ -94,21 +106,29 @@ class ArgumentAttribute(Attribute):
 	@property
 	def KWArgs(self):
 		return self.__kwargs
-	
-	
+
+
 class SwitchArgumentAttribute(ArgumentAttribute):
 	def __init__(self, *args, **kwargs):
-		kwargs['action'] =	"store_const"
-		kwargs['const'] =		True
-		kwargs['default'] =	False
+		kwargs['action'] =  "store_const"
+		kwargs['const'] =   True
+		kwargs['default'] = False
 		super().__init__(*args, **kwargs)
 
 
-class ArgParseMixin(AttributeHelperMixin):
-	__mainParser = 	None
-	__subParser =		None
-	__subParsers =	{}
+class CommonArgumentAttribute(ArgumentAttribute):
+	pass
 
+
+class CommonSwitchArgumentAttribute(SwitchArgumentAttribute):
+	pass
+
+
+class ArgParseMixin(AttributeHelperMixin):
+	__mainParser =  None
+	__subParser =   None
+	__subParsers =  {}
+	
 	def __init__(self, **kwargs):
 		super().__init__()
 		
@@ -117,7 +137,15 @@ class ArgParseMixin(AttributeHelperMixin):
 		self.__mainParser = argparse.ArgumentParser(**kwargs)
 		self.__subParser = self.__mainParser.add_subparsers(help='sub-command help')
 		
-		for _,func in self.GetMethods():
+		for _, func in CommonArgumentAttribute.GetMethods(self):
+			for comAttribute in CommonArgumentAttribute.GetAttributes(func):
+				self.__mainParser.add_argument(*(comAttribute.Args), **(comAttribute.KWArgs))
+		
+		for _, func in CommonSwitchArgumentAttribute.GetMethods(self):
+			for comAttribute in CommonSwitchArgumentAttribute.GetAttributes(func):
+				self.__mainParser.add_argument(*(comAttribute.Args), **(comAttribute.KWArgs))
+		
+		for _, func in self.GetMethods():
 			defAttributes = DefaultAttribute.GetAttributes(func)
 			if (len(defAttributes) != 0):
 				defAttribute = defAttributes[0]
@@ -132,7 +160,7 @@ class ArgParseMixin(AttributeHelperMixin):
 				
 				for argAttribute in ArgumentAttribute.GetAttributes(func):
 					subParser.add_argument(*(argAttribute.Args), **(argAttribute.KWArgs))
-
+				
 				self.__subParsers[cmdAttribute.Command] = subParser
 				continue
 	

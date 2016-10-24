@@ -36,46 +36,65 @@
 # limitations under the License.
 # ============================================================================
 #
-class Attribute():
-	AttributesMemberName = "__attributes__"
+class Attribute:
+	__AttributesMemberName__ = "__pyattr__"
+	_debug = False
 	
 	def __call__(self, func):
-		# inherit attributes and append myself or create a new attributes list
-		if (func.__dict__.__contains__(Attribute.AttributesMemberName)):
-			func.__dict__[Attribute.AttributesMemberName].append(self)
-		else:
-			func.__setattr__(Attribute.AttributesMemberName, [self])
+		self._AppendAttribute(func, self)
 		return func
+	
+	@staticmethod
+	def _AppendAttribute(func, attribute):
+		# inherit attributes and append myself or create a new attributes list
+		if (Attribute.__AttributesMemberName__ in func.__dict__):
+			func.__dict__[Attribute.__AttributesMemberName__].append(attribute)
+		else:
+			func.__setattr__(Attribute.__AttributesMemberName__, [attribute])
 	
 	def __str__(self):
 		return self.__name__
 	
 	@classmethod
-	def GetAttributes(self, method):
-		if method.__dict__.__contains__(Attribute.AttributesMemberName):
-			attributes = method.__dict__[Attribute.AttributesMemberName]
+	def GetMethods(cls, cl):
+		methods = {}
+		for funcname, func in cl.__class__.__dict__.items():
+			if hasattr(func, '__dict__'):
+				if (Attribute.__AttributesMemberName__ in func.__dict__):
+					attributes = func.__dict__[Attribute.__AttributesMemberName__]
+					if isinstance(attributes, list):
+						for attribute in attributes:
+							if isinstance(attribute, cls):
+								methods[funcname] = func
+		return methods.items()
+	
+	@classmethod
+	def GetAttributes(cls, method):
+		if (Attribute.__AttributesMemberName__ in method.__dict__):
+			attributes = method.__dict__[Attribute.__AttributesMemberName__]
 			if isinstance(attributes, list):
-				return [attribute for attribute in attributes if isinstance(attribute, self)]
+				return [attribute for attribute in attributes if isinstance(attribute, cls)]
 		return list()
 
 
-class AttributeHelperMixin():
+class AttributeHelperMixin:
 	def GetMethods(self):
-		return {funcname: func
-						for funcname, func in self.__class__.__dict__.items()
-						if hasattr(func, '__dict__')
-						}.items()
+		return {
+				funcname: func
+				for funcname, func in self.__class__.__dict__.items()
+				if hasattr(func, '__dict__')
+			}.items()
 	
 	def HasAttribute(self, method):
-		if method.__dict__.__contains__(Attribute.AttributesMemberName):
-			attributeList = method.__dict__[Attribute.AttributesMemberName]
+		if (Attribute.__AttributesMemberName__ in method.__dict__):
+			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			return (isinstance(attributeList, list) and (len(attributeList) != 0))
 		else:
 			return False
 	
 	def GetAttributes(self, method):
-		if method.__dict__.__contains__(Attribute.AttributesMemberName):
-			attributeList = method.__dict__[Attribute.AttributesMemberName]
+		if (Attribute.__AttributesMemberName__ in method.__dict__):
+			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			if isinstance(attributeList, list):
 				return attributeList
 		return list()

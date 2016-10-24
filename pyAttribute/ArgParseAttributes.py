@@ -13,7 +13,7 @@
 # =============================================================================
 # Authors:						Patrick Lehmann
 # 
-# Python Executable:	pyAttribute Testcase 1
+# Python module:	    pyAttributes for ArgParse
 #
 # Description:
 # ------------------------------------
@@ -21,7 +21,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2007-2015 Patrick Lehmann - Dresden, Germany
+# Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,13 +36,72 @@
 # limitations under the License.
 # ============================================================================
 #
-from pyAttribute import AttributeHelperMixin
-from pyAttribute.ArgParseAttributes import DefaultAttribute, CommandAttribute, ArgumentAttribute, SwitchArgumentAttribute
+from pyAttribute import Attribute, AttributeHelperMixin
 
 
-class MyBase():
-	def __init__(self):
-		pass
+class DefaultAttribute(Attribute):
+	__handler =	None
+	
+	def __call__(self, func):
+		self.__handler = func
+		return super().__call__(func)
+	
+	@property
+	def Handler(self):
+		return self.__handler
+
+
+class CommandAttribute(Attribute):
+	__command =	""
+	__handler =	None
+	__kwargs =	None
+
+	def __init__(self, command, **kwargs):
+		super().__init__()
+		self.__command =	command
+		self.__kwargs =		kwargs
+	
+	def __call__(self, func):
+		self.__handler = func
+		return super().__call__(func)
+	
+	@property
+	def Command(self):
+		return self.__command
+		
+	@property
+	def Handler(self):
+		return self.__handler
+	
+	@property
+	def KWArgs(self):
+		return self.__kwargs
+		
+		
+class ArgumentAttribute(Attribute):
+	__args =		None
+	__kwargs =	None
+
+	def __init__(self, *args, **kwargs):
+		super().__init__()
+		self.__args =		args
+		self.__kwargs =	kwargs
+	
+	@property
+	def Args(self):
+		return self.__args
+	
+	@property
+	def KWArgs(self):
+		return self.__kwargs
+	
+	
+class SwitchArgumentAttribute(ArgumentAttribute):
+	def __init__(self, *args, **kwargs):
+		kwargs['action'] =	"store_const"
+		kwargs['const'] =		True
+		kwargs['default'] =	False
+		super().__init__(*args, **kwargs)
 
 
 class ArgParseMixin(AttributeHelperMixin):
@@ -90,52 +149,3 @@ class ArgParseMixin(AttributeHelperMixin):
 	@property
 	def SubParsers(self):
 		return self.__subParsers
-
-
-class prog(MyBase, ArgParseMixin):
-	def __init__(self):
-		import argparse
-		import textwrap
-		
-		# call constructor of the main interitance tree
-		MyBase.__init__(self)
-		
-		# Call the constructor of the ArgParseMixin
-		ArgParseMixin.__init__(self,
-			# prog =	self.program,
-			# usage =	"Usage?",			# override usage string
-			description = textwrap.dedent('''\
-				This is the Admin Service Tool.
-				'''),
-			epilog =	"Epidingsbums",
-			formatter_class = argparse.RawDescriptionHelpFormatter,
-			add_help=False)
-
-		self.MainParser.add_argument('-v', '--verbose',	dest="verbose",	help='print out detailed messages',	action='store_const', const=True, default=False)
-		self.MainParser.add_argument('-d', '--debug',		dest="debug",		help='enable debug mode',						action='store_const', const=True, default=False)
-	
-	def Run(self):
-		ArgParseMixin.Run(self)
-	
-	@DefaultAttribute()
-	def HandleDefault(self, args):
-		print("DefaultHandler: verbose={0}  debug={1}".format(str(args.verbose), str(args.debug)))
-	
-	@CommandAttribute('help', help="help help")
-	def HandleHelp(self, _):
-		print("HandleHelp:")
-	
-	@CommandAttribute("prog", help="my new command")
-	@ArgumentAttribute(metavar='<DeviceID>', dest="DeviceID", type=str, help='todo help')
-	@ArgumentAttribute(metavar='<BitFile>', dest="Filename", type=str, help='todo help')
-	def HandleProg(self, args):
-		print("HandleProg: DeviceID={0}  BitFile={1}".format(args.DeviceID, args.Filename))
-	
-	@CommandAttribute("list", help="my new command")
-	@SwitchArgumentAttribute('--all', dest="all", help='show all devices, otherwise only available')
-	def HandleList(self, args):
-		print("HandleList: all={0}".format(str(args.all)))
-
-
-p = prog()
-p.Run()

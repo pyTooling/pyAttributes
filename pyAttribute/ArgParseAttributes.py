@@ -39,6 +39,19 @@
 from . import Attribute, AttributeHelperMixin
 
 
+__api__ = [
+	'CommandGroupAttribute',
+	'DefaultAttribute',
+	'CommandAttribute',
+	'ArgumentAttribute',
+	'SwitchArgumentAttribute',
+	'CommonArgumentAttribute',
+	'CommonSwitchArgumentAttribute',
+	'ArgParseMixin'
+]
+__all__ = __api__
+
+
 class CommandGroupAttribute(Attribute):
 	__groupName = ""
 	

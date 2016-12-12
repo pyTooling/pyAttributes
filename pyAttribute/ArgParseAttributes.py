@@ -38,7 +38,6 @@
 #
 from . import Attribute, AttributeHelperMixin
 
-
 __api__ = [
 	'CommandGroupAttribute',
 	'DefaultAttribute',
@@ -178,6 +177,12 @@ class ArgParseMixin(AttributeHelperMixin):
 				continue
 	
 	def Run(self):
+		try:
+			from argcomplete  import autocomplete
+			autocomplete(self.__mainParser)
+		except ImportError:
+			pass
+			
 		# parse command line options and process splitted arguments in callback functions
 		args = self.__mainParser.parse_args()
 		# because func is a function (unbound to an object), it MUST be called with self as a first parameter

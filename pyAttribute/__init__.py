@@ -36,6 +36,14 @@
 # limitations under the License.
 # ============================================================================
 #
+"""
+pyAttribute
+###########
+
+:copyright: Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
+:license: Apache License, Version 2.0
+"""
+
 __api__ = [
 	'Attribute',
 	'AttributeHelperMixin'

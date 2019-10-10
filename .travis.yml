@@ -13,4 +13,4 @@ deploy:
   skip_existing: true
   on:
     branch: master
-#    tags: true
+    tags: true

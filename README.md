@@ -1,3 +1,12 @@
+![GitHub](https://img.shields.io/github/license/Paebbels/pyAttribute)  
+![PyPI - License](https://img.shields.io/pypi/l/pyAttribute)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Paebbels/pyAttribute)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Paebbels/pyAttribute)
+![PyPI](https://img.shields.io/pypi/v/pyAttribute)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttribute)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttribute)
+![PyPI - Status](https://img.shields.io/pypi/status/pyAttribute)
+
 # pyAttribute
 
 **.NET-like Attributes implemented as Python decorators**

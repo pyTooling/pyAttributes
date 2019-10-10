@@ -2,4 +2,4 @@
 
 Contributor       | Contact E-Mail
 ------------------|------------------------------------------------------------
-Lehmann, Patrick  | Patrick.Lehmann@tu-dresden.de; Paebbels@gmail.com
+Lehmann, Patrick  | Patrick.Lehmann@plc2.de; Paebbels@gmail.com

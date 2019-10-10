@@ -41,7 +41,7 @@
 pyAttribute
 ###########
 
-:copyright: Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
+:copyright: Copyright 2007-2019 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
 

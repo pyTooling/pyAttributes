@@ -43,14 +43,14 @@ with open("README.md", "r") as file:
 	long_description = file.read()
 
 setuptools.setup(
-	name="pyAttribute",
-	version="0.2.1",
+	name="pyAttributes",
+	version="0.2.2",
 	author="Patrick Lehmann",
 	author_email="Paebbels@gmail.com",
 	description=".NET-like Attributes implemented as Python decorators.",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
-	url="https://github.com/Paebbels/pyAttribute",
+	url="https://github.com/Paebbels/pyAttributes",
 	packages=setuptools.find_packages(),
 	classifiers=[
 		"License :: OSI Approved :: Apache Software License",

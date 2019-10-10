@@ -6,7 +6,7 @@
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttribute)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttribute)
 
-# pyAttribute
+# pyAttributes
 
 **.NET-like Attributes implemented as Python decorators**
 
@@ -314,3 +314,9 @@ class ArgParseMixin(AttributeHelperMixin):
 	def SubParsers(self):
 		return self.__subParsers
 ```
+
+# List of Authors and Contributors (in alphabetical order)
+
+Contributor       | Contact E-Mail
+------------------|------------------------------------------------------------
+Lehmann, Patrick  | Patrick.Lehmann@plc2.de; Paebbels@gmail.com

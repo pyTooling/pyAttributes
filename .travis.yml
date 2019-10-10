@@ -1,5 +1,10 @@
 language: python
 
+install: skip
+
+script:
+  - echo "No tests. Just deploying to PyPI."
+
 deploy:
   provider: pypi
   user: "__token__"

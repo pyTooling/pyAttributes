@@ -1,10 +1,10 @@
-![PyPI - License](https://img.shields.io/pypi/l/pyAttribute)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Paebbels/pyAttribute) 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Paebbels/pyAttribute)  
-![PyPI](https://img.shields.io/pypi/v/pyAttribute)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttribute)](https://pypi.org/project/pyAttribute/)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttribute)
-![PyPI - Status](https://img.shields.io/pypi/status/pyAttribute)
+![PyPI - License](https://img.shields.io/pypi/l/pyAttributes)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes) 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Paebbels/pyAttributes)  
+![PyPI](https://img.shields.io/pypi/v/pyAttributes)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes)](https://pypi.org/project/pyAttributes/)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttributes)
+![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes)
 
 # pyAttributes
 

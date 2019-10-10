@@ -3,17 +3,16 @@
 # kate: tab-width 2; replace-tabs off; indent-width 2;
 #
 # =============================================================================
-#                 _   _   _        _ _           _
-#  _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___
-# | '_ \| | | | / _ \| __| __| '__| | '_ \| | | | __/ _ \
-# | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/
-# | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___|
-# |_|    |___/
-#
+#                  _   _   _        _ _           _
+#   _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___  ___
+#  | '_ \| | | | / _ \| __| __| '__| | '_ \| | | | __/ _ \/ __|
+#  | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/\__ \
+#  | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
+#  |_|    |___/
 # =============================================================================
 # Authors:						Patrick Lehmann
 #
-# Python package:	    pyAttribute Implementation
+# Python package:	    pyAttributes Package Configuration.
 #
 # Description:
 # ------------------------------------
@@ -43,8 +42,8 @@ with open("README.md", "r") as file:
 	long_description = file.read()
 
 setuptools.setup(
-	name="pyAttributes",
-	version="0.2.2",
+	name="pyAttribute",
+	version="0.2.3",
 	author="Patrick Lehmann",
 	author_email="Paebbels@gmail.com",
 	description=".NET-like Attributes implemented as Python decorators.",

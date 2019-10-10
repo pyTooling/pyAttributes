@@ -3,17 +3,16 @@
 # kate: tab-width 2; replace-tabs off; indent-width 2;
 # 
 # =============================================================================
-#                 _   _   _        _ _           _       
-#  _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___ 
-# | '_ \| | | | / _ \| __| __| '__| | '_ \| | | | __/ _ \
-# | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/
-# | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___|
-# |_|    |___/                                           
-# 
+#                  _   _   _        _ _           _
+#   _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___  ___
+#  | '_ \| | | | / _ \| __| __| '__| | '_ \| | | | __/ _ \/ __|
+#  | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/\__ \
+#  | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
+#  |_|    |___/
 # =============================================================================
 # Authors:						Patrick Lehmann
 # 
-# Python module:	    pyAttributes for ArgParse
+# Python module:	    pyAttribute for Python's argparse Package.
 #
 # Description:
 # ------------------------------------
@@ -184,7 +183,7 @@ class ArgParseMixin(AttributeHelperMixin):
 		except ImportError:
 			pass
 			
-		# parse command line options and process splitted arguments in callback functions
+		# parse command line options and process split arguments in callback functions
 		args = self.__mainParser.parse_args()
 		# because func is a function (unbound to an object), it MUST be called with self as a first parameter
 		args.func(self, args)

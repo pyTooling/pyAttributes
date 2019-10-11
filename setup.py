@@ -42,7 +42,7 @@ with open("README.md", "r") as file:
 	long_description = file.read()
 
 setuptools.setup(
-	name="pyAttribute",
+	name="pyAttributes",
 	version="0.2.3",
 	author="Patrick Lehmann",
 	author_email="Paebbels@gmail.com",

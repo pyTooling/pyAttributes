@@ -81,7 +81,26 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-
+# ==============================================================================
+# Sphinx.Ext.InterSphinx
+# ==============================================================================
 intersphinx_mapping = {
 	'python': ('https://docs.python.org/3', None)
 }
+
+
+# ==============================================================================
+# Sphinx.Ext.ExtLinks
+# ==============================================================================
+extlinks = {
+	'issue': ('https://github.com/Paebbels/pyAttributes/issues/%s', 'issue #'),
+	'pull':  ('https://github.com/Paebbels/pyAttributes/pull/%s', 'pull request #'),
+	'src':   ('https://github.com/Paebbels/pyAttributes/blob/master/pyAttributes/%s?ts=2', None),
+#	'test':  ('https://github.com/Paebbels/pyAttributes/blob/master/test/%s?ts=2', None)
+}
+
+
+# ==============================================================================
+# Sphinx.Ext.Graphviz
+# ==============================================================================
+graphviz_output_format = "svg"

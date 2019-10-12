@@ -39,7 +39,7 @@ Updating using PIP
    ArgParse
 
 .. toctree::
-   :caption: Attribute Classes:
+   :caption: Attribute Classes
    :hidden:
 
    pyAttributes

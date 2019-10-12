@@ -1,8 +1,9 @@
 ![PyPI - License](https://img.shields.io/pypi/l/pyAttributes)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes) 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Paebbels/pyAttributes)  
-![PyPI](https://img.shields.io/pypi/v/pyAttributes)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes)](https://pypi.org/project/pyAttributes/)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Paebbels/pyAttributes)
+[![Documentation Status](https://readthedocs.org/projects/pyattributes/badge/?version=latest)](https://pyattributes.readthedocs.io/en/latest/?badge=latest)    
+[![PyPI](https://img.shields.io/pypi/v/pyAttributes)](https://pypi.org/project/pyAttributes/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttributes)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes)
 
@@ -315,8 +316,15 @@ class ArgParseMixin(AttributeHelperMixin):
 		return self.__subParsers
 ```
 
-# List of Authors and Contributors (in alphabetical order)
+## Contributors:
 
-Contributor       | Contact E-Mail
-------------------|------------------------------------------------------------
-Lehmann, Patrick  | Patrick.Lehmann@plc2.de; Paebbels@gmail.com
+* [Patrick Lehmann](https://github.com/Paebbels) (Maintainer)
+
+
+## License
+
+This library is licensed under [Apache License 2.0](LICENSE.md)
+
+-------------------------
+
+SPDX-License-Identifier: Apache-2.0

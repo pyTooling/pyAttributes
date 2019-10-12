@@ -10,9 +10,9 @@
 #  | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
 #  |_|    |___/
 # =============================================================================
-# Authors:						Patrick Lehmann
+# Authors:            Patrick Lehmann
 #
-# Python package:	    pyAttributes Package Configuration.
+# Package installer:  pyAttributes Package Configuration.
 #
 # Description:
 # ------------------------------------
@@ -41,19 +41,42 @@ import setuptools
 with open("README.md", "r") as file:
 	long_description = file.read()
 
+requirements = []
+with open("requirements.txt") as file:
+	for line in file.readlines():
+		requirements.append(line)
+
+projectName = "pyAttributes"
+
+github_url =  "https://github.com/Paebbels/" + projectName
+rtd_url =     "https://" + projectName + ".readthedocs.io/en/latest/"
+
 setuptools.setup(
-	name="pyAttributes",
-	version="0.2.3",
+	name=projectName,
+	version="0.2.4",
+
 	author="Patrick Lehmann",
 	author_email="Paebbels@gmail.com",
+	# maintainer="Patrick Lehmann",
+	# maintainer_email="Paebbels@gmail.com",
+
 	description=".NET-like Attributes implemented as Python decorators.",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
-	url="https://github.com/Paebbels/pyAttributes",
+
+	url=github_url,
+	project_urls={
+		'Documentation': rtd_url,
+		'Source Code':   github_url,
+		'Issue Tracker': github_url + "/issues"
+	},
+	# download_url="",
+
 	packages=setuptools.find_packages(),
 	classifiers=[
 		"License :: OSI Approved :: Apache Software License",
 		"Operating System :: OS Independent",
+		"Programming Language :: Python :: 3 :: Only",
 		"Programming Language :: Python :: 3.5",
 		"Programming Language :: Python :: 3.6",
 		"Programming Language :: Python :: 3.7",
@@ -61,5 +84,10 @@ setuptools.setup(
 		"Development Status :: 5 - Production/Stable",
 		"Topic :: Utilities"
 	],
+	keywords="Python3 Decorators",
+
 	python_requires='>=3.5',
+	install_requires=requirements,
+	# provides=
+	# obsoletes=
 )

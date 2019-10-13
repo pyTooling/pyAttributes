@@ -10,9 +10,9 @@
 #  | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
 #  |_|    |___/
 # =============================================================================
-# Authors:						Patrick Lehmann
+# Authors:            Patrick Lehmann
 #
-# Python package:	    pyAttributes Implementation
+# Python package:     pyAttributes Implementation
 #
 # Description:
 # ------------------------------------
@@ -27,7 +27,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#		http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,15 +52,19 @@ __api__ = [
 ]
 __all__ = __api__
 
+# TODO: implement class, method, function attributes
+# TODO: implement unique attributes
+# TODO: add an attacheHelper methods option
+# TODO: implement a static HasAttribute method
 
 class Attribute:
 	__AttributesMemberName__ = "__pyattr__"
 	_debug = False
-	
+
 	def __call__(self, func):
 		self._AppendAttribute(func, self)
 		return func
-	
+
 	@staticmethod
 	def _AppendAttribute(func, attribute):
 		# inherit attributes and append myself or create a new attributes list
@@ -68,10 +72,10 @@ class Attribute:
 			func.__dict__[Attribute.__AttributesMemberName__].append(attribute)
 		else:
 			func.__setattr__(Attribute.__AttributesMemberName__, [attribute])
-	
+
 	def __str__(self):
 		return self.__name__
-	
+
 	@classmethod
 	def GetMethods(cls, cl):
 		methods = {}
@@ -84,7 +88,7 @@ class Attribute:
 							if isinstance(attribute, cls):
 								methods[funcname] = func
 		return methods.items()
-	
+
 	@classmethod
 	def GetAttributes(cls, method):
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
@@ -101,17 +105,17 @@ class AttributeHelperMixin:
 				for funcname, func in self.__class__.__dict__.items()
 				if hasattr(func, '__dict__')
 			}.items()
-	
+
 	@staticmethod
-	def HasAttribute(method):
+	def HasAttribute(method): # TODO: add a tuple based type filter
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			return (isinstance(attributeList, list) and (len(attributeList) != 0))
 		else:
 			return False
-	
+
 	@staticmethod
-	def GetAttributes(method):
+	def GetAttributes(method): # TODO: add a tuple based type filter
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			if isinstance(attributeList, list):

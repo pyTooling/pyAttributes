@@ -1,7 +1,6 @@
 # EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
 # vim: tabstop=2:shiftwidth=2:noexpandtab
 # kate: tab-width 2; replace-tabs off; indent-width 2;
-#
 # =============================================================================
 #                  _   _   _        _ _           _
 #   _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___  ___
@@ -58,10 +57,13 @@ __all__ = __api__
 # TODO: implement a static HasAttribute method
 
 class Attribute:
-	__AttributesMemberName__ = "__pyattr__"
+	"""Base-class for all pyAttributes."""
+
+	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
 	_debug = False
 
 	def __call__(self, func):
+		"""Make all ``Attribute`` classes callable, to they can be used as a decorator."""
 		self._AppendAttribute(func, self)
 		return func
 
@@ -91,6 +93,7 @@ class Attribute:
 
 	@classmethod
 	def GetAttributes(cls, method):
+		"""Returns attached attributes for a given method."""
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributes = method.__dict__[Attribute.__AttributesMemberName__]
 			if isinstance(attributes, list):
@@ -99,6 +102,8 @@ class Attribute:
 
 
 class AttributeHelperMixin:
+	"""A mixin class to ease finding methods with attached pyAttributes."""
+
 	def GetMethods(self):
 		return {
 				funcname: func
@@ -108,6 +113,7 @@ class AttributeHelperMixin:
 
 	@staticmethod
 	def HasAttribute(method): # TODO: add a tuple based type filter
+		"""Returns true, if the given method has pyAttributes attached."""
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			return (isinstance(attributeList, list) and (len(attributeList) != 0))
@@ -116,6 +122,7 @@ class AttributeHelperMixin:
 
 	@staticmethod
 	def GetAttributes(method): # TODO: add a tuple based type filter
+		"""Returns a list of pyAttributes attached to the given method."""
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			if isinstance(attributeList, list):

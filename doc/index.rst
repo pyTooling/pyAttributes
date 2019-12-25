@@ -1,28 +1,45 @@
+.. code-block::
+
+                     _   _   _        _ _           _
+      _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___  ___
+     | '_ \| | | | / _ \| __| __| '__| | '_ \| | | | __/ _ \/ __|
+     | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/\__ \
+     | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
+     |_|    |___/
+
 pyAttributes Documentation
 ##########################
 
 .NET-like Attributes implemented as Python decorators.
 
-
-Installation/Updates
-********************
-
-Installation using PIP
-======================
-
-.. code-block:: bash
-
-   pip3 install pyAttributes
+pyAttributes are implemented as class-based decorators.
 
 
-Updating using PIP
-==================
+Common Attributes
+*****************
 
-.. code-block:: bash
+* Attribute class
+* AttributeHelper class
 
-   pip3 install -U pyAttributes
+Special Attributes
+******************
+
+This package brings special attribute implementations for:
+
+* Python's ArgParse including sub-parser support.
 
 
+Contributors
+************
+
+* `Patrick Lehmann <https://github.com/Paebbels>`_ (Maintainer)
+
+
+
+License
+*******
+
+This library is licensed under **Apache License 2.0**.
 
 ------------------------------------
 
@@ -31,6 +48,13 @@ Updating using PIP
 .. only:: html
 
    This document was generated on |docdate|.
+
+.. toctree::
+   :caption: Overview
+   :hidden:
+
+   Installation
+   Dependencies
 
 .. toctree::
    :caption: Examples
@@ -43,11 +67,14 @@ Updating using PIP
    :hidden:
 
    pyAttributes
-   ArgParseAttributes
+   pyAttributes.ArgParseAttributes
 
 .. toctree::
    :caption: Appendix
    :hidden:
 
+   License
    genindex
+
+.. #
    py-modindex

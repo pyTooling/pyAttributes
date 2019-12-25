@@ -38,6 +38,7 @@
 # ============================================================================
 #
 # load dependencies
+from argparse   import ArgumentParser
 from .          import Attribute, AttributeHelperMixin
 
 
@@ -148,8 +149,7 @@ class ArgParseMixin(AttributeHelperMixin):
 		super().__init__()
 
 		# create a commandline argument parser
-		import argparse
-		self.__mainParser = argparse.ArgumentParser(**kwargs)
+		self.__mainParser = ArgumentParser(**kwargs)
 		self.__subParser = self.__mainParser.add_subparsers(help='sub-command help')
 
 		for _, func in CommonArgumentAttribute.GetMethods(self):

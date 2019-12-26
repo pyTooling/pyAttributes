@@ -4,6 +4,12 @@ ArgParseAttributes
 Attributes
 **********
 
+.. rubric:: Inheritance diagram:
+
+.. inheritance-diagram:: pyAttributes.ArgParseAttributes
+   :parts: 1
+
+
 CommandGroupAttribute
 =====================
 

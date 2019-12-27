@@ -1,11 +1,23 @@
 ![PyPI - License](https://img.shields.io/pypi/l/pyAttributes)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes) 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Paebbels/pyAttributes)
-[![Documentation Status](https://readthedocs.org/projects/pyattributes/badge/?version=latest)](https://pyattributes.readthedocs.io/en/latest/?badge=latest)  
+![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?include_prereleases)
+![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?include_prereleases)
+![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes)  
+![Travis](https://img.shields.io/travis/com/Paebbels/pyAttributes)
 [![PyPI](https://img.shields.io/pypi/v/pyAttributes)](https://pypi.org/project/pyAttributes/)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttributes)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes)
+![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttributes)  
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8dc5205ba8b24e008f2287759096e181)](https://www.codacy.com/manual/Paebbels/pyAttributes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Paebbels/pyAttributes&amp;utm_campaign=Badge_Grade)
+![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes)
+[![Documentation Status](https://readthedocs.org/projects/pyattributes/badge/?version=latest)](https://pyAttributes.readthedocs.io/en/latest/?badge=latest)
+
+<!--
+![](https://img.shields.io/librariesio/dependent-repos/Paebbels/pyAttributes)
+![Requires.io](https://img.shields.io/requires/github/Paebbels/pyAttributes)
+-->
+
 
 # pyAttributes
 

@@ -2,7 +2,7 @@ language: python
 
 install: skip
 
-if: tag IS present
+# if: tag IS present
 
 script:
   - echo "No tests. Just deploying to PyPI."

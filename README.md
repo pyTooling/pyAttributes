@@ -1,27 +1,23 @@
-![PyPI - License](https://img.shields.io/pypi/l/pyAttributes)
-![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?include_prereleases)
-![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?include_prereleases)
-![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes)  
-![Travis](https://img.shields.io/travis/com/Paebbels/pyAttributes)
-[![PyPI](https://img.shields.io/pypi/v/pyAttributes)](https://pypi.org/project/pyAttributes/)
-![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes)
-![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/pyAttributes)  
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8dc5205ba8b24e008f2287759096e181)](https://www.codacy.com/manual/Paebbels/pyAttributes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Paebbels/pyAttributes&amp;utm_campaign=Badge_Grade)
-![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes)
-[![Documentation Status](https://readthedocs.org/projects/pyattributes/badge/?version=latest)](https://pyAttributes.readthedocs.io/en/latest/?badge=latest)
-
-<!--
-![](https://img.shields.io/librariesio/dependent-repos/Paebbels/pyAttributes)
-![Requires.io](https://img.shields.io/requires/github/Paebbels/pyAttributes)
--->
-
+![PyPI - License](https://img.shields.io/pypi/l/pyAttributes?logo=PyPI)
+[![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/tags)
+[![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/releases/latest)
+[![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub&)](https://github.com/Paebbels/pyAttributes/releases)
+[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes)](https://libraries.io/github/Paebbels/pyAttributes)
+[![Requires.io](https://img.shields.io/requires/github/Paebbels/pyAttributes)](https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=master)  
+![Travis](https://img.shields.io/travis/com/Paebbels/pyAttributes?logo=Travis)
+[![PyPI](https://img.shields.io/pypi/v/pyAttributes?logo=PyPI)](https://pypi.org/project/pyAttributes/)
+![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes?logo=PyPI)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI)
+[![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes)](https://github.com/Paebbels/pyAttributes/network/dependents)  
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/)](https://www.codacy.com/manual/Paebbels/pyAttributes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Paebbels/pyAttributes&amp;utm_campaign=Badge_Grade)
+[![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes)](https://libraries.io/github/Paebbels/pyAttributes/sourcerank)
+[![Read the Docs](https://img.shields.io/readthedocs/pyattributes)](https://pyAttributes.readthedocs.io/en/latest/)
 
 # pyAttributes
 
 **.NET-like Attributes implemented as Python decorators**
+
+    TODO: Move the following documentation parts to ReadTheDocs and add a simplified version instead.
 
 I have played a bit with class-based decorators and <del>as far as</del> I can tell it's possible to implement .NET-like attributes in Python.
 

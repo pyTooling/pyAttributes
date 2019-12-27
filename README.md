@@ -9,7 +9,7 @@
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes?logo=PyPI)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI)
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes)](https://github.com/Paebbels/pyAttributes/network/dependents)  
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/)](https://www.codacy.com/manual/Paebbels/pyAttributes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Paebbels/pyAttributes&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b63aac7ef7e34baf829f11a61574bbaf)](https://www.codacy.com/manual/Paebbels/pyAttributes)
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes)](https://libraries.io/github/Paebbels/pyAttributes/sourcerank)
 [![Read the Docs](https://img.shields.io/readthedocs/pyattributes)](https://pyAttributes.readthedocs.io/en/latest/)
 

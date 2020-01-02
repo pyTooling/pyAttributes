@@ -324,7 +324,7 @@ class ArgParseMixin(AttributeHelperMixin):
 		return self.__subParsers
 ```
 
-## Contributors:
+## Contributors
 
 * [Patrick Lehmann](https://github.com/Paebbels) (Maintainer)
 

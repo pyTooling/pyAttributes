@@ -44,6 +44,8 @@ pyAttributes
 :copyright: Copyright 2007-2020 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
+from typing import Callable, List, TypeVar, Dict
+
 
 __api__ = [
 	'Attribute',
@@ -56,26 +58,28 @@ __all__ = __api__
 # TODO: add an attacheHelper methods option
 # TODO: implement a static HasAttribute method
 
+T = TypeVar("T")
+
 
 class Attribute:
 	"""Base-class for all pyAttributes."""
 
 	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
 
-	def __call__(self, func):
+	def __call__(self, func: T) -> T:
 		"""Make all ``Attribute`` classes callable, to they can be used as a decorator."""
 		self._AppendAttribute(func, self)
 		return func
 
 	@staticmethod
-	def _AppendAttribute(func, attribute):
+	def _AppendAttribute(func: Callable, attribute: 'Attribute'):
 		# inherit attributes and append myself or create a new attributes list
 		if (Attribute.__AttributesMemberName__ in func.__dict__):
 			func.__dict__[Attribute.__AttributesMemberName__].append(attribute)
 		else:
 			func.__setattr__(Attribute.__AttributesMemberName__, [attribute])
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.__name__
 
 	@classmethod
@@ -92,7 +96,7 @@ class Attribute:
 		return methods.items()
 
 	@classmethod
-	def GetAttributes(cls, method):
+	def GetAttributes(cls, method: Callable, includeSubClasses: bool=True) -> List['Attribute']:
 		"""Returns attached attributes for a given method."""
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributes = method.__dict__[Attribute.__AttributesMemberName__]
@@ -104,7 +108,7 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self):
+	def GetMethods(self): # XXX: finx type hint  -> Dict[str, Callable] => ItemsView
 		return {
 				funcname: func
 				for funcname, func in self.__class__.__dict__.items()
@@ -112,7 +116,7 @@ class AttributeHelperMixin:
 			}.items()
 
 	@staticmethod
-	def HasAttribute(method): # TODO: add a tuple based type filter
+	def HasAttribute(method: Callable) -> bool: # TODO: add a tuple based type filter
 		"""Returns true, if the given method has pyAttributes attached."""
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
@@ -121,7 +125,7 @@ class AttributeHelperMixin:
 			return False
 
 	@staticmethod
-	def GetAttributes(method): # TODO: add a tuple based type filter
+	def GetAttributes(method) -> List[Attribute]: # TODO: add a tuple based type filter
 		"""Returns a list of pyAttributes attached to the given method."""
 		if (Attribute.__AttributesMemberName__ in method.__dict__):
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]

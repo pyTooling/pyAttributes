@@ -11,14 +11,14 @@ script:
   - echo "For debugging: branch=$TRAVIS_BRANCH hash=$TRAVIS_COMMIT"
   - echo "\nPython Code Coverage\n========================================"
   - coverage run --append -m unittest tests.unit.Attributes
-  - coverage run --append -m unittest tests.unit.ArgParse
+#  - coverage run --append -m unittest tests.unit.ArgParse
   - coverage report
   - coverage xml
   - python-codacy-coverage -r coverage.xml
   - codecov
   - echo "\nPython Unit Tests\n========================================"
   - python -m unittest tests.unit.Attributes
-  - python -m unittest tests.unit.ArgParse
+#  - python -m unittest tests.unit.ArgParse
 
 deploy:
   provider: pypi

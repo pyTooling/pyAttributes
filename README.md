@@ -1,4 +1,4 @@
-[![PyPI - License](https://img.shields.io/pypi/l/pyAttributes?logo=PyPI)](LICENSE.md)
+[![License](https://img.shields.io/badge/Apache%20License,%202.0-bd0000.svg?longCache=true&label=code%20license&logo=Apache&logoColor=D22128)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub&)](https://github.com/Paebbels/pyAttributes/releases)
@@ -9,7 +9,9 @@
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes?logo=PyPI)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI)
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes)](https://github.com/Paebbels/pyAttributes/network/dependents)  
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b63aac7ef7e34baf829f11a61574bbaf)](https://www.codacy.com/manual/Paebbels/pyAttributes)
+[![Codacy - Quality](https://api.codacy.com/project/badge/Grade/b63aac7ef7e34baf829f11a61574bbaf)](https://www.codacy.com/manual/Paebbels/pyAttributes)
+[![Codacy - Coverage](https://api.codacy.com/project/badge/Coverage/b63aac7ef7e34baf829f11a61574bbaf)](https://www.codacy.com/manual/Paebbels/pyAttributes)
+[![Codecov - Branch Coverage](https://codecov.io/gh/Paebbels/pyAttributes/branch/master/graph/badge.svg)](https://codecov.io/gh/Paebbels/pyAttributes)
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes)](https://libraries.io/github/Paebbels/pyAttributes/sourcerank)
 [![Read the Docs](https://img.shields.io/readthedocs/pyattributes)](https://pyAttributes.readthedocs.io/en/latest/)
 

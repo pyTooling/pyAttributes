@@ -67,7 +67,7 @@ class Attribute:
 	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
 
 	def __call__(self, func: T) -> T:
-		"""Make all ``Attribute`` classes callable, to they can be used as a decorator."""
+		"""Make all classes derived from ``Attribute`` callable, so they can be used as a decorator."""
 		self._AppendAttribute(func, self)
 		return func
 
@@ -108,7 +108,7 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self): # XXX: finx type hint  -> Dict[str, Callable] => ItemsView
+	def GetMethods(self): # XXX: find type hint  -> Dict[str, Callable] => ItemsView
 		return {
 				funcname: func
 				for funcname, func in self.__class__.__dict__.items()

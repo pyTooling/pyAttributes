@@ -64,11 +64,11 @@
    :height: 22
    :target: https://pyAttributes.readthedocs.io/en/latest/
 
-|img-pyAttributes-github| |img-pyAttributes-license| |img-pyAttributes-tag| |img-pyAttributes-release| |img-pyAttributes-date| |br|
-|img-pyAttributes-travis| |img-pyAttributes-pypi-tag| |img-pyAttributes-pypi-status| |img-pyAttributes-pypi-python| |img-pyAttributes-lib-dep| |br|
-|img-pyAttributes-lib-status| |img-pyAttributes-req-status| |br|
+|img-pyAttributes-github| |img-pyAttributes-tag| |img-pyAttributes-release| |img-pyAttributes-date| |br|
+|img-pyAttributes-travis| |img-pyAttributes-pypi-tag| |img-pyAttributes-pypi-status| |img-pyAttributes-pypi-python| |br|
+|img-pyAttributes-lib-status| |img-pyAttributes-req-status| |img-pyAttributes-lib-dep| |br|
 |img-pyAttributes-codacy-quality| |img-pyAttributes-codacy-coverage| |img-pyAttributes-codecov-coverage| |img-pyAttributes-lib-rank| |br|
-|img-pyAttributes-rtd|
+|img-pyAttributes-rtd| |img-pyAttributes-license|
 
 .. code-block::
 

@@ -63,7 +63,7 @@ class Class_2(AttributeHelperMixin, Class_1):
 		pass
 
 
-class Test_NoAttributes(TestCase):
+class HasHelperMixin_NoAttributes(TestCase):
 	def test_GetAttributesIsAnEmptyList(self):
 		i = NoAttributes()
 
@@ -85,7 +85,7 @@ class Test_NoAttributes(TestCase):
 		self.assertEqual(len(methodList), 0, "GetMethods(...) doesn't return an empty list (len=0).")
 
 
-class TestFromAttribute(TestCase):
+class NoHelperMixin_HasAttributes(TestCase):
 	def test_1(self):
 
 		i = NoMixIn()

@@ -33,37 +33,37 @@ Here is a classic `argparse` example:
 
 ```python
 class MyProg():
-	def Run(self):
-		# create a commandline argument parser
-		MainParser = argparse.ArgumentParser(
-			description = textwrap.dedent('''This is the User Service Tool.'''),
-			formatter_class = argparse.RawDescriptionHelpFormatter,
-			add_help=False)
+  def Run(self):
+    # create a commandline argument parser
+    MainParser = argparse.ArgumentParser(
+      description = textwrap.dedent('''This is the User Service Tool.'''),
+      formatter_class = argparse.RawDescriptionHelpFormatter,
+      add_help=False)
 
-		MainParser.add_argument('-v', '--verbose', dest="verbose", help='print out detailed messages', action='store_const', const=True, default=False)
-		MainParser.add_argument('-d', '--debug', dest="debug", help='enable debug mode', action='store_const', const=True, default=False)
-		MainParser.set_defaults(func=self.HandleDefault)
-		subParsers = MainParser.add_subparsers(help='sub-command help')
+    MainParser.add_argument('-v', '--verbose', dest="verbose", help='print out detailed messages', action='store_const', const=True, default=False)
+    MainParser.add_argument('-d', '--debug', dest="debug", help='enable debug mode', action='store_const', const=True, default=False)
+    MainParser.set_defaults(func=self.HandleDefault)
+    subParsers = MainParser.add_subparsers(help='sub-command help')
 
-		# UserManagement commads
-		# create the sub-parser for the "create-user" command
-		CreateUserParser = subParsers.add_parser('create-user', help='create-user help')
-		CreateUserParser.add_argument(metavar='<Username>', dest="Users", type=str, nargs='+', help='todo help')
-		CreateUserParser.set_defaults(func=self.HandleCreateUser)
+    # UserManagement commads
+    # create the sub-parser for the "create-user" command
+    CreateUserParser = subParsers.add_parser('create-user', help='create-user help')
+    CreateUserParser.add_argument(metavar='<Username>', dest="Users", type=str, nargs='+', help='todo help')
+    CreateUserParser.set_defaults(func=self.HandleCreateUser)
 
-		# create the sub-parser for the "remove-user" command
-		RemoveUserParser = subParsers.add_parser('remove-user', help='remove-user help')
-		RemoveUserParser.add_argument(metavar='<UserID>', dest="UserIDs", type=str, nargs='+', help='todo help')
-		RemoveUserParser.set_defaults(func=self.HandleRemoveUser)
-	
-	def HandleDefault(self, args):
-		print("HandleDefault:")
-	
-	def HandleCreateUser(self, args):
-		print("HandleCreateUser: {0}".format(str(args.Users)))
-	
-	def HandleRemoveUser(self, args):
-		print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
+    # create the sub-parser for the "remove-user" command
+    RemoveUserParser = subParsers.add_parser('remove-user', help='remove-user help')
+    RemoveUserParser.add_argument(metavar='<UserID>', dest="UserIDs", type=str, nargs='+', help='todo help')
+    RemoveUserParser.set_defaults(func=self.HandleRemoveUser)
+
+  def HandleDefault(self, args):
+    print("HandleDefault:")
+
+  def HandleCreateUser(self, args):
+    print("HandleCreateUser: {0}".format(str(args.Users)))
+
+  def HandleRemoveUser(self, args):
+  	print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
 
 my = MyProg()
 my.Run()
@@ -73,25 +73,25 @@ A better and more descriptive solution could look like this:
 
 ```python
 class MyProg():
-	def __init__(self):
-		self.BuildParser()
-		# ...
-	def BuiltParser(self):
-		# 1. search self for methods (potential handlers)
-		# 2. search this methods for attributes
-		# 3. extract Command and Argument attributes
-		# 4. create the parser with that provided metadata
+  def __init__(self):
+    self.BuildParser()
+    # ...
+  def BuiltParser(self):
+    # 1. search self for methods (potential handlers)
+    # 2. search this methods for attributes
+    # 3. extract Command and Argument attributes
+    # 4. create the parser with that provided metadata
 
-	# UserManagement commads
-	@CommandAttribute('create-user', help="create-user help")
-	@ArgumentAttribute(metavar='<Username>', dest="Users", type=str, nargs='+', help='todo help')
-	def HandleCreateUser(self, args):
-		print("HandleCreateUser: {0}".format(str(args.Users)))
-	
-	@CommandAttribute('remove-user',help="remove-user help")
-	@ArgumentAttribute(metavar='<UserID>', dest="UserIDs", type=str, nargs='+', help='todo help')
-	def HandleRemoveUser(self, args):
-		print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
+  # UserManagement commads
+  @CommandAttribute('create-user', help="create-user help")
+  @ArgumentAttribute(metavar='<Username>', dest="Users", type=str, nargs='+', help='todo help')
+  def HandleCreateUser(self, args):
+    print("HandleCreateUser: {0}".format(str(args.Users)))
+
+  @CommandAttribute('remove-user',help="remove-user help")
+  @ArgumentAttribute(metavar='<UserID>', dest="UserIDs", type=str, nargs='+', help='todo help')
+  def HandleRemoveUser(self, args):
+  	print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
 ```
 
 -------
@@ -104,27 +104,27 @@ So let's develop a common `Attribute` class, which is also a class-based decorat
 
 ```python
 class Attribute():
-	AttributesMemberName =  "__attributes__"
-	_debug =                False
-	
-	def __call__(self, func):
-		# inherit attributes and append myself or create a new attributes list
-		if (func.__dict__.__contains__(Attribute.AttributesMemberName)):
-			func.__dict__[Attribute.AttributesMemberName].append(self)
-		else:
-			func.__setattr__(Attribute.AttributesMemberName, [self])
-		return func
-	
-	def __str__(self):
-		return self.__name__
+  AttributesMemberName =  "__attributes__"
+  _debug =                False
 
-	@classmethod
-	def GetAttributes(self, method):
-		if method.__dict__.__contains__(Attribute.AttributesMemberName):
-			attributes = method.__dict__[Attribute.AttributesMemberName]
-			if isinstance(attributes, list):
-				return [attribute for attribute in attributes if isinstance(attribute, self)]
-		return list()
+  def __call__(self, func):
+    # inherit attributes and append myself or create a new attributes list
+    if (func.__dict__.__contains__(Attribute.AttributesMemberName)):
+      func.__dict__[Attribute.AttributesMemberName].append(self)
+    else:
+      func.__setattr__(Attribute.AttributesMemberName, [self])
+    return func
+
+  def __str__(self):
+    return self.__name__
+
+  @classmethod
+  def GetAttributes(self, method):
+    if method.__dict__.__contains__(Attribute.AttributesMemberName):
+      attributes = method.__dict__[Attribute.AttributesMemberName]
+      if isinstance(attributes, list):
+        return [attribute for attribute in attributes if isinstance(attribute, self)]
+    return list()
 ```
 
 ## Step 2 - User defined attributes
@@ -137,62 +137,62 @@ Now we can create custom attributes which inherit the basic decorative functiona
 
 ```python
 class DefaultAttribute(Attribute):
-	__handler = None
-	
-	def __call__(self, func):
-		self.__handler = func
-		return super().__call__(func)
-	
-	@property
-	def Handler(self):
-		return self.__handler
+  __handler = None
+
+  def __call__(self, func):
+    self.__handler = func
+    return super().__call__(func)
+
+  @property
+  def Handler(self):
+    return self.__handler
 ```
 
 ```python
 class CommandAttribute(Attribute):
-	__command = ""
-	__handler = None
-	__kwargs =  None
+  __command = ""
+  __handler = None
+  __kwargs =  None
 
-	def __init__(self, command, **kwargs):
-		super().__init__()
-		self.__command =  command
-		self.__kwargs =   kwargs
-	
-	def __call__(self, func):
-		self.__handler = func
-		return super().__call__(func)
-	
-	@property
-	def Command(self):
-		return self.__command
-	
-	@property
-	def Handler(self):
-		return self.__handler
-	
-	@property
-	def KWArgs(self):
-		return self.__kwargs
+  def __init__(self, command, **kwargs):
+    super().__init__()
+    self.__command =  command
+    self.__kwargs =   kwargs
+
+  def __call__(self, func):
+    self.__handler = func
+    return super().__call__(func)
+
+  @property
+  def Command(self):
+    return self.__command
+
+  @property
+  def Handler(self):
+    return self.__handler
+
+  @property
+  def KWArgs(self):
+    return self.__kwargs
 ```
 
 ```python
 class ArgumentAttribute(Attribute):
-	__args =   None
-	__kwargs = None
+  __args =   None
+  __kwargs = None
 
-	def __init__(self, *args, **kwargs):
-		super().__init__()
-		self.__args =   args
-		self.__kwargs = kwargs
-	
-	@property
-	def Args(self):
-		return self.__args
-	
-	@property
-	def KWArgs(self):
-		return self.__kwargs
+  def __init__(self, *args, **kwargs):
+    super().__init__()
+    self.__args =   args
+    self.__kwargs = kwargs
+
+  @property
+  def Args(self):
+    return self.__args
+
+  @property
+  def KWArgs(self):
+    return self.__kwargs
 ```
 
 ## Step 3 - Building a helper mixin class to handle attributes on methods
@@ -205,25 +205,26 @@ To ease the work with attributes I implemented a `AttributeHelperMixin` class, t
 
 ```python
 class AttributeHelperMixin():
-	def GetMethods(self):
-		return {funcname: func
-						for funcname, func in self.__class__.__dict__.items()
-						if hasattr(func, '__dict__')
-					 }.items()
+  def GetMethods(self):
+    return {
+      funcname: func
+      for funcname, func in self.__class__.__dict__.items()
+      if hasattr(func, '__dict__')
+    }.items()
 
-	def HasAttribute(self, method):
-		if method.__dict__.__contains__(Attribute.AttributesMemberName):
-			attributeList = method.__dict__[Attribute.AttributesMemberName]
-			return (isinstance(attributeList, list) and (len(attributeList) != 0))
-		else:
-			return False
-				
-	def GetAttributes(self, method):
-		if method.__dict__.__contains__(Attribute.AttributesMemberName):
-			attributeList = method.__dict__[Attribute.AttributesMemberName]
-			if isinstance(attributeList, list):
-				return attributeList
-		return list()
+  def HasAttribute(self, method):
+    if method.__dict__.__contains__(Attribute.AttributesMemberName):
+      attributeList = method.__dict__[Attribute.AttributesMemberName]
+      return (isinstance(attributeList, list) and (len(attributeList) != 0))
+    else:
+      return False
+
+  def GetAttributes(self, method):
+    if method.__dict__.__contains__(Attribute.AttributesMemberName):
+      attributeList = method.__dict__[Attribute.AttributesMemberName]
+      if isinstance(attributeList, list):
+        return attributeList
+    return list()
 ```
 
 ## Step 4 - Build an application class
@@ -232,45 +233,45 @@ Now it's time to build an application class that inherits from `MyBase` and from
 
 ```python
 class MyBase():
-	def __init__(self):
-		pass
+  def __init__(self):
+    pass
 
 class prog(MyBase, ArgParseMixin):
-	def __init__(self):
-		import argparse
-		import textwrap
-		
-		# call constructor of the main interitance tree
-		MyBase.__init__(self)
-		
-		# Call the constructor of the ArgParseMixin
-		ArgParseMixin.__init__(self,
-			description = textwrap.dedent('''\
-				This is the Admin Service Tool.
-				'''),
-			formatter_class = argparse.RawDescriptionHelpFormatter,
-			add_help=False)
+  def __init__(self):
+    import argparse
+    import textwrap
 
-		self.MainParser.add_argument('-v', '--verbose',  dest="verbose",  help='print out detailed messages',  action='store_const', const=True, default=False)
-		self.MainParser.add_argument('-d', '--debug',    dest="debug",    help='enable debug mode',            action='store_const', const=True, default=False)
-	
-	def Run(self):
-		ArgParseMixin.Run(self)
-	
-	@DefaultAttribute()
-	def HandleDefault(self, args):
-		print("DefaultHandler: verbose={0}  debug={1}".format(str(args.verbose), str(args.debug)))
-	
-	@CommandAttribute("create-user", help="my new command")
-	@ArgumentAttribute(metavar='<Username>', dest="Users", type=str, help='todo help')
-	def HandleCreateUser(self, args):
-		print("HandleCreateUser: {0}".format(str(args.Users)))
-	
-	@CommandAttribute("remove-user", help="my new command")
-	@ArgumentAttribute(metavar='<UserID>', dest="UserIDs", type=str, help='todo help')
-	def HandleRemoveUser(self, args):
-		print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
-	
+    # call constructor of the main interitance tree
+    MyBase.__init__(self)
+
+    # Call the constructor of the ArgParseMixin
+    ArgParseMixin.__init__(self,
+      description = textwrap.dedent('''\
+        This is the Admin Service Tool.
+        '''),
+      formatter_class = argparse.RawDescriptionHelpFormatter,
+      add_help=False)
+
+    self.MainParser.add_argument('-v', '--verbose',  dest="verbose",  help='print out detailed messages',  action='store_const', const=True, default=False)
+    self.MainParser.add_argument('-d', '--debug',    dest="debug",    help='enable debug mode',            action='store_const', const=True, default=False)
+
+  def Run(self):
+    ArgParseMixin.Run(self)
+
+  @DefaultAttribute()
+  def HandleDefault(self, args):
+    print("DefaultHandler: verbose={0}  debug={1}".format(str(args.verbose), str(args.debug)))
+
+  @CommandAttribute("create-user", help="my new command")
+  @ArgumentAttribute(metavar='<Username>', dest="Users", type=str, help='todo help')
+  def HandleCreateUser(self, args):
+    print("HandleCreateUser: {0}".format(str(args.Users)))
+
+  @CommandAttribute("remove-user", help="my new command")
+  @ArgumentAttribute(metavar='<UserID>', dest="UserIDs", type=str, help='todo help')
+  def HandleRemoveUser(self, args):
+    print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
+
 p = prog()
 p.Run()
 ```
@@ -281,50 +282,50 @@ This class constructs the `argparse` based parser with the provided data from at
 
 ```python
 class ArgParseMixin(AttributeHelperMixin):
-	__mainParser = None
-	__subParser =  None
-	__subParsers = {}
+  __mainParser = None
+  __subParser =  None
+  __subParsers = {}
 
-	def __init__(self, **kwargs):
-		super().__init__()
-		
-		# create a commandline argument parser
-		import argparse
-		self.__mainParser = argparse.ArgumentParser(**kwargs)
-		self.__subParser =  self.__mainParser.add_subparsers(help='sub-command help')
-		
-		for funcname,func in self.GetMethods():
-			defAttributes = DefaultAttribute.GetAttributes(func)
-			if (len(defAttributes) != 0):
-				defAttribute = defAttributes[0]
-				self.__mainParser.set_defaults(func=defAttribute.Handler)
-				continue
-			
-			cmdAttributes = CommandAttribute.GetAttributes(func)
-			if (len(cmdAttributes) != 0):
-				cmdAttribute = cmdAttributes[0]
-				subParser = self.__subParser.add_parser(cmdAttribute.Command, **(cmdAttribute.KWArgs))
-				subParser.set_defaults(func=cmdAttribute.Handler)
-				
-				for argAttribute in ArgumentAttribute.GetAttributes(func):
-					subParser.add_argument(*(argAttribute.Args), **(argAttribute.KWArgs))
+  def __init__(self, **kwargs):
+    super().__init__()
 
-				self.__subParsers[cmdAttribute.Command] = subParser
-				continue
-	
-	def Run(self):
-		# parse command line options and process splitted arguments in callback functions
-		args = self.__mainParser.parse_args()
-		# because func is a function (unbound to an object), it MUST be called with self as a first parameter
-		args.func(self, args)
-	
-	@property
-	def MainParser(self):
-		return self.__mainParser
-	
-	@property
-	def SubParsers(self):
-		return self.__subParsers
+    # create a commandline argument parser
+    import argparse
+    self.__mainParser = argparse.ArgumentParser(**kwargs)
+    self.__subParser =  self.__mainParser.add_subparsers(help='sub-command help')
+
+    for funcname,func in self.GetMethods():
+      defAttributes = DefaultAttribute.GetAttributes(func)
+      if (len(defAttributes) != 0):
+        defAttribute = defAttributes[0]
+        self.__mainParser.set_defaults(func=defAttribute.Handler)
+        continue
+
+      cmdAttributes = CommandAttribute.GetAttributes(func)
+      if (len(cmdAttributes) != 0):
+        cmdAttribute = cmdAttributes[0]
+        subParser = self.__subParser.add_parser(cmdAttribute.Command, **(cmdAttribute.KWArgs))
+        subParser.set_defaults(func=cmdAttribute.Handler)
+
+        for argAttribute in ArgumentAttribute.GetAttributes(func):
+          subParser.add_argument(*(argAttribute.Args), **(argAttribute.KWArgs))
+
+        self.__subParsers[cmdAttribute.Command] = subParser
+        continue
+
+  def Run(self):
+    # parse command line options and process splitted arguments in callback functions
+    args = self.__mainParser.parse_args()
+    # because func is a function (unbound to an object), it MUST be called with self as a first parameter
+    args.func(self, args)
+
+  @property
+  def MainParser(self):
+    return self.__mainParser
+
+  @property
+  def SubParsers(self):
+    return self.__subParsers
 ```
 
 ## Contributors

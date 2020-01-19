@@ -10,7 +10,7 @@
 #  |_|    |___/
 # =============================================================================
 # Authors:            Patrick Lehmann
-# 
+#
 # Python module:      pyAttribute for Python's argparse Package.
 #
 # Description:
@@ -19,7 +19,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2017-2019 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2017-2020 Patrick Lehmann - Bötzingen, Germany
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

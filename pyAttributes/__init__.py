@@ -19,7 +19,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2017-2019 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2017-2020 Patrick Lehmann - Bötzingen, Germany
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@
 pyAttributes
 ############
 
-:copyright: Copyright 2007-2019 Patrick Lehmann - Bötzingen, Germany
+:copyright: Copyright 2007-2020 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
 
@@ -56,11 +56,11 @@ __all__ = __api__
 # TODO: add an attacheHelper methods option
 # TODO: implement a static HasAttribute method
 
+
 class Attribute:
 	"""Base-class for all pyAttributes."""
 
 	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
-	_debug = False
 
 	def __call__(self, func):
 		"""Make all ``Attribute`` classes callable, to they can be used as a decorator."""

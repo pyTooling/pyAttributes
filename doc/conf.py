@@ -22,12 +22,35 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'pyAttributes'
-copyright = '2007-2019, Patrick Lehmann'
+copyright = '2007-2020, Patrick Lehmann'
 author = 'Patrick Lehmann'
 
-# The full version, including alpha/beta/rc tags
-release = 'v1.0'
+# ==============================================================================
+# Versioning
+# ==============================================================================
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+from subprocess import check_output
 
+def _IsUnderGitControl():
+	return (check_output(["git", "rev-parse", "--is-inside-work-tree"], universal_newlines=True).strip() == "true")
+
+def _LatestTagName():
+	return check_output(["git", "describe", "--abbrev=0", "--tags"], universal_newlines=True).strip()
+
+# The full version, including alpha/beta/rc tags
+version = "0.4"     # The short X.Y version.
+release = "0.4.3"   # The full version, including alpha/beta/rc tags.
+try:
+	if _IsUnderGitControl:
+		latestTagName = _LatestTagName()[1:]		# remove prefix "v"
+		versionParts =  latestTagName.split("-")[0].split(".")
+
+		version = ".".join(versionParts[:2])
+		release = latestTagName   # ".".join(versionParts[:3])
+except:
+	pass
 
 # -- General configuration ---------------------------------------------------
 
@@ -37,6 +60,7 @@ release = 'v1.0'
 extensions = [
 # Sphinx theme
 	"sphinx_rtd_theme",
+
 # Standard Sphinx extensions
 	"sphinx.ext.autodoc",
 	'sphinx.ext.extlinks',
@@ -47,11 +71,18 @@ extensions = [
 	'sphinx.ext.mathjax',
 	'sphinx.ext.ifconfig',
 	'sphinx.ext.viewcode',
+
 # SphinxContrib extensions
+
+# BuildTheDocs extensions
+#	'btd.sphinx.autoprogram',
+#	'btd.sphinx.graphviz',
+#	'btd.sphinx.inheritance_diagram',
 
 # Other extensions
 #	'DocumentMember',
-# local extensions (patched)
+	'sphinx_fontawesome',
+	'sphinx_autodoc_typehints',
 
 # local extensions
 ]
@@ -68,6 +99,22 @@ exclude_patterns = [
 	".DS_Store"
 ]
 
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = 'stata-dark'
+
+
+
+# ==============================================================================
+# Restructured Text settings
+# ==============================================================================
+prologPath = "prolog.inc"
+try:
+	with open(prologPath, "r") as prologFile:
+		rst_prolog = prologFile.read()
+except Exception as ex:
+	print("[ERROR:] While reading '{0!s}'.".format(prologPath))
+	print(ex)
+	rst_prolog = ""
 
 # -- Options for HTML output -------------------------------------------------
 

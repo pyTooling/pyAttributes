@@ -8,15 +8,17 @@ install:
 # if: tag IS present
 
 script:
-  - echo "For debugging: branch=$TRAVIS_BRANCH hash=$TRAVIS_COMMIT"
-  - echo "\nPython Code Coverage\n========================================"
+  - echo "For debugging: branch=" $TRAVIS_BRANCH "hash=" $TRAVIS_COMMIT
+  - echo "Python Code Coverage"
+  - echo "========================================"
   - coverage run --append -m unittest tests.unit.Attributes
 #  - coverage run --append -m unittest tests.unit.ArgParse
   - coverage report
   - coverage xml
   - python-codacy-coverage -r coverage.xml
   - codecov
-  - echo "\nPython Unit Tests\n========================================"
+  - echo "Python Unit Tests"
+  - echo "========================================"
   - python -m unittest tests.unit.Attributes
 #  - python -m unittest tests.unit.ArgParse
 

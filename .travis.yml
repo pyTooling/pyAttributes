@@ -8,7 +8,7 @@ install:
 # if: tag IS present
 
 script:
-  - echo "For debugging: branch=" $TRAVIS_BRANCH "hash=" $TRAVIS_COMMIT
+  - echo "For debugging:: branch=" $TRAVIS_BRANCH "hash=" $TRAVIS_COMMIT
   - echo "Python Code Coverage"
   - echo "========================================"
   - coverage run --append -m unittest tests.unit.Attributes

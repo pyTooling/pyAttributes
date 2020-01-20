@@ -44,7 +44,8 @@ pyAttributes
 :copyright: Copyright 2007-2020 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
-from typing import Callable, List, TypeVar, Dict
+from collections import OrderedDict
+from typing import Callable, List, TypeVar, Dict, Any, Iterable, Union
 
 
 __api__ = [
@@ -59,6 +60,7 @@ __all__ = __api__
 # TODO: implement a static HasAttribute method
 
 T = TypeVar("T")
+AttributeFilter = Union['Attribute', Iterable['Attribute'], None]
 
 
 class Attribute:
@@ -83,17 +85,39 @@ class Attribute:
 		return self.__name__
 
 	@classmethod
-	def GetMethods(cls, cl):
+	def GetMethods(cls, inst: Any, includeDerivedAttributes: bool=True) -> Dict[Callable, List['Attribute']]:
 		methods = {}
-		for funcname, func in cl.__class__.__dict__.items():
-			if hasattr(func, '__dict__'):
-				if (Attribute.__AttributesMemberName__ in func.__dict__):
-					attributes = func.__dict__[Attribute.__AttributesMemberName__]
-					if isinstance(attributes, list):
-						for attribute in attributes:
-							if isinstance(attribute, cls):
-								methods[funcname] = func
-		return methods.items()
+		classOfInst = inst.__class__
+		mro = classOfInst.mro()
+
+		# search in method-resolution-order (MRO)
+		for c in mro:
+			for functionName, function in c.__dict__.items():
+				if callable(function):
+					# try to read '__pyattr__'
+					try:
+						attributes = function.__dict__[Attribute.__AttributesMemberName__]
+						if includeDerivedAttributes:
+							for attribute in attributes:
+								if isinstance(attribute, cls):
+									try:
+										methods[function].append(attribute)
+									except KeyError:
+										methods[function] = [attribute]
+						else:
+							for attribute in attributes:
+								if type(attribute) is cls:
+									try:
+										methods[function].append(attribute)
+									except KeyError:
+										methods[function] = [attribute]
+
+					except AttributeError:
+						pass
+					except KeyError:
+						pass
+
+		return methods
 
 	@classmethod
 	def GetAttributes(cls, method: Callable, includeSubClasses: bool=True) -> List['Attribute']:
@@ -108,27 +132,82 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self): # XXX: find type hint  -> Dict[str, Callable] => ItemsView
-		return {
-				funcname: func
-				for funcname, func in self.__class__.__dict__.items()
-				if hasattr(func, '__dict__')
-			}.items()
+	def GetMethods(self, filter: AttributeFilter=Attribute) -> Dict[Callable, List[Attribute]]:
+		attributedMethods = OrderedDict()
+		for method in self.__class__.__dict__:
+			if isinstance(method, Callable):
+				try:
+					attributeList = method.__dict__[Attribute.__AttributesMemberName__]
+
+					if isinstance(filter, Attribute):
+						pass
+					elif (filter is None):
+						filter = Attribute
+					elif isinstance(filter, Iterable):
+						filter = tuple([attribute for attribute in filter])
+
+					if method not in attributedMethods:
+						attributedMethods[method] = []
+
+					attributes = attributedMethods[method]
+
+					for attribute in attributeList:
+						if isinstance(attribute, filter):
+							attributes.append(attribute)
+
+				except AttributeError:
+					return False
+				except KeyError:
+					return False
+
+		return attributedMethods
 
 	@staticmethod
-	def HasAttribute(method: Callable) -> bool: # TODO: add a tuple based type filter
+	def HasAttribute(method: Callable, filter: AttributeFilter=Attribute) -> bool: # TODO: add a tuple based type filter
 		"""Returns true, if the given method has pyAttributes attached."""
-		if (Attribute.__AttributesMemberName__ in method.__dict__):
+		try:
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
-			return (isinstance(attributeList, list) and (len(attributeList) != 0))
-		else:
+			if (len(attributeList) == 0):
+				return False
+			elif (filter is not None):
+				if isinstance(filter, Attribute):
+					pass
+				elif isinstance(filter, Iterable):
+					filter = tuple([attribute for attribute in filter])
+
+				for attribute in attributeList:
+					if isinstance(attribute, filter):
+						return True
+				else:
+					return False
+			else:
+				return False
+		except AttributeError:
+			return False
+		except KeyError:
 			return False
 
 	@staticmethod
-	def GetAttributes(method) -> List[Attribute]: # TODO: add a tuple based type filter
+	def GetAttributes(method: Callable, filter: AttributeFilter=Attribute) -> List[Attribute]: # TODO: add a tuple based type filter
 		"""Returns a list of pyAttributes attached to the given method."""
-		if (Attribute.__AttributesMemberName__ in method.__dict__):
+
+		try:
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
-			if isinstance(attributeList, list):
-				return attributeList
-		return list()
+			if isinstance(filter, Attribute):
+				pass
+			elif (filter is None):
+				filter = Attribute
+			elif isinstance(filter, Iterable):
+				filter = tuple([attribute for attribute in filter])
+
+			attributes = []
+			for attribute in attributeList:
+				if isinstance(attribute, filter):
+					attributes.append(attribute)
+
+			return attributes
+
+		except AttributeError:
+			return list()
+		except KeyError:
+			return list()

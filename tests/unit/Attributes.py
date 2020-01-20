@@ -82,18 +82,18 @@ class HasHelperMixin_NoAttributes(TestCase):
 
 		methodList = i.GetMethods()
 		# self.assertIsInstance(methodList, dict_items, "GetMethods(...) doesn't return dict_items.")
-		self.assertEqual(len(methodList), 0, "GetMethods(...) doesn't return an empty list (len=0).")
+		self.assertEqual(0, len(methodList), "GetMethods(...) doesn't return an empty list (len=0).")
 
 
 class NoHelperMixin_HasAttributes(TestCase):
-	def test_1(self):
-
+	def test_GetMethodsHasOneElement(self):
 		i = NoMixIn()
 		methodList = Attribute_1.GetMethods(i)
 
 		#self.assertIsInstance(methodList, dict_items, "GetMethods(...) doesn't return list.")
-		self.assertEqual(len(methodList), 1, "GetMethods(...) doesn't return a list with 1 element (len=1).")
+		self.assertEqual(1, len(methodList), "GetMethods(...) doesn't return a list with 1 element (len=1).")
+		self.assertIn(NoMixIn.method_1, methodList, "GetMethods didn't list 'method_1'.")
 
-	def test_2(self):
+	def test_GetAttributes(self):
 		i = NoMixIn()
 		attributeList = Attribute_1.GetAttributes(i.method_1)

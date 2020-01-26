@@ -141,27 +141,26 @@ class AttributeHelperMixin:
 		elif isinstance(filter, Iterable):
 			filter = tuple([attribute for attribute in filter])
 
+		mro = self.__class__.mro()
+
 		attributedMethods = OrderedDict()
-		for method in self.__class__.__dict__.values():
-			print(method)
-			if isinstance(method, Callable):
-				print("  is callable")
-				try:
-					attributeList = method.__dict__[Attribute.__AttributesMemberName__]
+		# search in method-resolution-order (MRO)
+		for c in mro:
+			for method in c.__dict__.values():
+				if isinstance(method, Callable):
+					try:
+						attributeList = method.__dict__[Attribute.__AttributesMemberName__]
+						for attribute in attributeList:
+							if isinstance(attribute, filter):
+								try:
+									attributedMethods[method].append(attribute)
+								except KeyError:
+									attributedMethods[method] = [attribute]
 
-					if method not in attributedMethods:
-						attributedMethods[method] = []
-
-					attributes = attributedMethods[method]
-
-					for attribute in attributeList:
-						if isinstance(attribute, filter):
-							attributes.append(attribute)
-
-				except AttributeError:
-					return False
-				except KeyError:
-					pass
+					except AttributeError:
+						pass
+					except KeyError:
+						pass
 
 		return attributedMethods
 

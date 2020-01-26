@@ -81,18 +81,19 @@ class Attribute:
 		else:
 			func.__setattr__(Attribute.__AttributesMemberName__, [attribute])
 
-	def __str__(self) -> str:
-		return self.__name__
 
 	@classmethod
 	def GetMethods(cls, inst: Any, includeDerivedAttributes: bool=True) -> Dict[Callable, List['Attribute']]:
 		methods = {}
 		classOfInst = inst.__class__
+		if (classOfInst is type):
+			classOfInst = inst
+
 		mro = classOfInst.mro()
 
 		# search in method-resolution-order (MRO)
 		for c in mro:
-			for functionName, function in c.__dict__.items():
+			for function in c.__dict__.values():
 				if callable(function):
 					# try to read '__pyattr__'
 					try:
@@ -132,19 +133,21 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self, filter: AttributeFilter=Attribute) -> Dict[Callable, List[Attribute]]:
+	def GetMethods(self, filter: AttributeFilter=Attribute) -> Union[Dict[Callable, List[Attribute]], bool]:
+		if (filter is Attribute):
+			pass
+		elif (filter is None):
+			filter = Attribute
+		elif isinstance(filter, Iterable):
+			filter = tuple([attribute for attribute in filter])
+
 		attributedMethods = OrderedDict()
-		for method in self.__class__.__dict__:
+		for method in self.__class__.__dict__.values():
+			print(method)
 			if isinstance(method, Callable):
+				print("  is callable")
 				try:
 					attributeList = method.__dict__[Attribute.__AttributesMemberName__]
-
-					if isinstance(filter, Attribute):
-						pass
-					elif (filter is None):
-						filter = Attribute
-					elif isinstance(filter, Iterable):
-						filter = tuple([attribute for attribute in filter])
 
 					if method not in attributedMethods:
 						attributedMethods[method] = []
@@ -158,7 +161,7 @@ class AttributeHelperMixin:
 				except AttributeError:
 					return False
 				except KeyError:
-					return False
+					pass
 
 		return attributedMethods
 
@@ -193,7 +196,7 @@ class AttributeHelperMixin:
 
 		try:
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
-			if isinstance(filter, Attribute):
+			if (filter is Attribute):
 				pass
 			elif (filter is None):
 				filter = Attribute

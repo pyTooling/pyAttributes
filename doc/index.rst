@@ -43,11 +43,11 @@
    :alt: Dependent repos (via libraries.io)
    :height: 22
    :target: https://github.com/Paebbels/pyAttributes/network/dependents
-.. |img-pyAttributes-codacy-quality| image:: https://img.shields.io/codacy/grade/1155f244b6f54a3a95abdaa80d6771f8?logo=codacy
+.. |img-pyAttributes-codacy-quality| image:: https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=codacy
    :alt: Codacy - Quality
    :height: 22
    :target: https://www.codacy.com/manual/Paebbels/pyAttributes
-.. |img-pyAttributes-codacy-coverage| image:: https://img.shields.io/codacy/coverage/1155f244b6f54a3a95abdaa80d6771f8?logo=codacy
+.. |img-pyAttributes-codacy-coverage| image:: https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
    :target: https://www.codacy.com/manual/Paebbels/pyAttributes

@@ -1,12 +1,26 @@
 ArgParseAttributes
 ##################
 
+.. automodule:: pyAttributes.ArgParseAttributes
+
+.. rubric:: Base-Class:
+
+.. autoclass:: pyAttributes.ArgParseAttributes.ArgParseAttribute
+   :show-inheritance:
+   :members:
+   :private-members:
+   :special-members: __init__
+
+
 Attributes
 **********
+
+
 
 .. rubric:: Inheritance diagram:
 
 .. inheritance-diagram:: pyAttributes.ArgParseAttributes
+   :top-classes: pyAttributes.ArgParseAttributes.ArgParseAttribute
    :parts: 1
 
 

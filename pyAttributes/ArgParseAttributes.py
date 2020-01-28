@@ -37,6 +37,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
+"""
+This module implements attribute-classes and a mixin-class which describe
+options to construct a :mod:`argparse`-based command line processor. All
+attributes in this module are sub-classes of :class:`Attribute`.
+"""
+
 # load dependencies
 from argparse   import ArgumentParser
 from typing     import Callable, Dict, Tuple
@@ -58,54 +64,105 @@ __all__ = __api__
 
 
 class ArgParseAttribute(Attribute):
-	pass
+	"""
+	Base-class for all attributes to describe a :mod:`argparse`-base command line
+	argument parser.
+	"""
+
 
 class CommandGroupAttribute(ArgParseAttribute):
+	"""
+	*Experimental* attribute to group sub-commands in groups for better readability
+	in a ``prog.py --help`` call.
+	"""
 	__groupName: str = None
 
 	def __init__(self, groupName: str):
+		"""
+		The constructor expects a 'groupName' which can be used to group sub-commands
+		for better readability.
+		"""
 		super().__init__()
 		self.__groupName = groupName
 
 	@property
 	def GroupName(self) -> str:
+		"""Returns the name of the command group."""
 		return self.__groupName
 
 
 class _HandlerMixin:
-	_handler: Callable = None
+	"""
+	A mixin-class that offers a class field for a reference to a handler method
+	and a matching property.
+	"""
+	_handler: Callable = None   #: Reference to a method that is called to handle e.g. a sub-command.
 
 	@property
 	def Handler(self) -> Callable:
+		"""Returns the handler method."""
 		return self._handler
 
 
 class _KwArgsMixin:
-	_kwargs: Dict = None
+	"""
+	A mixin-class that offers a class field for named arguments (```**kwargs``)
+	and a matching property.
+	"""
+	_kwargs: Dict = None        #: A dictionary of additional keyword arguments.
 
 	@property
 	def KWArgs(self) -> Dict:
+		"""
+		A dictionary of additional keyword arguments (``**kwargs``) passed to the
+		attribute. These additional parameters are passed without modification to
+		:class:`~ArgumentParser`.
+		"""
 		return self._kwargs
 
 
 class _ArgsMixin(_KwArgsMixin):
-	_args: Tuple = None
+	"""
+	A mixin-class that offers a class field for positional arguments (```*args``)
+	and a matching property.
+	"""
+
+	_args: Tuple = None  #: A tuple of additional positional arguments.
 
 	@property
 	def Args(self) -> Tuple:
+		"""
+		A tuple of additional positional arguments (``*args``) passed to the
+		attribute. These additional parameters are passed without modification to
+		:class:`~ArgumentParser`.
+		"""
 		return self._args
 
 
 class DefaultAttribute(ArgParseAttribute, _HandlerMixin):
+	"""
+	Marks a handler method is *default* handler. This method is called if no
+	sub-command is given. It's an error if more then one method is annotated with
+	this attribute.
+	"""
+
 	def __call__(self, func: Callable) -> Callable:
 		self._handler = func
 		return super().__call__(func)
 
 
 class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
+	"""
+	Marks a handler method as responsible for the given 'command'. This constructs
+	a sub-command parser using :meth:`~ArgumentParser.add_subparsers`.
+	"""
 	_command: str =  None
 
 	def __init__(self, command: str, **kwargs):
+		"""
+		The constructor expects a 'command' and an optional list of named parameters
+		(keyword arguments) which are passed without modification to :meth:`~ArgumentParser.add_subparsers`.
+		"""
 		super().__init__()
 		self._command =  command
 		self._kwargs =   kwargs
@@ -116,10 +173,13 @@ class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
 
 	@property
 	def Command(self) -> str:
+		"""Returns the 'command' a sub-command parser adheres to."""
 		return self._command
 
 
 class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
+	"""Base-class for all attributes storing arguments."""
+
 	def __init__(self, *args, **kwargs):
 		super().__init__()
 		self._args =   args
@@ -127,6 +187,8 @@ class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 
 
 class SwitchArgumentAttribute(ArgumentAttribute):
+	"""Defines a switch argument."""
+
 	def __init__(self, *args, **kwargs):
 		kwargs['action'] =  "store_const"
 		kwargs['const'] =   True
@@ -143,6 +205,10 @@ class CommonSwitchArgumentAttribute(SwitchArgumentAttribute):
 
 
 class ArgParseMixin(AttributeHelperMixin):
+	"""
+	Mixin-class to implement an :mod:`argparse`-base command line argument
+	processor.
+	"""
 	__mainParser: ArgumentParser =  None
 	__subParser =   None
 	__subParsers =  {}

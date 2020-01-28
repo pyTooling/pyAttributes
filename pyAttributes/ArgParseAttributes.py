@@ -45,7 +45,7 @@ attributes in this module are sub-classes of :class:`Attribute`.
 
 # load dependencies
 from argparse   import ArgumentParser
-from typing     import Callable, Dict, Tuple
+from typing import Callable, Dict, Tuple, List
 
 from .          import Attribute, AttributeHelperMixin
 
@@ -106,15 +106,15 @@ class _HandlerMixin:
 
 class _KwArgsMixin:
 	"""
-	A mixin-class that offers a class field for named arguments (```**kwargs``)
+	A mixin-class that offers a class field for named parameters (```**kwargs``)
 	and a matching property.
 	"""
-	_kwargs: Dict = None        #: A dictionary of additional keyword arguments.
+	_kwargs: Dict = None        #: A dictionary of additional keyword parameters.
 
 	@property
 	def KWArgs(self) -> Dict:
 		"""
-		A dictionary of additional keyword arguments (``**kwargs``) passed to the
+		A dictionary of additional named parameters (``**kwargs``) passed to the
 		attribute. These additional parameters are passed without modification to
 		:class:`~ArgumentParser`.
 		"""
@@ -123,16 +123,16 @@ class _KwArgsMixin:
 
 class _ArgsMixin(_KwArgsMixin):
 	"""
-	A mixin-class that offers a class field for positional arguments (```*args``)
+	A mixin-class that offers a class field for positional parameters (```*args``)
 	and a matching property.
 	"""
 
-	_args: Tuple = None  #: A tuple of additional positional arguments.
+	_args: Tuple = None  #: A tuple of additional positional parameters.
 
 	@property
 	def Args(self) -> Tuple:
 		"""
-		A tuple of additional positional arguments (``*args``) passed to the
+		A tuple of additional positional parameters (``*args``) passed to the
 		attribute. These additional parameters are passed without modification to
 		:class:`~ArgumentParser`.
 		"""
@@ -181,15 +181,41 @@ class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 	"""Base-class for all attributes storing arguments."""
 
 	def __init__(self, *args, **kwargs):
+		"""
+		The constructor expects positional (``*args``) and/or named parameters
+		(``**kwargs``) which are passed without modification to :meth:`~ArgumentParser.add_argument`.
+		"""
 		super().__init__()
 		self._args =   args
 		self._kwargs = kwargs
 
 
 class SwitchArgumentAttribute(ArgumentAttribute):
-	"""Defines a switch argument."""
+	"""
+	Defines a switch argument like ``--help``.
 
-	def __init__(self, *args, **kwargs):
+	Some of the named parameters passed to :meth:`~ArgumentParser.add_argument`
+	are predefined (or overwritten) to create a boolean parameter passed to the
+	registered handler method. The boolean parameter is ``True`` if the switch
+	argument is present in the commandline arguments, otherwise ``False``.
+	"""
+
+	def __init__(self, *args, dest:str, **kwargs):
+		"""
+		The constructor expects positional (``*args``), the destination parameter
+		name ``dest`` and/or named parameters	(``**kwargs``) which are passed to
+		:meth:`~ArgumentParser.add_argument`.
+
+		To implement a switch argument, the following named parameters are
+		predefined:
+
+		* ``action="store_const"``
+		* ``const=True``
+		* ``default=False``
+
+		This implements a boolean parameter passed to the handler method.
+		"""
+		kwargs['dest'] =    dest
 		kwargs['action'] =  "store_const"
 		kwargs['const'] =   True
 		kwargs['default'] = False
@@ -214,6 +240,10 @@ class ArgParseMixin(AttributeHelperMixin):
 	__subParsers =  {}
 
 	def __init__(self, **kwargs):
+		"""
+		The mixin-constructor expects an optional list of named parameters which
+		are passed without modification to the :class:`ArgumentParser` constructor.
+		"""
 		super().__init__()
 
 		# create a commandline argument parser
@@ -260,9 +290,11 @@ class ArgParseMixin(AttributeHelperMixin):
 		args.func(self, args)
 
 	@property
-	def MainParser(self):
+	def MainParser(self) -> ArgumentParser:
+		"""Returns the main parser."""
 		return self.__mainParser
 
 	@property
 	def SubParsers(self):
+		"""Returns the sub-parsers."""
 		return self.__subParsers

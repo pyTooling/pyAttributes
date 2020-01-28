@@ -59,7 +59,7 @@ __all__ = __api__
 # TODO: add an attacheHelper methods option
 # TODO: implement a static HasAttribute method
 
-T = TypeVar("T")
+F = TypeVar("F")
 AttributeFilter = Union['Attribute', Iterable['Attribute'], None]
 
 
@@ -68,7 +68,7 @@ class Attribute:
 
 	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
 
-	def __call__(self, func: T) -> T:
+	def __call__(self, func: F) -> F:
 		"""Make all classes derived from ``Attribute`` callable, so they can be used as a decorator."""
 		self._AppendAttribute(func, self)
 		return func

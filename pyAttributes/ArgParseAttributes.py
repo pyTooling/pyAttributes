@@ -39,6 +39,8 @@
 #
 # load dependencies
 from argparse   import ArgumentParser
+from typing     import Callable, Dict, Tuple
+
 from .          import Attribute, AttributeHelperMixin
 
 
@@ -55,73 +57,73 @@ __api__ = [
 __all__ = __api__
 
 
-class CommandGroupAttribute(Attribute):
-	__groupName = ""
+class ArgParseAttribute(Attribute):
+	pass
 
-	def __init__(self, groupName):
+class CommandGroupAttribute(ArgParseAttribute):
+	__groupName: str = None
+
+	def __init__(self, groupName: str):
 		super().__init__()
 		self.__groupName = groupName
 
 	@property
-	def GroupName(self):
+	def GroupName(self) -> str:
 		return self.__groupName
 
 
-class DefaultAttribute(Attribute):
-	__handler = None
-
-	def __call__(self, func):
-		self.__handler = func
-		return super().__call__(func)
+class _HandlerMixin:
+	_handler: Callable = None
 
 	@property
-	def Handler(self):
-		return self.__handler
+	def Handler(self) -> Callable:
+		return self._handler
 
 
-class CommandAttribute(Attribute):
-	__command = ""
-	__handler = None
-	__kwargs =  None
+class _KwArgsMixin:
+	_kwargs: Dict = None
 
-	def __init__(self, command, **kwargs):
+	@property
+	def KWArgs(self) -> Dict:
+		return self._kwargs
+
+
+class _ArgsMixin(_KwArgsMixin):
+	_args: Tuple = None
+
+	@property
+	def Args(self) -> Tuple:
+		return self._args
+
+
+class DefaultAttribute(ArgParseAttribute, _HandlerMixin):
+	def __call__(self, func: Callable) -> Callable:
+		self._handler = func
+		return super().__call__(func)
+
+
+class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
+	_command: str =  None
+
+	def __init__(self, command: str, **kwargs):
 		super().__init__()
-		self.__command =  command
-		self.__kwargs =   kwargs
+		self._command =  command
+		self._kwargs =   kwargs
 
-	def __call__(self, func):
-		self.__handler =  func
+	def __call__(self, func: Callable) -> Callable:
+		self._handler =  func
 		return super().__call__(func)
 
 	@property
-	def Command(self):
-		return self.__command
-
-	@property
-	def Handler(self):
-		return self.__handler
-
-	@property
-	def KWArgs(self):
-		return self.__kwargs
+	def Command(self) -> str:
+		return self._command
 
 
-class ArgumentAttribute(Attribute):
-	__args =    None
-	__kwargs =  None
-
+class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 	def __init__(self, *args, **kwargs):
 		super().__init__()
-		self.__args =   args
-		self.__kwargs = kwargs
-
-	@property
-	def Args(self):
-		return self.__args
-
-	@property
-	def KWArgs(self):
-		return self.__kwargs
+		self._args =   args
+		self._kwargs = kwargs
 
 
 class SwitchArgumentAttribute(ArgumentAttribute):
@@ -141,7 +143,7 @@ class CommonSwitchArgumentAttribute(SwitchArgumentAttribute):
 
 
 class ArgParseMixin(AttributeHelperMixin):
-	__mainParser =  None
+	__mainParser: ArgumentParser =  None
 	__subParser =   None
 	__subParsers =  {}
 

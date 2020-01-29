@@ -60,27 +60,67 @@ A better and more descriptive solution could look like this:
 
 .. code-block:: python
 
-   class MyProg():
+   class ProgramBase():
      def __init__(self):
-       self.BuildParser()
-       # ...
+       pass
 
-     def BuiltParser(self):
-       # 1. search self for methods (potential handlers)
-       # 2. search this methods for attributes
-       # 3. extract Command and Argument attributes
-       # 4. create the parser with that provided metadata
 
-     # UserManagement commads
-     @CommandAttribute('create-user', help="create-user help")
-     @ArgumentAttribute(metavar='<Username>', dest="Users", type=str, nargs='+', help='todo help')
-     def HandleCreateUser(self, args):
-       print("HandleCreateUser: {0}".format(str(args.Users)))
+   class Program(ProgramBase, ArgParseMixin):
+     def __init__(self):
+       import argparse
+       import textwrap
 
-     @CommandAttribute('remove-user',help="remove-user help")
-     @ArgumentAttribute(metavar='<UserID>', dest="UserIDs", type=str, nargs='+', help='todo help')
-     def HandleRemoveUser(self, args):
-       print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
+       # call constructor of the main interitance tree
+       super().__init__()
+
+       # Call the constructor of the ArgParseMixin
+       ArgParseMixin.__init__(
+         self,
+         # prog =	self.program,
+         # usage =	"Usage?",			# override usage string
+         description=textwrap.dedent('''\
+           This is the test program.
+           '''),
+         epilog=textwrap.fill("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."),
+         formatter_class=argparse.RawDescriptionHelpFormatter,
+         add_help=False
+       )
+
+
+     @CommonSwitchArgumentAttribute("-q", "--quiet",   dest="quiet",   help="Reduce messages to a minimum.")
+     @CommonSwitchArgumentAttribute("-v", "--verbose", dest="verbose", help="Print out detailed messages.")
+     @CommonSwitchArgumentAttribute("-d", "--debug",   dest="debug",   help="Enable debug mode.")
+     def Run(self):
+       ArgParseMixin.Run(self)
+
+
+     @DefaultAttribute()
+     def HandleDefault(self, args):
+       print("DefaultHandler: verbose={0}  debug={1}".format(str(args.verbose), str(args.debug)))
+
+
+     @CommandAttribute('help', help="Print help page(s).")
+     def HandleHelp(self, _):
+       print("HandleHelp:")
+
+
+     @CommandAttribute("new-user", help="Create a new user.")
+     @ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
+     @ArgumentAttribute(metavar='<Name>', dest="Name", type=str, help="The user's display name.")
+     def HandleNewUser(self, args):
+       print("HandleNewUser: UserID={0}  Name={1}".format(args.UserID, args.Name))
+
+
+     @CommandAttribute("delete-user", help="Delete a user.")
+     @ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
+     def HandleDeleteUser(self, args):
+       print("HandleDeleteUser: all={0}".format(str(args.all)))
+
+
+     @CommandAttribute("list-user", help="List users.")
+     @SwitchArgumentAttribute('--all', dest="all", help='List all users.')
+     def HandleListUser(self, args):
+       print("HandleListUser: all={0}".format(str(args.all)))
 
 .. note:: Missing Documentation
 

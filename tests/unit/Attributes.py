@@ -19,7 +19,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2017-2020 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2017-2020 Patrick Lehmann - BÃ¶tzingen, Germany
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@
 pyAttributes
 ############
 
-:copyright: Copyright 2007-2020 Patrick Lehmann - Bötzingen, Germany
+:copyright: Copyright 2007-2020 Patrick Lehmann - BÃ¶tzingen, Germany
 :license: Apache License, Version 2.0
 """
 from unittest     import TestCase
@@ -179,7 +179,7 @@ class NoHelperMixin_HasAttributes(TestCase):
 		attributeList = Attribute1.GetAttributes(self.uut.method_1)
 
 
-class TestFromClassInstance(TestCase):
+class FromClassInstance(TestCase):
 	uut : MainClass
 
 	def setUp(self) -> None:
@@ -297,9 +297,6 @@ class TestFromClassInstance(TestCase):
 			BaseClass2.method_4: [Attribute1],
 			BaseClass2.method_5: [Attribute2]
 		}
-
-		for m in methodList:
-			print(m)
 
 		for actualMethod, expectedMethod, actualAttributes, expectedAttributes in zip(methodList, expected):
 			self.assertIs(actualMethod, expectedMethod)

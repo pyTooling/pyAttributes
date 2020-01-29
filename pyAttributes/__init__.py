@@ -59,8 +59,9 @@ __all__ = __api__
 # TODO: add an attacheHelper methods option
 # TODO: implement a static HasAttribute method
 
-F = TypeVar("F")
-AttributeFilter = Union['Attribute', Iterable['Attribute'], None]
+Func = TypeVar("Func")
+Attr = TypeVar("Attr", bound='Attribute')
+AttributeFilter = Union[Attr, Iterable[Attr], None]
 
 
 class Attribute:
@@ -68,7 +69,7 @@ class Attribute:
 
 	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
 
-	def __call__(self, func: F) -> F:
+	def __call__(self, func: Func) -> Func:
 		"""Make all classes derived from ``Attribute`` callable, so they can be used as a decorator."""
 		self._AppendAttribute(func, self)
 		return func
@@ -133,7 +134,7 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self, filter: AttributeFilter=Attribute) -> Union[Dict[Callable, List[Attribute]], bool]:
+	def GetMethods(self, filter: AttributeFilter=Attribute) -> Union[Dict[Callable, List[Attr]], bool]:
 		if (filter is Attribute):
 			pass
 		elif (filter is None):

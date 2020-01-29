@@ -45,7 +45,7 @@ attributes in this module are sub-classes of :class:`Attribute`.
 
 # load dependencies
 from argparse   import ArgumentParser
-from typing import Callable, Dict, Tuple, List
+from typing     import Callable, Dict, Tuple, List
 
 from .          import Attribute, AttributeHelperMixin
 
@@ -250,39 +250,52 @@ class ArgParseMixin(AttributeHelperMixin):
 		self.__mainParser = ArgumentParser(**kwargs)
 		self.__subParser = self.__mainParser.add_subparsers(help='sub-command help')
 
-		for _, func in CommonArgumentAttribute.GetMethods(self):
-			for comAttribute in CommonArgumentAttribute.GetAttributes(func):
-				self.__mainParser.add_argument(*(comAttribute.Args), **(comAttribute.KWArgs))
+		methods: Dict[Callable, List[CommonArgumentAttribute]] = self.GetMethods(filter=CommonArgumentAttribute)
+		# QUESTION: should 'CommonArgumentAttribute's be limited to only one method?
+		for method, attributes in methods.items():
+			for attribute in attributes:
+				self.__mainParser.add_argument(*(attribute.Args), **(attribute.KWArgs))
 
-		for _, func in CommonSwitchArgumentAttribute.GetMethods(self):
-			for comAttribute in CommonSwitchArgumentAttribute.GetAttributes(func):
-				self.__mainParser.add_argument(*(comAttribute.Args), **(comAttribute.KWArgs))
+		methods: Dict[Callable, List[CommonSwitchArgumentAttribute]] = self.GetMethods(filter=CommonSwitchArgumentAttribute)
+		# QUESTION: should 'CommonSwitchArgumentAttribute's be limited to only one method?
+		# QUESTION: should 'CommonSwitchArgumentAttribute's be limited to same method as 'CommonArgumentAttribute's
+		for method, attributes in methods.items():
+			for attribute in attributes:
+				self.__mainParser.add_argument(*(attribute.Args), **(attribute.KWArgs))
 
-		for _, func in self.GetMethods():
-			defAttributes = DefaultAttribute.GetAttributes(func)
-			if (len(defAttributes) != 0):
-				defAttribute = defAttributes[0]
-				self.__mainParser.set_defaults(func=defAttribute.Handler)
-				continue
-
-			cmdAttributes = CommandAttribute.GetAttributes(func)
-			if (len(cmdAttributes) != 0):
-				cmdAttribute = cmdAttributes[0]
-				subParser = self.__subParser.add_parser(cmdAttribute.Command, **(cmdAttribute.KWArgs))
-				subParser.set_defaults(func=cmdAttribute.Handler)
-
-				for argAttribute in ArgumentAttribute.GetAttributes(func):
-					subParser.add_argument(*(argAttribute.Args), **(argAttribute.KWArgs))
-
-				self.__subParsers[cmdAttribute.Command] = subParser
-				continue
-
-	def Run(self):
-		try:
-			from argcomplete  import autocomplete
-			autocomplete(self.__mainParser)
-		except ImportError:
+		methods: Dict[Callable, List[DefaultAttribute]] = self.GetMethods(filter=DefaultAttribute)
+		l = len(methods)
+		if (l == 0):
 			pass
+		elif (l == 1):
+			attribute = methods.popitem(last=False)[1][0]
+			self.__mainParser.set_defaults(func=attribute.Handler)
+		else:
+			raise Exception("Marked more then one handler as default handler with 'DefaultAttribute'.")
+
+		methods: Dict[Callable, List[CommandAttribute]] = self.GetMethods(filter=CommandAttribute)
+		for method, attributes in methods.items():
+			if (len(attributes) == 1):
+				attribute = attributes[0]
+				subParser = self.__subParser.add_parser(attribute.Command, **(attribute.KWArgs))
+				subParser.set_defaults(func=attribute.Handler)
+
+				attributes2: List[ArgumentAttribute] = self.GetAttributes(method, filter=ArgumentAttribute)
+				for attribute2 in attributes2:
+					subParser.add_argument(*(attribute2.Args), **(attribute2.KWArgs))
+
+				self.__subParsers[attribute.Command] = subParser
+			else:
+				raise Exception("Defined more then one 'CommandAttribute' per handler method.")
+
+
+	def Run(self, enableAutoComplete=True):
+		if enableAutoComplete:
+			try:
+				from argcomplete  import autocomplete
+				autocomplete(self.__mainParser)
+			except ImportError:
+				pass
 
 		# parse command line options and process split arguments in callback functions
 		args = self.__mainParser.parse_args()

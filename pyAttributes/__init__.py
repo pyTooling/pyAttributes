@@ -76,9 +76,9 @@ class Attribute:
 
 	@staticmethod
 	def _AppendAttribute(func: Callable, attribute: 'Attribute'):
-		# inherit attributes and append myself or create a new attributes list
+		# inherit attributes and prepend myself or create a new attributes list
 		if (Attribute.__AttributesMemberName__ in func.__dict__):
-			func.__dict__[Attribute.__AttributesMemberName__].append(attribute)
+			func.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)
 		else:
 			func.__setattr__(Attribute.__AttributesMemberName__, [attribute])
 

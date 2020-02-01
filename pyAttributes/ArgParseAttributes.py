@@ -291,14 +291,23 @@ class ArgParseMixin(AttributeHelperMixin):
 
 	def Run(self, enableAutoComplete=True):
 		if enableAutoComplete:
-			try:
-				from argcomplete  import autocomplete
-				autocomplete(self.__mainParser)
-			except ImportError:
-				pass
+			self._EnabledAutoComplete()
 
+		self._ParseArguments()
+
+	def _EnabledAutoComplete(self):
+		try:
+			from argcomplete  import autocomplete
+			autocomplete(self.__mainParser)
+		except ImportError:
+			pass
+
+	def _ParseArguments(self):
 		# parse command line options and process split arguments in callback functions
 		args = self.__mainParser.parse_args()
+		self._RouteToHandler(args)
+
+	def _RouteToHandler(self, args):
 		# because func is a function (unbound to an object), it MUST be called with self as a first parameter
 		args.func(self, args)
 

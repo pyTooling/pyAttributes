@@ -44,13 +44,12 @@ pyAttributes
 :copyright: Copyright 2007-2020 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
+from typing import Callable, Any
 from unittest     import TestCase
 
 from pyAttributes.ArgParseAttributes import ArgParseMixin, DefaultAttribute, CommandAttribute, ArgumentAttribute, SwitchArgumentAttribute, CommonSwitchArgumentAttribute
 
-from pyAttributes import Attribute, AttributeHelperMixin
-
-from .            import zip
+from .            import zip, CapturePrintContext
 
 
 if __name__ == "__main__":
@@ -65,6 +64,9 @@ class ProgramBase():
 
 
 class Program(ProgramBase, ArgParseMixin):
+	handler: Callable = None
+	args:    Any =      None
+
 	def __init__(self):
 		import argparse
 		import textwrap
@@ -80,7 +82,7 @@ class Program(ProgramBase, ArgParseMixin):
 		  description=textwrap.dedent('''\
 				This is the test program.
 				'''),
-		  epilog=textwrap.fill("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."),
+		  epilog=textwrap.fill("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."),
 		  formatter_class=argparse.RawDescriptionHelpFormatter,
 		  add_help=False
 		)
@@ -89,37 +91,43 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommonSwitchArgumentAttribute("-q", "--quiet",   dest="quiet",   help="Reduce messages to a minimum.")
 	@CommonSwitchArgumentAttribute("-v", "--verbose", dest="verbose", help="Print out detailed messages.")
 	@CommonSwitchArgumentAttribute("-d", "--debug",   dest="debug",   help="Enable debug mode.")
-	def Run(self):
+	def Run(self, testVector):
 		ArgParseMixin.Run(self)
 
 
 	@DefaultAttribute()
 	def HandleDefault(self, args):
-		print("DefaultHandler: verbose={0}  debug={1}".format(str(args.verbose), str(args.debug)))
+		self.handler = self.HandleDefault
+		self.args =    args
 
 
-	@CommandAttribute('help', help="Print help page(s).")
-	def HandleHelp(self, _):
-		print("HandleHelp:")
+	@CommandAttribute("help", help="Display help page(s) for the given command name.")
+	@ArgumentAttribute(metavar="Command", dest="Command", type=str, nargs="?", help="Print help page(s) for a command.")
+	def HandleHelp(self, args):
+		self.handler = self.HandleHelp
+		self.args =    args
 
 
 	@CommandAttribute("new-user", help="Create a new user.")
-	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
+	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=int, help="UserID - unique identifier")
 	@ArgumentAttribute(metavar='<Name>', dest="Name", type=str, help="The user's display name.")
 	def HandleNewUser(self, args):
-		print("HandleNewUser: UserID={0}  Name={1}".format(args.UserID, args.Name))
+		self.handler = self.HandleNewUser
+		self.args =    args
 
 
 	@CommandAttribute("delete-user", help="Delete a user.")
 	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
 	def HandleDeleteUser(self, args):
-		print("HandleDeleteUser: all={0}".format(str(args.all)))
+		self.handler = self.HandleDeleteUser
+		self.args =    args
 
 
 	@CommandAttribute("list-user", help="List users.")
 	@SwitchArgumentAttribute('--all', dest="all", help='List all users.')
 	def HandleListUser(self, args):
-		print("HandleListUser: all={0}".format(str(args.all)))
+		self.handler = self.HandleListUser
+		self.args =    args
 
 
 class Test(TestCase):
@@ -128,5 +136,83 @@ class Test(TestCase):
 	def setUp(self) -> None:
 		self.prog = Program()
 
-	def testDefaultAttribute(self):
-		pass
+	def test_DefaultAttribute_NoArguments(self):
+		arguments = []
+
+		parsed = self.prog.MainParser.parse_args(arguments)
+		self.prog._RouteToHandler(parsed)
+
+		self.assertIs(self.prog.handler.__func__, Program.HandleDefault)
+		self.assertFalse(self.prog.args.quiet)
+		self.assertFalse(self.prog.args.verbose)
+		self.assertFalse(self.prog.args.debug)
+
+	def test_HelpCommand_NoArguments(self):
+		arguments = ["help"]
+
+		parsed = self.prog.MainParser.parse_args(arguments)
+		self.prog._RouteToHandler(parsed)
+
+		self.assertIs(self.prog.handler.__func__, Program.HandleHelp)
+		self.assertFalse(self.prog.args.quiet)
+		self.assertFalse(self.prog.args.verbose)
+		self.assertFalse(self.prog.args.debug)
+
+	def test_HelpCommand_ShortQuiet(self):
+		arguments = ["-q", "help"]
+
+		parsed = self.prog.MainParser.parse_args(arguments)
+		self.prog._RouteToHandler(parsed)
+
+		self.assertIs(self.prog.handler.__func__, Program.HandleHelp)
+		self.assertTrue(self.prog.args.quiet)
+		self.assertFalse(self.prog.args.verbose)
+		self.assertFalse(self.prog.args.debug)
+
+	def test_HelpCommand_ShortVerbose(self):
+		arguments = ["-v", "help"]
+
+		parsed = self.prog.MainParser.parse_args(arguments)
+		self.prog._RouteToHandler(parsed)
+
+		self.assertIs(self.prog.handler.__func__, Program.HandleHelp)
+		self.assertFalse(self.prog.args.quiet)
+		self.assertTrue(self.prog.args.verbose)
+		self.assertFalse(self.prog.args.debug)
+
+	def test_HelpCommand_ShortDebug(self):
+		arguments = ["-d", "help"]
+
+		parsed = self.prog.MainParser.parse_args(arguments)
+		self.prog._RouteToHandler(parsed)
+
+		self.assertIs(self.prog.handler.__func__, Program.HandleHelp)
+		self.assertFalse(self.prog.args.quiet)
+		self.assertFalse(self.prog.args.verbose)
+		self.assertTrue(self.prog.args.debug)
+
+	def test_NewUserCommand_NoArguments(self):
+		arguments = ["new-user"]
+
+		with CapturePrintContext() as (_, ErrorCapture):
+			with self.assertRaises(SystemExit) as ExceptionCapture:
+				_ = self.prog.MainParser.parse_args(arguments)
+
+			self.assertEqual(2, ExceptionCapture.exception.code)
+
+		#output = OutputCapture.getvalue().strip()
+		error = ErrorCapture.getvalue().strip()
+		self.assertTrue("the following arguments are required: <UserID>, <Name>" in error)
+
+	def test_NewUserCommand_UserID(self):
+		arguments = ["new-user", "25", "argparse"]
+
+		parsed = self.prog.MainParser.parse_args(arguments)
+		self.prog._RouteToHandler(parsed)
+
+		self.assertIs(self.prog.handler.__func__, Program.HandleNewUser)
+		self.assertFalse(self.prog.args.quiet)
+		self.assertFalse(self.prog.args.verbose)
+		self.assertFalse(self.prog.args.debug)
+		self.assertEqual(self.prog.args.UserID, 25)
+		self.assertEqual(self.prog.args.Name, "argparse")

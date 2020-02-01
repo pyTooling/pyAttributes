@@ -45,7 +45,10 @@ pyAttributes
 :license: Apache License, Version 2.0
 """
 
-from typing       import Generator, Dict, TypeVar, Tuple
+from contextlib import contextmanager
+from io         import StringIO
+import sys      as _sys
+from typing     import Generator, Dict, TypeVar, Tuple
 
 K1 = TypeVar("K1")
 V1 = TypeVar("V1")
@@ -74,3 +77,16 @@ def zip(dict1: Dict[K1, V1], dict2: Dict[K2, V2]) -> Generator[Tuple[K1, K2, V1,
 
 	except StopIteration:
 		return
+
+
+@contextmanager
+def CapturePrintContext():
+	old_out = _sys.stdout
+	old_err = _sys.stderr
+	try:
+		_sys.stdout = StringIO()
+		_sys.stderr = StringIO()
+		yield _sys.stdout, _sys.stderr
+	finally:
+		_sys.stdout = old_out
+		_sys.stderr = old_err

@@ -59,9 +59,9 @@ __all__ = __api__
 # TODO: add an attacheHelper methods option
 # TODO: implement a static HasAttribute method
 
-Func = TypeVar("Func")
-Attr = TypeVar("Attr", bound='Attribute')
-AttributeFilter = Union[Attr, Iterable[Attr], None]
+Func =  TypeVar("Func")
+TAttr = TypeVar("TAttr", bound='Attribute')
+TAttributeFilter = Union[TAttr, Iterable[TAttr], None]
 
 
 class Attribute:
@@ -134,7 +134,7 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self, filter: AttributeFilter=Attribute) -> Union[Dict[Callable, List[Attr]], bool]:
+	def GetMethods(self, filter: TAttributeFilter[TAttr]=Attribute) -> Union[Dict[Callable, List[TAttr]], bool]:
 		if (filter is Attribute):
 			pass
 		elif (filter is None):
@@ -166,7 +166,7 @@ class AttributeHelperMixin:
 		return attributedMethods
 
 	@staticmethod
-	def HasAttribute(method: Callable, filter: AttributeFilter=Attribute) -> bool: # TODO: add a tuple based type filter
+	def HasAttribute(method: Callable, filter: TAttributeFilter[TAttr]=Attribute) -> bool: # TODO: add a tuple based type filter
 		"""Returns true, if the given method has pyAttributes attached."""
 		try:
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
@@ -191,7 +191,7 @@ class AttributeHelperMixin:
 			return False
 
 	@staticmethod
-	def GetAttributes(method: Callable, filter: AttributeFilter=Attribute) -> List[Attribute]: # TODO: add a tuple based type filter
+	def GetAttributes(method: Callable, filter: TAttributeFilter[TAttr]=Attribute) -> List[TAttr]: # TODO: add a tuple based type filter
 		"""Returns a list of pyAttributes attached to the given method."""
 
 		try:

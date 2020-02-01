@@ -250,20 +250,20 @@ class ArgParseMixin(AttributeHelperMixin):
 		self.__mainParser = ArgumentParser(**kwargs)
 		self.__subParser = self.__mainParser.add_subparsers(help='sub-command help')
 
-		methods: Dict[Callable, List[CommonArgumentAttribute]] = self.GetMethods(filter=CommonArgumentAttribute)
+		methods = self.GetMethods(filter=CommonArgumentAttribute)
 		# QUESTION: should 'CommonArgumentAttribute's be limited to only one method?
 		for method, attributes in methods.items():
 			for attribute in attributes:
 				self.__mainParser.add_argument(*(attribute.Args), **(attribute.KWArgs))
 
-		methods: Dict[Callable, List[CommonSwitchArgumentAttribute]] = self.GetMethods(filter=CommonSwitchArgumentAttribute)
+		methods = self.GetMethods(filter=CommonSwitchArgumentAttribute)
 		# QUESTION: should 'CommonSwitchArgumentAttribute's be limited to only one method?
 		# QUESTION: should 'CommonSwitchArgumentAttribute's be limited to same method as 'CommonArgumentAttribute's
 		for method, attributes in methods.items():
 			for attribute in attributes:
 				self.__mainParser.add_argument(*(attribute.Args), **(attribute.KWArgs))
 
-		methods: Dict[Callable, List[DefaultAttribute]] = self.GetMethods(filter=DefaultAttribute)
+		methods = self.GetMethods(filter=DefaultAttribute)
 		l = len(methods)
 		if (l == 0):
 			pass
@@ -273,7 +273,7 @@ class ArgParseMixin(AttributeHelperMixin):
 		else:
 			raise Exception("Marked more then one handler as default handler with 'DefaultAttribute'.")
 
-		methods: Dict[Callable, List[CommandAttribute]] = self.GetMethods(filter=CommandAttribute)
+		methods = self.GetMethods(filter=CommandAttribute)
 		for method, attributes in methods.items():
 			if (len(attributes) == 1):
 				attribute = attributes[0]

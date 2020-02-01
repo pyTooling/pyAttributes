@@ -213,13 +213,13 @@ class FromClassInstance(TestCase):
 		attributeList = self.uut.GetAttributes(self.uut.method_6)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
-		self.assertListEqual(attributes, [Attribute4, Attribute3, Attribute2])
+		self.assertListEqual(attributes, [Attribute2, Attribute3, Attribute4])
 
 	def test_GetAttributes_Method6_FilterNone(self):
 		attributeList = self.uut.GetAttributes(self.uut.method_6, None)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
-		self.assertListEqual(attributes, [Attribute4, Attribute3, Attribute2])
+		self.assertListEqual(attributes, [Attribute2, Attribute3, Attribute4])
 
 	def test_GetAttributes_Method6_FilterAttribute5(self):
 		attributeList = self.uut.GetAttributes(self.uut.method_6, Attribute5)
@@ -237,7 +237,7 @@ class FromClassInstance(TestCase):
 		attributeList = self.uut.GetAttributes(self.uut.method_6, (Attribute3, Attribute4))
 
 		attributes = [attribute.__class__ for attribute in attributeList]
-		self.assertListEqual(attributes, [Attribute4, Attribute3])
+		self.assertListEqual(attributes, [Attribute3, Attribute4])
 
 	def test_GetMethods_DefaultFilter(self):
 		methodList = self.uut.GetMethods()
@@ -246,11 +246,11 @@ class FromClassInstance(TestCase):
 
 		expected = {
 			MainClass.method_7:  [Attribute4],
-			MainClass.method_8:  [Attribute5, Attribute1],
+			MainClass.method_8:  [Attribute1, Attribute5],
 			BaseClass1.method_1: [Attribute1],
 			BaseClass1.method_2: [Attribute2],
-			BaseClass1.method_3: [Attribute3, Attribute2],
-			BaseClass3.method_6: [Attribute4, Attribute3, Attribute2],
+			BaseClass1.method_3: [Attribute2, Attribute3],
+			BaseClass3.method_6: [Attribute2, Attribute3, Attribute4],
 			BaseClass2.method_4: [Attribute1],
 			BaseClass2.method_5: [Attribute2]
 		}
@@ -268,11 +268,11 @@ class FromClassInstance(TestCase):
 
 		expected = {
 			MainClass.method_7:  [Attribute4],
-			MainClass.method_8:  [Attribute5, Attribute1],
+			MainClass.method_8:  [Attribute1, Attribute5],
 			BaseClass1.method_1: [Attribute1],
 			BaseClass1.method_2: [Attribute2],
-			BaseClass1.method_3: [Attribute3, Attribute2],
-			BaseClass3.method_6: [Attribute4, Attribute3, Attribute2],
+			BaseClass1.method_3: [Attribute2, Attribute3],
+			BaseClass3.method_6: [Attribute2, Attribute3, Attribute4],
 			BaseClass2.method_4: [Attribute1],
 			BaseClass2.method_5: [Attribute2]
 		}
@@ -289,7 +289,7 @@ class FromClassInstance(TestCase):
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
 
 		expected = {
-			MainClass.method_8:  [Attribute5, Attribute1],
+			MainClass.method_8:  [Attribute1, Attribute5],
 			BaseClass1.method_1: [Attribute1],
 			BaseClass1.method_2: [Attribute2],
 			BaseClass1.method_3: [Attribute2],

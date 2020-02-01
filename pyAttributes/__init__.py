@@ -86,19 +86,25 @@ class Attribute:
 	@classmethod
 	def GetMethods(cls, inst: Any, includeDerivedAttributes: bool=True) -> Dict[Callable, List['Attribute']]:
 		methods = {}
+		# print("-----------------------------------")
+		# print(inst)
 		classOfInst = inst.__class__
 		if (classOfInst is type):
 			classOfInst = inst
 
 		mro = classOfInst.mro()
 
+		# print(mro)
+
 		# search in method-resolution-order (MRO)
 		for c in mro:
 			for function in c.__dict__.values():
+				# print(functionName, function)
 				if callable(function):
 					# try to read '__pyattr__'
 					try:
 						attributes = function.__dict__[Attribute.__AttributesMemberName__]
+						# print(attributes)
 						if includeDerivedAttributes:
 							for attribute in attributes:
 								if isinstance(attribute, cls):
@@ -142,13 +148,17 @@ class AttributeHelperMixin:
 		elif isinstance(filter, Iterable):
 			filter = tuple([attribute for attribute in filter])
 
+		# print("-----------------------------------")
 		mro = self.__class__.mro()
+		# print(mro)
 
 		attributedMethods = OrderedDict()
 		# search in method-resolution-order (MRO)
 		for c in mro:
 			for method in c.__dict__.values():
+				# print(method)
 				if isinstance(method, Callable):
+					# print("  is callable")
 					try:
 						attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 						for attribute in attributeList:

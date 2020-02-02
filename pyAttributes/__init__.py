@@ -41,18 +41,26 @@
 pyAttributes
 ############
 
-:copyright: Copyright 2007-2020 Patrick Lehmann - Bötzingen, Germany
-:license: Apache License, Version 2.0
+This Python module offers the base implementation of .NET-like attributes
+realized via Python decorators. This module comes also with a mixin-class
+to ease using classes having annotated methods.
+
+The decorators in pyAttributes are implemented as class-based decorators.
+
+The annotated data is stored in an additional ``__dict__`` entry for each
+annotated method. By default the entry is called ``__pyattr__``.
 """
-from collections import OrderedDict
-from typing import Callable, List, TypeVar, Dict, Any, Iterable, Union
+
+# load dependencies
+from collections  import OrderedDict
+from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
 
 
-__api__ = [
+__all__ = [
 	'Attribute',
 	'AttributeHelperMixin'
 ]
-__all__ = __api__
+__api__ = __all__
 
 # TODO: implement class, method, function attributes
 # TODO: implement unique attributes
@@ -60,8 +68,13 @@ __all__ = __api__
 # TODO: implement a static HasAttribute method
 
 Func =  TypeVar("Func")
+"""A type variable for functions. Here it's used for methods."""
+
 TAttr = TypeVar("TAttr", bound='Attribute')
+"""A type variable for :class:`~pyAttributes.Attribute`."""
+
 TAttributeFilter = Union[TAttr, Iterable[TAttr], None]
+"""A type hint for a filter parameter that accepts either a single :class:`~pyAttributes.Attribute` or an iterable of those."""
 
 
 class Attribute:

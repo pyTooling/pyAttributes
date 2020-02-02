@@ -51,6 +51,7 @@ from .          import Attribute, AttributeHelperMixin
 
 
 __api__ = [
+	'ArgParseAttribute',
 	'CommandGroupAttribute',
 	'DefaultAttribute',
 	'CommandAttribute',

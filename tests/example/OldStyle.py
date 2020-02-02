@@ -1,5 +1,6 @@
 import textwrap
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+from typing import List, Dict
 
 
 class ProgramBase():
@@ -16,6 +17,7 @@ class ProgramBase():
 
 class Program(ProgramBase):
 	MainParser: ArgumentParser = None
+	SubParsers: Dict[str, ArgumentParser] = None
 
 	def __init__(self):
 		super().__init__()
@@ -33,39 +35,78 @@ class Program(ProgramBase):
 			add_help=False
 		)
 
-		self.MainParser.set_defaults(func=self.HandleDefault)
-
 		self.MainParser.add_argument("-q", "--quiet",   dest="quiet",   action="store_const", const=True, default=False, help="Reduce messages to a minimum.")
 		self.MainParser.add_argument("-v", "--verbose", dest="verbose", action="store_const", const=True, default=False, help="Print out detailed messages.")
 		self.MainParser.add_argument("-d", "--debug",   dest="debug",   action="store_const", const=True, default=False, help="Enable debug mode.")
 
-
+		# create subparsers
 		subParsers = self.MainParser.add_subparsers(help='sub-command help')
+		self.SubParsers = {}
+
+		# Default handler
+		self.MainParser.set_defaults(func=self.HandleDefault)
+
+		# Help handler
+		HelpParser = subParsers.add_parser("help", help = "Display help page(s) for the given command name.")
+		HelpParser.add_argument(metavar = "Command", dest = "Command", type = str, nargs = "?", help = "Print help page(s) for a command.")
+		HelpParser.set_defaults(func=self.HandleHelp)
+		self.SubParsers["help"] = HelpParser
 
 		# UserManagement commands
-		# create the sub-parser for the "create-user" command
-		CreateUserParser = subParsers.add_parser('create-user', help='create-user help')
-		CreateUserParser.add_argument(metavar='<Username>', dest="Users", type=str, nargs='+', help='todo help')
-		CreateUserParser.set_defaults(func=self.HandleCreateUser)
+		CreateUserParser = subParsers.add_parser("new-user", help="Create a new user.")
+		CreateUserParser.add_argument(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
+		CreateUserParser.add_argument(metavar='<Name>', dest="Name", type=str, help="The user's display name.")
+		CreateUserParser.set_defaults(func=self.HandleNewUser)
+		self.SubParsers["new-user"] = CreateUserParser
 
-		# create the sub-parser for the "remove-user" command
-		RemoveUserParser = subParsers.add_parser('remove-user', help='remove-user help')
-		RemoveUserParser.add_argument(metavar='<UserID>', dest="UserIDs", type=str, nargs='+', help='todo help')
-		RemoveUserParser.set_defaults(func=self.HandleRemoveUser)
+		RemoveUserParser = subParsers.add_parser("delete-user", help="Delete a user.")
+		RemoveUserParser.add_argument(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
+		RemoveUserParser.set_defaults(func=self.HandleDeleteUser)
+		self.SubParsers["delete-user"] = RemoveUserParser
+
+		RemoveUserParser = subParsers.add_parser("list-user", help="List users.")
+		RemoveUserParser.add_argument('--all', dest="all", help='List all users.')
+		RemoveUserParser.set_defaults(func=self.HandleListUser)
+		self.SubParsers["list-user"] = RemoveUserParser
 
 	def Run(self):
-		self.MainParser.parse_args()
+		args = self.MainParser.parse_args()
+		args.func(args)
 
 	def HandleDefault(self, args):
 		self.PrintHeadline()
 
 		print("HandleDefault:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}".format(args.quiet, args.verbose, args.debug))
 
-	def HandleCreateUser(self, args):
-		print("HandleCreateUser: {0}".format(str(args.Users)))
+	def HandleHelp(self, args):
+		self.PrintHeadline()
 
-	def HandleRemoveUser(self, args):
-		print("HandleRemoveUser: {0}".format(str(args.UserIDs)))
+		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  command={3!s}\n\n".format(args.quiet, args.verbose, args.debug, args.Command))
+
+		if (args.Command is None):
+			self.MainParser.print_help()
+		elif (args.Command == "help"):
+			print("This is a recursion ...")
+		else:
+			try:
+				self.SubParsers[args.Command].print_help()
+			except KeyError:
+				print("Command {0} is unknown.".format(args.Command))
+
+	def HandleNewUser(self, args):
+		self.PrintHeadline()
+
+		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}  Name={4!s}".format(args.quiet, args.verbose, args.debug, args.UserID, args.Name))
+
+	def HandleDeleteUser(self, args):
+		self.PrintHeadline()
+
+		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}".format(args.quiet, args.verbose, args.debug, args.UserID))
+
+	def HandleListUser(self, args):
+		self.PrintHeadline()
+
+		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  all={3!s}".format(args.quiet, args.verbose, args.debug, args.all))
 
 
 if __name__ == "__main__":

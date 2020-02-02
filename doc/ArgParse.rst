@@ -6,6 +6,14 @@ can handle sub-commands like ``git commit -m "message"`` where *commit* is a
 sub-command and ``-m <message>`` is an argument of this sub-command parser. It's
 possible to assign a callback function to each individual sub-command parser.
 
+.. topic:: Advantages
+
+* Declarative description instead of imperative form.
+* All options from argparse can be used.
+* Declare accepted command-line arguments close to the responsible handler method
+* Complex parsers can be distributed accross multiple classes and merged via multiple inheritance.
+* Pre-defined argument templates like switch parameters (``--help``).
+
 
 Classic ``argparse`` Example
 ****************************
@@ -27,7 +35,3 @@ A better and more descriptive solution could look like this:
    :linenos:
    :caption: tests/example/UserManager.py
    :tab-width: 2
-
-.. note:: Missing Documentation
-
-   Port more documentation from README to Sphinx documentation.

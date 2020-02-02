@@ -51,7 +51,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleHelp(self, args):
 		self.PrintHeadline()
 
-		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  command={3!s}".format(args.quiet, args.verbose, args.debug, args.Command))
+		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  command={3!s}\n\n".format(args.quiet, args.verbose, args.debug, args.Command))
 
 		if (args.Command is None):
 			self.MainParser.print_help()

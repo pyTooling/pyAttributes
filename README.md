@@ -34,14 +34,15 @@ class. Therefore the provided helper-mixin should be inherited.
 
 ## Use Cases
 
-**Annotate properties and user-defined data to methods.**
+***Annotate properties and user-defined data to methods.***
 
-Derived use cases:
-* Describe a command line argument parser (argparse).
+**Derived use cases:**
+* Describe a command line argument parser (argparse).  
+  See [pyAttributes Documentation -> ArgParse Examples](https://pyattributes.readthedocs.io/en/latest/ArgParse.html)
 * Mark class members for documentation.  
-  See Sphinx-Extensions -> DocumentMember attribute
+  See [SphinxExtensions](https://sphinxextensions.readthedocs.io/en/latest/) -> DocumentMemberAttribute
 
-Planned implementations:
+**Planned implementations:**
 * Annotate user-defined data to classes.
 * Describe test cases and test suits to get a cleaner syntax for Python's unit tests.
 

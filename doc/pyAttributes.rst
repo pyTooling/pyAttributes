@@ -1,5 +1,8 @@
-pyAttributes
-############
+pyAttributes Module
+###################
+
+.. automodule:: pyAttributes
+   :members: Func, TAttr, TAttributeFilter
 
 Attribute
 *********

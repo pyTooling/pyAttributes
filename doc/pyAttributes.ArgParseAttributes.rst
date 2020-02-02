@@ -1,9 +1,13 @@
-ArgParseAttributes
-##################
+ArgParseAttributes Module
+#########################
 
 .. automodule:: pyAttributes.ArgParseAttributes
 
-.. rubric:: Base-Class:
+Base-Classes
+************
+
+ArgParseAttribute
+=================
 
 .. autoclass:: pyAttributes.ArgParseAttributes.ArgParseAttribute
    :show-inheritance:
@@ -11,18 +15,63 @@ ArgParseAttributes
    :private-members:
    :special-members: __init__
 
-
-Attributes
-**********
-
-
-
 .. rubric:: Inheritance diagram:
 
-.. inheritance-diagram:: pyAttributes.ArgParseAttributes
+.. inheritance-diagram:: pyAttributes.ArgParseAttributes.ArgumentAttribute pyAttributes.ArgParseAttributes.SwitchArgumentAttribute pyAttributes.ArgParseAttributes.CommonArgumentAttribute pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute pyAttributes.ArgParseAttributes.CommandAttribute pyAttributes.ArgParseAttributes.DefaultAttribute pyAttributes.ArgParseAttributes.CommandGroupAttribute
    :top-classes: pyAttributes.ArgParseAttributes.ArgParseAttribute
    :parts: 1
 
+
+
+MixIns
+******
+
+_HandlerMixin
+=============
+
+.. autoclass:: pyAttributes.ArgParseAttributes._HandlerMixin
+   :show-inheritance:
+   :members:
+   :private-members:
+   :special-members: __init__
+
+
+_KwArgsMixin
+============
+
+.. autoclass:: pyAttributes.ArgParseAttributes._KwArgsMixin
+   :show-inheritance:
+   :members:
+   :private-members:
+   :special-members: __init__
+
+
+_ArgsMixin
+==========
+
+.. autoclass:: pyAttributes.ArgParseAttributes._ArgsMixin
+   :show-inheritance:
+   :members:
+   :private-members:
+   :special-members: __init__
+
+
+Helper-Classes
+**************
+
+ArgParseMixin
+=============
+
+.. autoclass:: pyAttributes.ArgParseAttributes.ArgParseMixin
+   :show-inheritance:
+   :members:
+   :private-members:
+   :special-members: __init__
+
+
+
+Attributes
+**********
 
 CommandGroupAttribute
 =====================
@@ -94,22 +143,10 @@ CommonSwitchArgumentAttribute
    :special-members: __init__
 
 
-MixIns
-******
-
-ArgParseMixin
-=============
-
-.. autoclass:: pyAttributes.ArgParseAttributes.ArgParseMixin
-   :show-inheritance:
-   :members:
-   :private-members:
-   :special-members: __init__
-
 .. seealso::
 
    Base attribute class :class:`~pyAttributes.Attribute`
-      Base class for all attributes.
+      Base-class for all attributes.
 
    Helper mixin class :class:`~pyAttributes.AttributeHelperMixin`
-      Base class for all helper mixins.
+      Base-class for all helper mixins.

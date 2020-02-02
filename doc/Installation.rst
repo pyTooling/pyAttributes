@@ -1,3 +1,5 @@
+.. _INSTALL:
+
 Installation/Updates
 ####################
 

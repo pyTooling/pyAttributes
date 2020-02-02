@@ -22,8 +22,39 @@ The Python package `pyAttributes` offers implementations of .NET-like attributes
 realized with Python decorators. The package also offers a mixin-class to ease
 using classes having annotated methods.
 
-## Creating new Attributes
+In addition, an `ArgParseAttributes` module is provided, which allows users to
+describe complex argparse commond-line argument parser structures in a declarative
+way.
 
+Attributes can create a complex class hierarchy. This helps in finding and
+filtering for annotated properties and user-defined data. These search operations
+can be called globally on the attribute classes or locally within an annotated
+class. Therefore the provided helper-mixin should be inherited.
+
+
+## Use Cases
+
+**Annotate properties and user-defined data to methods.**
+
+Derived use cases:
+* Describe a command line argument parser (argparse).
+* Mark class members for documentation.  
+  See Sphinx-Extensions -> DocumentMember attribute
+
+Planned implementations:
+* Annotate user-defined data to classes.
+* Describe test cases and test suits to get a cleaner syntax for Python's unit tests.
+
+
+## Technique
+
+The annotated data is stored in an additional ``__dict__`` entry for each
+annotated method. By default the entry is called ``__pyattr__``. Multiple
+attributes can be applied to the same method.
+
+
+
+## Creating new Attributes
 ### Simple User-Defined Attribute
 
 ```python
@@ -45,41 +76,8 @@ class DataAttribute(Attribute):
     return self.data
 ```
 
-### Attributes with a Complex Hierarchy
-
-```python
-class BaseAttribute(Attribute):
-  pass
-
-class _Mixin:
-  pass
-
-class Attribute_1(BaseAttribute):
-  pass
-
-class Attribute_2(Attribute_1, _Mixin):
-  pass
-
-class Attribute_3(BaseAttribute, _Mixin):
-  pass 
-```
 
 ## Applying Attributes to Methods
-
-### Simple Class
-
-```python
-class Program:
-  @SimpleAttribute()
-  def Method_1(self):
-    """This method is marked as simple."""
-
-  @DataAttribute("hello world")
-  def Method_2(self):
-    """This method as annotated data."""
-```
-
-### Class with Attribute Helper-Class
 
 ```python
 class ProgramWithHelper(AttributeHelperMixin):
@@ -93,7 +91,6 @@ class ProgramWithHelper(AttributeHelperMixin):
 ```
 
 ## Finding Methods with Attributes
-
 ### Finding Methods with Global Search
 
 ```python
@@ -128,26 +125,6 @@ class ProgramWithHelper(AttributeHelperMixin):
     for attribute in attributes:
       print("  ", attribute)
 ```
-
-
-## Use Cases
-**Annotate properties and user-defined data to methods.**
-
-Derived use cases:
-* Describe a command line argument parser (argparse).
-* Mark class members for documentation.  
-  See Sphinx-Extensions -> DocumentMember attribute
-
-Planned implementations:
-* Annotate user-defined data to classes.
-* Describe test cases and test suits to get a cleaner syntax for Python's unit tests.
-
-
-## Technique
-
-The annotated data is stored in an additional ``__dict__`` entry for each
-annotated method. By default the entry is called ``__pyattr__``. Multiple
-attributes can be applied to the same method.
 
 
 ## Contributors

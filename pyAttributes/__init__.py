@@ -42,7 +42,7 @@ pyAttributes
 ############
 
 This Python module offers the base implementation of .NET-like attributes
-realized via Python decorators. This module comes also with a mixin-class
+realized with Python decorators. This module comes also with a mixin-class
 to ease using classes having annotated methods.
 
 The decorators in pyAttributes are implemented as class-based decorators.

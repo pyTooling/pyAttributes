@@ -55,7 +55,7 @@ Dependency List
    :target: https://pyAttributes.readthedocs.io/en/latest/
 
 +----------------+---------------------------+----------------------------------------+--------------------------------------+--------------------------+
-| Package        | Repository                | PyPI                                   | License                              | Documentation            |
+| Package        | Repository                | PyPI - Latest                          | PyPI - License                       | Documentation            |
 +================+===========================+========================================+======================================+==========================+
 | autocomplete   | |img-autocomplete-github| | |img-autocomplete-pypi-version|        | |img-autocomplete-pypi-license|      | |img-autocomplete-rtd|_  |
 +----------------+---------------------------+----------------------------------------+--------------------------------------+--------------------------+
@@ -122,7 +122,7 @@ Use the :file:`tests/requirements.txt` file to install all dependencies via
 .. _img-codecov-rtd: https://github.com/codecov/codecov-python/blob/master/README.md
 
 +------------------+-----------------------+----------------------------------+---------------------------------+--------------------------+
-| Package          | Repository            | PyPI                             | License                         | Documentation            |
+| Package          | Repository            | PyPI - Latest                    | PyPI - License                  | Documentation            |
 +==================+=======================+==================================+=================================+==========================+
 | Coverage         | |img-coverage-github| | |img-coverage-pypi-version|      | |img-coverage-pypi-license|     | |img-coverage-rtd|       |
 +------------------+-----------------------+----------------------------------+---------------------------------+--------------------------+
@@ -147,7 +147,7 @@ Use the :file:`doc/requirements.txt` file to install all dependencies via
    pip3 install -U -r doc/requirements.txt
 
 +----------------------------+---------------------------------------+----------------------------------------------+--------------------------------------------------+-----------------------------------------+
-| Package                    | Repository                            | PyPI                                         | License                                          | Documentation                           |
+| Package                    | Repository                            | PyPI - Latest                                | PyPI - License                                   | Documentation                           |
 +============================+=======================================+==============================================+==================================================+=========================================+
 | sphinx                     | |img-sphinx-github|                   | |img-sphinx-pypi-version|                    | |img-sphinx-pypi-license|                        | |img-sphinx-rtd|                        |
 +----------------------------+---------------------------------------+----------------------------------------------+--------------------------------------------------+-----------------------------------------+

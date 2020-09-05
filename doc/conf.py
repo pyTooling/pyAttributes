@@ -151,7 +151,7 @@ extlinks = {
 	'issue': ('https://github.com/Paebbels/pyAttributes/issues/%s', 'issue #'),
 	'pull':  ('https://github.com/Paebbels/pyAttributes/pull/%s', 'pull request #'),
 	'src':   ('https://github.com/Paebbels/pyAttributes/blob/master/pyAttributes/%s?ts=2', None),
-#	'test':  ('https://github.com/Paebbels/pyAttributes/blob/master/test/%s?ts=2', None)
+#	'tests':  ('https://github.com/Paebbels/pyAttributes/blob/master/test/%s?ts=2', None)
 }
 
 

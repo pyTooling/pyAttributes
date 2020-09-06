@@ -3,7 +3,7 @@
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub&)](https://github.com/Paebbels/pyAttributes/releases)  
-[![Travis](https://img.shields.io/travis/com/Paebbels/pyAttributes?logo=Travis)](https://travis-ci.com/Paebbels/pyAttributes)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Paebbels/pyAttributes/Test,%20Coverage%20and%20Release?label=Workflow&logo=GitHub)](https://github.com/Paebbels/pyAttributes/actions?query=workflow%3A%22Test%2C+Coverage+and+Release%22)
 [![PyPI](https://img.shields.io/pypi/v/pyAttributes?logo=PyPI)](https://pypi.org/project/pyAttributes/)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes?logo=PyPI)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI)

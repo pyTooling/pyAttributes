@@ -55,7 +55,7 @@ rtd_url =     "https://" + projectName + ".readthedocs.io/en/latest/"
 
 setuptools.setup(
 	name=projectName,
-	version="2.0.0",
+	version="2.0.1",
 
 	author="Patrick Lehmann",
 	author_email="Paebbels@gmail.com",
@@ -79,7 +79,6 @@ setuptools.setup(
 		"License :: OSI Approved :: Apache Software License",
 		"Operating System :: OS Independent",
 		"Programming Language :: Python :: 3 :: Only",
-		"Programming Language :: Python :: 3.5",
 		"Programming Language :: Python :: 3.6",
 		"Programming Language :: Python :: 3.7",
 		"Programming Language :: Python :: 3.8",
@@ -89,7 +88,7 @@ setuptools.setup(
 	],
 	keywords="Python3 Decorators",
 
-	python_requires='>=3.5',
+	python_requires='>=3.6',
 	install_requires=requirements,
 	# provides=
 	# obsoletes=

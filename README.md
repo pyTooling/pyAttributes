@@ -10,9 +10,9 @@
 [![Dependent repos (via libraries.io)](https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes)](https://github.com/Paebbels/pyAttributes/network/dependents)  
 [![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes)](https://libraries.io/github/Paebbels/pyAttributes)
 [![Requires.io](https://img.shields.io/requires/github/Paebbels/pyAttributes)](https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=master)  
-[![Codacy - Quality](https://api.codacy.com/project/badge/Grade/b63aac7ef7e34baf829f11a61574bbaf)](https://www.codacy.com/manual/Paebbels/pyAttributes)
-[![Codacy - Coverage](https://api.codacy.com/project/badge/Coverage/b63aac7ef7e34baf829f11a61574bbaf)](https://www.codacy.com/manual/Paebbels/pyAttributes)
-[![Codecov - Branch Coverage](https://codecov.io/gh/Paebbels/pyAttributes/branch/master/graph/badge.svg)](https://codecov.io/gh/Paebbels/pyAttributes)
+[![Codacy - Quality](https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/Paebbels/pyAttributes)
+[![Codacy - Coverage](https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/Paebbels/pyAttributes)
+[![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/Paebbels/pyAttributes?logo=Codecov)](https://codecov.io/gh/Paebbels/pyAttributes)
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes)](https://libraries.io/github/Paebbels/pyAttributes/sourcerank)  
 [![Read the Docs](https://img.shields.io/readthedocs/pyattributes)](https://pyAttributes.readthedocs.io/en/latest/)
 
@@ -135,7 +135,10 @@ class ProgramWithHelper(AttributeHelperMixin):
 
 ## License
 
-This library is licensed under [Apache License 2.0](LICENSE.md)
+This Python package (source code) is licensed under [Apache License 2.0](LICENSE.md).
+
+<!-- The accompanying documentation is licensed under Creative Commons - Attribution-4.0 (CC-BY 4.0). -->
+
 
 -------------------------
 

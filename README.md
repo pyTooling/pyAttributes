@@ -1,5 +1,5 @@
 [![Sourcecode on GitHub](https://img.shields.io/badge/Paebbels-pyAttributes-323131.svg?logo=github&longCache=true)](https://github.com/Paebbels/pyAttributes)
-[![License](https://img.shields.io/badge/Apache%20License,%202.0-bd0000.svg?longCache=true&label=code%20license&logo=Apache&logoColor=D22128)](LICENSE.md)
+[![License](https://img.shields.io/badge/code%20license-Apache%20License%2C%202.0-lightgrey?logo=GitHub)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/releases/latest)
 [![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub&)](https://github.com/Paebbels/pyAttributes/releases)  

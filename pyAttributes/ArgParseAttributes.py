@@ -19,7 +19,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2017-2020 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -238,6 +238,7 @@ class ArgParseMixin(AttributeHelperMixin):
 	"""
 	__mainParser: ArgumentParser =  None
 	__subParser =   None
+	__formatter =   None
 	__subParsers =  {}
 
 	def __init__(self, **kwargs):
@@ -246,6 +247,9 @@ class ArgParseMixin(AttributeHelperMixin):
 		are passed without modification to the :class:`ArgumentParser` constructor.
 		"""
 		super().__init__()
+
+		if ("formatter_class" in kwargs):
+			self.__formatter = kwargs["formatter_class"]
 
 		# create a commandline argument parser
 		self.__mainParser = ArgumentParser(**kwargs)
@@ -277,8 +281,11 @@ class ArgParseMixin(AttributeHelperMixin):
 		methods = self.GetMethods(filter=CommandAttribute)
 		for method, attributes in methods.items():
 			if (len(attributes) == 1):
-				attribute = attributes[0]
-				subParser = self.__subParser.add_parser(attribute.Command, **(attribute.KWArgs))
+				attribute : CommandAttribute = attributes[0]
+				kwArgs = attribute.KWArgs.copy()
+				if ("formatter_class" not in kwArgs and self.__formatter is not None):
+					kwArgs["formatter_class"] = self.__formatter
+				subParser = self.__subParser.add_parser(attribute.Command, **kwArgs)
 				subParser.set_defaults(func=attribute.Handler)
 
 				attributes2: List[ArgumentAttribute] = self.GetAttributes(method, filter=ArgumentAttribute)
@@ -290,25 +297,25 @@ class ArgParseMixin(AttributeHelperMixin):
 				raise Exception("Defined more then one 'CommandAttribute' per handler method.")
 
 
-	def Run(self, enableAutoComplete=True):
+	def Run(self, enableAutoComplete=True) -> None:
 		if enableAutoComplete:
 			self._EnabledAutoComplete()
 
 		self._ParseArguments()
 
-	def _EnabledAutoComplete(self):
+	def _EnabledAutoComplete(self) -> None:
 		try:
 			from argcomplete  import autocomplete
 			autocomplete(self.__mainParser)
 		except ImportError:
 			pass
 
-	def _ParseArguments(self):
+	def _ParseArguments(self) -> None:
 		# parse command line options and process split arguments in callback functions
 		args = self.__mainParser.parse_args()
 		self._RouteToHandler(args)
 
-	def _RouteToHandler(self, args):
+	def _RouteToHandler(self, args) -> None:
 		# because func is a function (unbound to an object), it MUST be called with self as a first parameter
 		args.func(self, args)
 

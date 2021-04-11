@@ -283,9 +283,9 @@ class ArgParseMixin(AttributeHelperMixin):
 			if (len(attributes) == 1):
 				attribute : CommandAttribute = attributes[0]
 				kwArgs = attribute.KWArgs.copy()
-				if ("formatter_class" not in kwArgs):
+				if ("formatter_class" not in kwArgs and self.__formatter is not None):
 					kwArgs["formatter_class"] = self.__formatter
-				subParser = self.__subParser.add_parser(attribute.Command, **(kwArgs))
+				subParser = self.__subParser.add_parser(attribute.Command, **kwArgs)
 				subParser.set_defaults(func=attribute.Handler)
 
 				attributes2: List[ArgumentAttribute] = self.GetAttributes(method, filter=ArgumentAttribute)

@@ -1,4 +1,6 @@
-from pyAttributes.ArgParseAttributes import ArgParseMixin, CommonSwitchArgumentAttribute, DefaultAttribute, CommandAttribute, ArgumentAttribute, SwitchArgumentAttribute
+from argparse import ArgumentDefaultsHelpFormatter
+
+from pyAttributes.ArgParseAttributes import ArgParseMixin, CommonSwitchArgumentAttribute, DefaultAttribute, CommandAttribute, CommonArgumentAttribute, ArgumentAttribute, SwitchArgumentAttribute
 
 
 class ProgramBase():
@@ -15,7 +17,6 @@ class ProgramBase():
 
 class Program(ProgramBase, ArgParseMixin):
 	def __init__(self):
-		import argparse
 		import textwrap
 
 		# call constructor of the main inheritance tree
@@ -28,7 +29,7 @@ class Program(ProgramBase, ArgParseMixin):
         This is the test program.
         '''),
 			epilog=textwrap.fill("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."),
-			formatter_class=argparse.RawDescriptionHelpFormatter,
+			formatter_class=ArgumentDefaultsHelpFormatter,
 			add_help=False
 		)
 
@@ -70,7 +71,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleNewUser(self, args):
 		self.PrintHeadline()
 
-		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}  Name={4!s}".format(args.quiet, args.verbose, args.debug, args.UserID, args.Name))
+		print("HandleNewUser:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}  Name={4!s}  Limit={5!s}".format(args.quiet, args.verbose, args.debug, args.UserID, args.Name, args.Limit))
 
 
 	@CommandAttribute("delete-user", help="Delete a user.")
@@ -78,7 +79,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleDeleteUser(self, args):
 		self.PrintHeadline()
 
-		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}".format(args.quiet, args.verbose, args.debug, args.UserID))
+		print("HandleDeleteUser:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}".format(args.quiet, args.verbose, args.debug, args.UserID))
 
 
 	@CommandAttribute("list-user", help="List users.")
@@ -86,7 +87,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleListUser(self, args):
 		self.PrintHeadline()
 
-		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  all={3!s}".format(args.quiet, args.verbose, args.debug, args.all))
+		print("HandleListUser:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  all={3!s}".format(args.quiet, args.verbose, args.debug, args.all))
 
 
 if __name__ == "__main__":

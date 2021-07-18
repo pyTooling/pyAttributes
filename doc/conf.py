@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'pyAttributes'
-copyright = '2007-2020, Patrick Lehmann'
+copyright = '2007-2021, Patrick Lehmann'
 author = 'Patrick Lehmann'
 
 # ==============================================================================
@@ -40,8 +40,8 @@ def _LatestTagName():
 	return check_output(["git", "describe", "--abbrev=0", "--tags"], universal_newlines=True).strip()
 
 # The full version, including alpha/beta/rc tags
-version = "2.0"     # The short X.Y version.
-release = "2.0.0"   # The full version, including alpha/beta/rc tags.
+version = "2.1"     # The short X.Y version.
+release = "2.1.0"   # The full version, including alpha/beta/rc tags.
 try:
 	if _IsUnderGitControl:
 		latestTagName = _LatestTagName()[1:]		# remove prefix "v"

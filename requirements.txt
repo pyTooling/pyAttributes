@@ -1,1 +1,1 @@
-autocomplete
+argcomplete>=1.12.3

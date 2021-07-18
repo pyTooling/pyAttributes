@@ -34,20 +34,20 @@ or install the package directly from PyPI (see :ref:`INSTALL`).
 Dependency List
 ===============
 
-.. |img-autocomplete-github| image:: https://img.shields.io/badge/rodricios-autocomplete-323131.svg?logo=github&longCache=true
+.. |img-argcomplete-github| image:: https://img.shields.io/badge/kislyuk-argcomplete-323131.svg?logo=github&longCache=true
    :alt: Sourcecode on GitHub
    :height: 22
-   :target: https://github.com/rodricios/autocomplete
-.. |img-autocomplete-pypi-license| image:: https://img.shields.io/pypi/l/autocomplete
+   :target: https://github.com/kislyuk/argcomplete
+.. |img-argcomplete-pypi-license| image:: https://img.shields.io/pypi/l/argcomplete
    :alt: License shown at PyPI
    :height: 22
-   :target: https://pypi.org/project/autocomplete/
-.. |img-autocomplete-pypi-version| image:: https://img.shields.io/pypi/v/autocomplete
+   :target: https://pypi.org/project/argcomplete/
+.. |img-argcomplete-pypi-version| image:: https://img.shields.io/pypi/v/argcomplete
    :alt: Version shown at PyPI
    :height: 22
-   :target: https://pypi.org/project/autocomplete/
-.. |img-autocomplete-rtd| replace:: README
-.. _img-autocomplete-rtd: https://github.com/rodricios/autocomplete/blob/master/README.rst
+   :target: https://pypi.org/project/argcomplete/
+.. |img-argcomplete-rtd| replace:: README
+.. _img-argcomplete-rtd: https://github.com/kislyuk/argcomplete/blob/master/README.rst
 
 .. # image:: https://img.shields.io/readthedocs/pyattributes
    :alt: Read the Docs
@@ -57,7 +57,7 @@ Dependency List
 +----------------+---------------------------+----------------------------------------+--------------------------------------+--------------------------+
 | Package        | Repository                | PyPI - Latest                          | PyPI - License                       | Documentation            |
 +================+===========================+========================================+======================================+==========================+
-| autocomplete   | |img-autocomplete-github| | |img-autocomplete-pypi-version|        | |img-autocomplete-pypi-license|      | |img-autocomplete-rtd|_  |
+| argcomplete    | |img-argcomplete-github|  | |img-argcomplete-pypi-version|         | |img-argcomplete-pypi-license|       | |img-argcomplete-rtd|_   |
 +----------------+---------------------------+----------------------------------------+--------------------------------------+--------------------------+
 
 

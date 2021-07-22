@@ -2,7 +2,7 @@
 [![Sourcecode License](https://img.shields.io/pypi/l/pyAttributes?logo=GitHub&label=code%20license)](LICENSE.md)
 [![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/tags)
 [![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/releases/latest)
-[![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub&)](https://github.com/Paebbels/pyAttributes/releases)
+[![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub)](https://github.com/Paebbels/pyAttributes/releases)
 [![Dependents (via libraries.io)](https://img.shields.io/librariesio/dependents/pypi/pyAttributes?logo=librariesdotio)](https://github.com/Paebbels/pyAttributes/network/dependents)  
 [![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/Paebbels/pyAttributes/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Pipeline&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/Paebbels/pyAttributes/actions/workflows/Pipeline.yml)
 [![Codacy - Quality](https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/Paebbels/pyAttributes)
@@ -25,7 +25,7 @@ realized with Python decorators. The package also offers a mixin-class to ease
 using classes having annotated methods.
 
 In addition, an `ArgParseAttributes` module is provided, which allows users to
-describe complex argparse commond-line argument parser structures in a declarative
+describe complex argparse command-line argument parser structures in a declarative
 way.
 
 Attributes can create a complex class hierarchy. This helps in finding and
@@ -52,7 +52,7 @@ class. Therefore the provided helper-mixin should be inherited.
 ## Technique
 
 The annotated data is stored in an additional ``__dict__`` entry for each
-annotated method. By default the entry is called ``__pyattr__``. Multiple
+annotated method. By default, the entry is called ``__pyattr__``. Multiple
 attributes can be applied to the same method.
 
 

@@ -2,11 +2,11 @@
    :alt: Sourcecode on GitHub
    :height: 22
    :target: https://github.com/Paebbels/pyAttributes
-.. |img-pyAttributes-license| image:: https://img.shields.io/badge/Apache%20License,%202.0-bd0000.svg?longCache=true&label=license&logo=Apache&logoColor=D22128
-   :alt: License
+.. |img-pyAttributes-codelicense| image:: https://img.shields.io/pypi/l/pyAttributes?logo=GitHub&label=code%20license
+   :alt: Sourcecode License
    :height: 22
 .. |img-pyAttributes-tag| image:: https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases
-   :alt: GitHub tag (latest SemVer incl. pre-release
+   :alt: GitHub tag (latest SemVer incl. pre-release)
    :height: 22
    :target: https://github.com/Paebbels/pyAttributes/tags
 .. |img-pyAttributes-release| image:: https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases
@@ -17,7 +17,41 @@
    :alt: GitHub release date
    :height: 22
    :target: https://github.com/Paebbels/pyAttributes/releases
-.. |img-pyAttributes-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyAttributes
+.. |img-pyAttributes-lib-dep| image:: https://img.shields.io/librariesio/dependents/pypi/pyAttributes?logo=librariesdotio
+   :alt: Dependents (via libraries.io)
+   :height: 22
+   :target: https://github.com/Paebbels/pyAttributes/network/dependents
+.. |img-pyAttributes-gha-pipeline| image:: https://img.shields.io/github/workflow/status/Paebbels/pyAttributes/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Pipeline&logo=GitHub%20Actions&logoColor=FFFFFF
+   :alt: GitHub Workflow - Build and Test Status
+   :height: 22
+   :target: https://github.com/Paebbels/pyAttributes/actions/workflows/Pipeline.yml
+.. |img-pyAttributes-codacy-quality| image:: https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy
+   :alt: Codacy - Quality
+   :height: 22
+   :target: https://www.codacy.com/manual/Paebbels/pyAttributes
+.. |img-pyAttributes-codacy-coverage| image:: https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy
+   :alt: Codacy - Line Coverage
+   :height: 22
+   :target: https://www.codacy.com/manual/Paebbels/pyAttributes
+.. |img-pyAttributes-codecov-coverage| image:: https://img.shields.io/codecov/c/github/Paebbels/pyAttributes?logo=Codecov
+   :alt: Codecov - Branch Coverage
+   :height: 22
+   :target: https://codecov.io/gh/Paebbels/pyAttributes
+.. |img-pyAttributes-lib-rank| image:: https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes?logo=librariesdotio
+   :alt: Libraries.io SourceRank
+   :height: 22
+   :target: https://libraries.io/github/Paebbels/pyAttributes/sourcerank
+.. |img-pyAttributes-pypi-tag| image:: https://img.shields.io/pypi/v/pyAttributes?logo=PyPI&logoColor=FBE072
+   :alt: PyPI - Tag
+   :height: 22
+   :target: https://pypi.org/project/pyAttributes/
+.. |img-pyAttributes-pypi-python| image:: https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI&logoColor=FBE072
+   :alt: PyPI - Python Version
+   :height: 22
+.. |img-pyAttributes-pypi-status| image:: https://img.shields.io/pypi/status/pyAttributes?logo=PyPI&logoColor=FBE072
+   :alt: PyPI - Status
+   :height: 22
+.. |img-pyAttributes-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyAttributes?logo=librariesdotio
    :alt: Libraries.io status for latest release
    :height: 22
    :target: https://libraries.io/github/Paebbels/pyAttributes
@@ -25,50 +59,23 @@
    :alt: Requires.io
    :height: 22
    :target: https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=master
-.. |img-pyAttributes-travis| image:: https://img.shields.io/travis/com/Paebbels/pyAttributes?logo=Travis
-   :alt: Travis - Build on 'master'
-   :height: 22
-   :target: https://travis-ci.com/Paebbels/pyAttributes
-.. |img-pyAttributes-pypi-tag| image:: https://img.shields.io/pypi/v/pyAttributes?logo=PyPI
-   :alt: PyPI - Tag
-   :height: 22
-   :target: https://pypi.org/project/pyAttributes/
-.. |img-pyAttributes-pypi-status| image:: https://img.shields.io/pypi/status/pyAttributes?logo=PyPI
-   :alt: PyPI - Status
-   :height: 22
-.. |img-pyAttributes-pypi-python| image:: https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI
-   :alt: PyPI - Python Version
-   :height: 22
-.. |img-pyAttributes-lib-dep| image:: https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes
-   :alt: Dependent repos (via libraries.io)
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes/network/dependents
-.. |img-pyAttributes-codacy-quality| image:: https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=codacy
-   :alt: Codacy - Quality
-   :height: 22
-   :target: https://www.codacy.com/manual/Paebbels/pyAttributes
-.. |img-pyAttributes-codacy-coverage| image:: https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=codacy
-   :alt: Codacy - Line Coverage
-   :height: 22
-   :target: https://www.codacy.com/manual/Paebbels/pyAttributes
-.. |img-pyAttributes-codecov-coverage| image:: https://codecov.io/gh/Paebbels/pyAttributes/branch/master/graph/badge.svg
-   :alt: Codecov - Branch Coverage
-   :height: 22
-   :target: https://codecov.io/gh/Paebbels/pyAttributes
-.. |img-pyAttributes-lib-rank| image:: https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes
-   :alt: Libraries.io SourceRank
-   :height: 22
-   :target: https://libraries.io/github/Paebbels/pyAttributes/sourcerank
-.. |img-pyAttributes-rtd| image:: https://img.shields.io/readthedocs/pyattributes
+.. |img-pyAttributes-rtd| image:: https://img.shields.io/readthedocs/pyattributes?label=ReadTheDocs&logo=readthedocs
    :alt: Read the Docs
    :height: 22
-   :target: https://pyAttributes.readthedocs.io/en/latest/
+   :target: https://pyAttributes.readthedocs.io/
+.. |img-pyAttributes-doclicense| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?logo=readthedocs
+   :alt: Documentation License
+   :height: 22
+   :target: LICENSE.md
+.. |img-pyAttributes-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet?logo=readthedocs
+   :alt: Documentation - Read Now!
+   :height: 22
+   :target: https://pyAttributes.readthedocs.io/
 
-|img-pyAttributes-github| |img-pyAttributes-tag| |img-pyAttributes-release| |img-pyAttributes-date| |br|
-|img-pyAttributes-lib-status| |img-pyAttributes-req-status| |img-pyAttributes-lib-dep| |br|
-|img-pyAttributes-travis| |img-pyAttributes-pypi-tag| |img-pyAttributes-pypi-status| |img-pyAttributes-pypi-python| |br|
-|img-pyAttributes-codacy-quality| |img-pyAttributes-codacy-coverage| |img-pyAttributes-codecov-coverage| |img-pyAttributes-lib-rank| |br|
-|img-pyAttributes-rtd| |img-pyAttributes-license|
+|img-pyAttributes-github| |img-pyAttributes-codelicense| |img-pyAttributes-tag| |img-pyAttributes-release| |img-pyAttributes-date| |img-pyAttributes-lib-dep| |br|
+|img-pyAttributes-gha-pipeline| |img-pyAttributes-codacy-quality| |img-pyAttributes-codacy-coverage| |img-pyAttributes-codecov-coverage| |img-pyAttributes-lib-rank| |br|
+|img-pyAttributes-pypi-tag| |img-pyAttributes-pypi-python| |img-pyAttributes-pypi-status| |img-pyAttributes-lib-status| |img-pyAttributes-req-status| |br|
+|img-pyAttributes-rtd| |img-pyAttributes-doclicense| |img-pyAttributes-doc|
 
 .. code-block::
 
@@ -138,14 +145,24 @@ This package brings special attribute implementations for:
 Contributors
 ************
 
-* `Patrick Lehmann <https://github.com/Paebbels>`_ (Maintainer)
+* `Patrick Lehmann <https://github.com/Paebbels>`__ (Maintainer)
+* `and more... <https://github.com/paebbels/pyCallBy/graphs/contributors>`__
 
 
 
 License
 *******
 
-This library is licensed under **Apache License 2.0**.
+.. only:: html
+
+   This Python package (source code) is licensed under `Apache License 2.0 <Code-License.html>`__. |br|
+   The accompanying documentation is licensed under `Creative Commons - Attribution 4.0 (CC-BY 4.0) <Doc-License.html>`__.
+
+.. only:: latex
+
+   This Python package (source code) is licensed under **Apache License 2.0**. |br|
+   The accompanying documentation is licensed under **Creative Commons - Attribution 4.0 (CC-BY 4.0)**.
+
 
 ------------------------------------
 

@@ -44,23 +44,15 @@ attributes in this module are sub-classes of :class:`Attribute`.
 from argparse   import ArgumentParser
 from typing     import Callable, Dict, Tuple, List
 
+from pydecor    import export
+
 from .          import Attribute, AttributeHelperMixin
 
 
-__api__ = [
-	'ArgParseAttribute',
-	'CommandGroupAttribute',
-	'DefaultAttribute',
-	'CommandAttribute',
-	'ArgumentAttribute',
-	'SwitchArgumentAttribute',
-	'CommonArgumentAttribute',
-	'CommonSwitchArgumentAttribute',
-	'ArgParseMixin'
-]
-__all__ = __api__
+# __all__ = __api__
 
 
+@export
 class ArgParseAttribute(Attribute):
 	"""
 	Base-class for all attributes to describe a :mod:`argparse`-base command line
@@ -68,6 +60,7 @@ class ArgParseAttribute(Attribute):
 	"""
 
 
+@export
 class CommandGroupAttribute(ArgParseAttribute):
 	"""
 	*Experimental* attribute to group sub-commands in groups for better readability
@@ -89,6 +82,7 @@ class CommandGroupAttribute(ArgParseAttribute):
 		return self.__groupName
 
 
+@export
 class _HandlerMixin:
 	"""
 	A mixin-class that offers a class field for a reference to a handler method
@@ -102,6 +96,7 @@ class _HandlerMixin:
 		return self._handler
 
 
+@export
 class _KwArgsMixin:
 	"""
 	A mixin-class that offers a class field for named parameters (```**kwargs``)
@@ -119,6 +114,7 @@ class _KwArgsMixin:
 		return self._kwargs
 
 
+@export
 class _ArgsMixin(_KwArgsMixin):
 	"""
 	A mixin-class that offers a class field for positional parameters (```*args``)
@@ -137,6 +133,7 @@ class _ArgsMixin(_KwArgsMixin):
 		return self._args
 
 
+@export
 class DefaultAttribute(ArgParseAttribute, _HandlerMixin):
 	"""
 	Marks a handler method is *default* handler. This method is called if no
@@ -149,6 +146,7 @@ class DefaultAttribute(ArgParseAttribute, _HandlerMixin):
 		return super().__call__(func)
 
 
+@export
 class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
 	"""
 	Marks a handler method as responsible for the given 'command'. This constructs
@@ -175,6 +173,7 @@ class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
 		return self._command
 
 
+@export
 class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 	"""Base-class for all attributes storing arguments."""
 
@@ -188,6 +187,7 @@ class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 		self._kwargs = kwargs
 
 
+@export
 class SwitchArgumentAttribute(ArgumentAttribute):
 	"""
 	Defines a switch argument like ``--help``.
@@ -220,14 +220,17 @@ class SwitchArgumentAttribute(ArgumentAttribute):
 		super().__init__(*args, **kwargs)
 
 
+@export
 class CommonArgumentAttribute(ArgumentAttribute):
 	pass
 
 
+@export
 class CommonSwitchArgumentAttribute(SwitchArgumentAttribute):
 	pass
 
 
+@export
 class ArgParseMixin(AttributeHelperMixin):
 	"""
 	Mixin-class to implement an :mod:`argparse`-base command line argument

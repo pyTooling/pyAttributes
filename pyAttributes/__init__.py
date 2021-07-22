@@ -47,22 +47,19 @@ The decorators in pyAttributes are implemented as class-based decorators.
 The annotated data is stored in an additional ``__dict__`` entry for each
 annotated method. By default the entry is called ``__pyattr__``.
 """
-
 # load dependencies
-from collections  import OrderedDict
 from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
+from collections  import OrderedDict
 
+from pydecor      import export
 
-__all__ = [
-	'Attribute',
-	'AttributeHelperMixin'
-]
-__api__ = __all__
+# __api__ = __all__
 
 # TODO: implement class, method, function attributes
 # TODO: implement unique attributes
 # TODO: add an attacheHelper methods option
 # TODO: implement a static HasAttribute method
+
 
 Func =  TypeVar("Func")
 """A type variable for functions. Here it's used for methods."""
@@ -74,6 +71,7 @@ TAttributeFilter = Union[TAttr, Iterable[TAttr], None]
 """A type hint for a filter parameter that accepts either a single :class:`~pyAttributes.Attribute` or an iterable of those."""
 
 
+@export
 class Attribute:
 	"""Base-class for all pyAttributes."""
 
@@ -147,6 +145,7 @@ class Attribute:
 		return list()
 
 
+@export
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 

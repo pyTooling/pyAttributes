@@ -149,10 +149,20 @@ Contributors
 * `and more... <https://github.com/paebbels/pyCallBy/graphs/contributors>`__
 
 
+
 License
 *******
 
-This library is licensed under **Apache License 2.0**.
+.. only:: html
+
+   This Python package (source code) is licensed under `Apache License 2.0 <Code-License.html>`__. |br|
+   The accompanying documentation is licensed under `Creative Commons - Attribution 4.0 (CC-BY 4.0) <Doc-License.html>`__.
+
+.. only:: latex
+
+   This Python package (source code) is licensed under **Apache License 2.0**. |br|
+   The accompanying documentation is licensed under **Creative Commons - Attribution 4.0 (CC-BY 4.0)**.
+
 
 ------------------------------------
 

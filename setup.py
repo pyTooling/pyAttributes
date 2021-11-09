@@ -37,9 +37,9 @@ from setuptools import (
 )
 
 gitHubNamespace =       "pyTooling"
-projectName =           "Attributes"
-projectNameWithPrefix = "pyTooling." + projectName
-version =               "2.2.2"
+projectName =           "pyAttributes"
+projectNameWithPrefix = projectName
+version =               "2.3.0"
 
 # Read README for upload to PyPI
 readmeFile = Path("README.md")
@@ -53,8 +53,7 @@ with requirementsFile.open("r") as file:
 
 # Derive URLs
 sourceCodeURL =     f"https://github.com/{gitHubNamespace}/{projectName}"
-#documentationURL =  f"https://{gitHubNamespace}.github.io/{projectName}"
-documentationURL =  f"https://{projectName}.readthedocs.io/en/latest/"
+documentationURL =  f"https://{gitHubNamespace}.github.io/{projectName}"
 
 # Assemble all package information
 setuptools_setup(
@@ -87,11 +86,12 @@ setuptools_setup(
 		"Programming Language :: Python :: 3.7",
 		"Programming Language :: Python :: 3.8",
 		"Programming Language :: Python :: 3.9",
+		"Programming Language :: Python :: 3.10",
 		"Development Status :: 5 - Production/Stable",
 		"Intended Audience :: Developers",
 		"Topic :: Utilities"
 	],
-	keywords="Python3 Decorators",
+	keywords="Python3 Decorators Attributes",
 
 	python_requires='>=3.6',
 	install_requires=requirements,

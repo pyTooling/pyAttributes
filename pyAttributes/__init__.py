@@ -50,7 +50,7 @@ from collections  import OrderedDict
 from pyTooling.Decorators import export
 
 
-__version__ = "2.2.2"
+__version__ = "2.3.0"
 
 
 # TODO: implement class, method, function attributes

@@ -4,8 +4,13 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.cov" />
       <excludeFolder url="file://$MODULE_DIR$/doc/_build" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/.pytest_cache/v" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="pyTooling.TerminalUI" />
+    <orderEntry type="module" module-name="pyTooling.GenericPath" />
+    <orderEntry type="module" module-name="pyTooling.AbstractGraph" />
+    <orderEntry type="module" module-name="pyCLIAbstraction" />
   </component>
 </module>

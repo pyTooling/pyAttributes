@@ -10,10 +10,6 @@
 #
 # Python package:     pyAttributes Implementation
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
@@ -51,9 +47,11 @@ annotated method. By default the entry is called ``__pyattr__``.
 from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
 from collections  import OrderedDict
 
-from pydecor      import export
+from pyTooling.Decorators import export
 
-# __api__ = __all__
+
+__version__ = "2.2.2"
+
 
 # TODO: implement class, method, function attributes
 # TODO: implement unique attributes

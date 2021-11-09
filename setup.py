@@ -10,10 +10,6 @@
 #
 # Package installer:  pyAttributes Package Configuration.
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
@@ -34,43 +30,55 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-import setuptools
+from pathlib    import Path
+from setuptools import (
+	setup as setuptools_setup,
+	find_namespace_packages as setuptools_find_namespace_packages
+)
 
-with open("README.md", "r") as file:
+gitHubNamespace =       "pyTooling"
+projectName =           "Attributes"
+projectNameWithPrefix = "pyTooling." + projectName
+version =               "2.2.2"
+
+# Read README for upload to PyPI
+readmeFile = Path("README.md")
+with readmeFile.open("r") as file:
 	long_description = file.read()
 
-requirements = []
-with open("requirements.txt") as file:
-	for line in file.readlines():
-		requirements.append(line)
+# Read requirements file and add them to package dependency list
+requirementsFile = Path("requirements.txt")
+with requirementsFile.open("r") as file:
+	requirements = [line for line in file.readlines()]
 
-projectName = "pyAttributes"
+# Derive URLs
+sourceCodeURL =     f"https://github.com/{gitHubNamespace}/{projectName}"
+#documentationURL =  f"https://{gitHubNamespace}.github.io/{projectName}"
+documentationURL =  f"https://{projectName}.readthedocs.io/en/latest/"
 
-github_url =  "https://github.com/Paebbels/" + projectName
-rtd_url =     "https://" + projectName + ".readthedocs.io/en/latest/"
-
-setuptools.setup(
-	name=projectName,
-	version="2.2.2",
+# Assemble all package information
+setuptools_setup(
+	name=projectNameWithPrefix,
+	version=version,
 
 	author="Patrick Lehmann",
 	author_email="Paebbels@gmail.com",
 	# maintainer="Patrick Lehmann",
 	# maintainer_email="Paebbels@gmail.com",
+  license='Apache 2.0',
 
 	description=".NET-like Attributes implemented as Python decorators.",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
 
-	url=github_url,
+	url=sourceCodeURL,
 	project_urls={
-		'Documentation': rtd_url,
-		'Source Code':   github_url,
-		'Issue Tracker': github_url + "/issues"
+		'Documentation': f"{documentationURL}",
+		'Source Code':   f"{sourceCodeURL}",
+		'Issue Tracker': f"{sourceCodeURL}/issues"
 	},
-	# download_url="",
 
-	packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
+	packages=setuptools_find_namespace_packages(exclude=["tests", "tests.*",]),
 	classifiers=[
 		"License :: OSI Approved :: Apache Software License",
 		"Operating System :: OS Independent",
@@ -87,6 +95,4 @@ setuptools.setup(
 
 	python_requires='>=3.6',
 	install_requires=requirements,
-	# provides=
-	# obsoletes=
 )

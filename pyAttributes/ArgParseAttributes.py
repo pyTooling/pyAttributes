@@ -10,10 +10,6 @@
 #
 # Python module:      pyAttribute for Python's argparse Package.
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
@@ -44,14 +40,37 @@ attributes in this module are sub-classes of :class:`Attribute`.
 from argparse   import ArgumentParser
 from typing     import Callable, Dict, Tuple, List
 
-from pydecor    import export
+from pyTooling.Decorators import export
 
-from .          import Attribute, AttributeHelperMixin
-
-
-# __all__ = __api__
+from pyAttributes import Attribute, AttributeHelperMixin
 
 
+@export
+class AbstractClassError(RuntimeError):
+	"""Raised when an abstract class is instantiated."""
+
+
+@export
+def abstract(abstract_cls):
+	def new_decorator(old__new__):
+		"""will decorate the __new__ method"""
+
+		def new__new__(cls, *a, **k):
+			""" will wraps (or replace) __new__ method"""
+			if abstract_cls is cls:
+				# if tried to directly instanciate it
+				raise AbstractClassError("An abstract class can't be instantiated.")
+			# else cls is a derived class
+			return old__new__(cls, *a, **k)
+		return new__new__
+
+	# decorate
+	abstract_cls.__new__ = new_decorator(abstract_cls.__new__)
+
+	return abstract_cls
+
+
+#@abstract
 @export
 class ArgParseAttribute(Attribute):
 	"""

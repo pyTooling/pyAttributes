@@ -10,10 +10,6 @@
 #
 # Python unittest:    Testing the Attributes module
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany

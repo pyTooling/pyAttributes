@@ -10,10 +10,6 @@
 #
 # Python unittest:    Testing the ArgParse module
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
@@ -46,7 +42,7 @@ from unittest     import TestCase
 
 from pyAttributes.ArgParseAttributes import ArgParseMixin, DefaultAttribute, CommandAttribute, ArgumentAttribute, SwitchArgumentAttribute, CommonSwitchArgumentAttribute
 
-from .            import zip, CapturePrintContext
+from . import CapturePrintContext
 
 
 if __name__ == "__main__":

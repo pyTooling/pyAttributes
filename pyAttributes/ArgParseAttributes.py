@@ -10,10 +10,6 @@
 #
 # Python module:      pyAttribute for Python's argparse Package.
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
@@ -44,12 +40,9 @@ attributes in this module are sub-classes of :class:`Attribute`.
 from argparse   import ArgumentParser
 from typing     import Callable, Dict, Tuple, List
 
-from pydecor    import export
+from pyTooling.Decorators import export
 
 from .          import Attribute, AttributeHelperMixin
-
-
-# __all__ = __api__
 
 
 @export

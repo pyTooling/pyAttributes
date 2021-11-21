@@ -6,7 +6,7 @@ can handle sub-commands like ``git commit -m "message"`` where *commit* is a
 sub-command and ``-m <message>`` is an argument of this sub-command parser. It's
 possible to assign a callback function to each individual sub-command parser.
 
-.. topic:: Advantages
+.. rubric:: Advantages
 
 * Declarative description instead of imperative form.
 * All options from argparse can be used.

@@ -7,6 +7,7 @@ defaults:
     shell: bash
 
 jobs:
+
   UnitTesting:
     name: ${{ matrix.icon }} Unit Tests using Python ${{ matrix.python }}
     runs-on: ubuntu-latest
@@ -15,10 +16,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {python: 3.6, icon: 🔴}
-          - {python: 3.7, icon: 🟠}
-          - {python: 3.8, icon: 🟡}
-          - {python: 3.9, icon: 🟢}
+          - {python: "3.6", icon: 🔴}   # until 23.12.2021
+          - {python: "3.7", icon: 🟠}  # until 27.06.2023
+          - {python: "3.8", icon: 🟡}  # until Oct. 2024
+          - {python: "3.9", icon: 🟢}  # until Oct. 2025
+          - {python: "3.10", icon: 🟢} # until Oct. 2026
 
     env:
       PYTHON: ${{ matrix.python }}
@@ -41,16 +43,18 @@ jobs:
 
       - name: ☑ Run unit tests
         run: |
-          python -m pytest -rA tests/unit
+          python -m pytest -rA tests/unit --color=yes
 
   Coverage:
-    name: 📈 Collect Coverage Data using Python 3.9
+    name: 📈 Collect Coverage Data using Python 3.10
     runs-on: ubuntu-latest
 
     env:
-      PYTHON: 3.9
+      PYTHON: "3.10"
+      ARTIFACT: pyAttributes-coverage-html
     outputs:
       python: ${{ env.PYTHON }}
+      artifact: ${{ env.ARTIFACT }}
 
     steps:
       - name: ⏬ Checkout repository
@@ -69,11 +73,16 @@ jobs:
       - name: Collect coverage
         continue-on-error: true
         run: |
-          python -m pytest -rA --cov=.. --cov-config=tests/.coveragerc tests/unit
+          python -m pytest -rA --cov=.. --cov-config=tests/.coveragerc tests/unit --color=yes
 
       - name: Convert to cobertura format
         run: |
           coverage xml
+
+      - name: Convert to HTML format
+        run: |
+          coverage html
+          rm htmlcov/.gitignore
 
       - name: 📊 Publish coverage at CodeCov
         continue-on-error: true
@@ -90,6 +99,56 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: ./coverage.xml
 
+      - name: 📤 Upload 'Coverage Report' artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: htmlcov
+          if-no-files-found: error
+          retention-days: 1
+
+  StaticTypeCheck:
+    name: 👀 Check Static Typing using Python 3.10
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHON: "3.10"
+      ARTIFACT: pyAttributes-typing-html
+    outputs:
+      python: ${{ env.PYTHON }}
+      artifact: ${{ env.ARTIFACT }}
+
+    steps:
+      - name: ⏬ Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 🐍 Setup Python ${{ env.PYTHON }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON }}
+
+      - name: 🗂 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tests/requirements.txt
+
+      - name: Check Static Typing
+        continue-on-error: true
+        run: |
+          pwd
+          mypy --html-report htmlmypy -m pyAttributes
+
+      - name: 📤 Upload 'Static Typing Report' artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: htmlmypy
+          if-no-files-found: error
+          retention-days: 1
+
+
   Release:
     name: 📝 Create 'Release Page' on GitHub
     runs-on: ubuntu-latest
@@ -98,6 +157,7 @@ jobs:
     needs:
       - UnitTesting
       - Coverage
+      - StaticTypeCheck
 
     env:
       PYTHON: ${{ needs.Coverage.outputs.python }}
@@ -193,6 +253,7 @@ jobs:
 
     if: startsWith(github.ref, 'refs/tags')
     needs:
+      - Release
       - Package
 
     env:
@@ -226,20 +287,164 @@ jobs:
         run: |
           twine upload dist/*
 
+      - name: 🗑️ Delete packaging Artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            ${{ env.ARTIFACT }}
+
+#  VerifyDocs:
+#    name: 👍 Verify example snippets using Python 3.10
+#    runs-on: ubuntu-latest
+#
+#    env:
+#      PYTHON: "3.10"
+#    outputs:
+#      python: ${{ env.PYTHON }}
+#
+#    steps:
+#      - name: ⏬ Checkout repository
+#        uses: actions/checkout@v2
+#
+#      - name: 🐍 Setup Python
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: ${{ env.PYTHON }}
+#
+#      - name: 🐍 Install dependencies
+#        run: |
+#          pip3 install .
+#
+#      - name: ✂ Extract code snippet from README
+#        shell: python
+#        run: |
+#          from pathlib import Path
+#          import re
+#
+#          ROOT = Path('.')
+#
+#          with (ROOT / 'README.md').open('r') as rptr:
+#              content = rptr.read()
+#
+#          m = re.search(r"```py(thon)?(?P<code>.*?)```", content, re.MULTILINE|re.DOTALL)
+#
+#          if m is None:
+#              raise Exception("Regular expression did not find the example in the README!")
+#
+#          with (ROOT / 'tests/docs/example.py').open('w') as wptr:
+#              wptr.write(m["code"])
+#
+#      - name: Print example.py
+#        run: cat tests/docs/example.py
+#
+#      - name: ☑ Run example snippet
+#        working-directory: tests/docs
+#        run: |
+#          python3 example.py
+
+  BuildTheDocs:
+    name: 📓 Run BuildTheDocs
+    runs-on: ubuntu-latest
+#    needs:
+#      - VerifyDocs
+
+    env:
+      ARTIFACT: pyAttributes-documentation
+    outputs:
+      artifact: ${{ env.ARTIFACT }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 🚢 Build container image 'vhdl/doc'
+        run: |
+          docker build -t edaa/doc - <<-EOF
+          FROM btdi/sphinx:featured
+          RUN apk add -U --no-cache graphviz
+          EOF
+
+      - name: 🛳️ Build documentation using container edaa/doc
+        uses: buildthedocs/btd@v0
+        with:
+          skip-deploy: true
+
+      - name: 📤 Upload 'documentation' artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: doc/_build/html
+          retention-days: 7
+
+  PublishToGitHubPages:
+    name: 📚 Publish to GH-Pages
+    runs-on: ubuntu-latest
+    needs:
+      - BuildTheDocs
+      - Coverage
+#      - StaticTypeCheck
+
+    env:
+      DOC:      ${{ needs.BuildTheDocs.outputs.artifact }}
+      COVERAGE: ${{ needs.Coverage.outputs.artifact }}
+#      TYPING:   ${{ needs.StaticTypeCheck.outputs.artifact }}
+    outputs:
+      artifact: ${{ env.ARTIFACT }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 📥 Download artifacts '${{ env.DOC }}' from 'BuildTheDocs' job
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.DOC }}
+          path: public
+
+      - name: 📥 Download artifacts '${{ env.COVERAGE }}' from 'Coverage' job
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.COVERAGE }}
+          path: public/coverage
+
+#      - name: 📥 Download artifacts '${{ env.TYPING }}' from 'StaticTypeCheck' job
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: ${{ env.TYPING }}
+#          path: public/typing
+
+      - name: '📓 Publish site to GitHub Pages'
+        if: github.event_name != 'pull_request'
+        run: |
+          cd public
+          touch .nojekyll
+          git init
+          cp ../.git/config ./.git/config
+          git add .
+          git config --local user.email "BuildTheDocs@GitHubActions"
+          git config --local user.name "GitHub Actions"
+          git commit -a -m "update ${{ github.sha }}"
+          git push -u origin +HEAD:gh-pages
+
   ArtifactCleanUp:
     name: 🗑️ Artifact Cleanup
     runs-on: ubuntu-latest
-
     needs:
-      - Package
-      - PublishOnPyPI
+      - Coverage
+#      - StaticTypeCheck
+      - BuildTheDocs
+      - PublishToGitHubPages
 
     env:
-      ARTIFACT: ${{ needs.Package.outputs.artifact }}
+      COVERAGE: ${{ needs.Coverage.outputs.artifact }}
+#      TYPING:   ${{ needs.StaticTypeCheck.outputs.artifact }}
+      DOC:      ${{ needs.BuildTheDocs.outputs.artifact }}
 
     steps:
       - name: 🗑️ Delete all Artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
           name: |
-            ${{ env.ARTIFACT }}
+            ${{ env.COVERAGE }}
+            ${{ env.DOC }}
+#            ${{ env.TYPING }}

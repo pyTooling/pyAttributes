@@ -1,90 +1,23 @@
-.. |img-pyAttributes-github| image:: https://img.shields.io/badge/Paebbels-pyAttributes-323131.svg?logo=github&longCache=true
-   :alt: Sourcecode on GitHub
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes
-.. |img-pyAttributes-codelicense| image:: https://img.shields.io/pypi/l/pyAttributes?logo=GitHub&label=code%20license
-   :alt: Sourcecode License
-   :height: 22
-.. |img-pyAttributes-tag| image:: https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases
-   :alt: GitHub tag (latest SemVer incl. pre-release)
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes/tags
-.. |img-pyAttributes-release| image:: https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases
-   :alt: GitHub release (latest SemVer incl. including pre-releases
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes/releases/latest
-.. |img-pyAttributes-date| image:: https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub
-   :alt: GitHub release date
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes/releases
-.. |img-pyAttributes-lib-dep| image:: https://img.shields.io/librariesio/dependents/pypi/pyAttributes?logo=librariesdotio
-   :alt: Dependents (via libraries.io)
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes/network/dependents
-.. |img-pyAttributes-gha-pipeline| image:: https://img.shields.io/github/workflow/status/Paebbels/pyAttributes/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Pipeline&logo=GitHub%20Actions&logoColor=FFFFFF
-   :alt: GitHub Workflow - Build and Test Status
-   :height: 22
-   :target: https://github.com/Paebbels/pyAttributes/actions/workflows/Pipeline.yml
-.. |img-pyAttributes-codacy-quality| image:: https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy
-   :alt: Codacy - Quality
-   :height: 22
-   :target: https://www.codacy.com/manual/Paebbels/pyAttributes
-.. |img-pyAttributes-codacy-coverage| image:: https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy
-   :alt: Codacy - Line Coverage
-   :height: 22
-   :target: https://www.codacy.com/manual/Paebbels/pyAttributes
-.. |img-pyAttributes-codecov-coverage| image:: https://img.shields.io/codecov/c/github/Paebbels/pyAttributes?logo=Codecov
-   :alt: Codecov - Branch Coverage
-   :height: 22
-   :target: https://codecov.io/gh/Paebbels/pyAttributes
-.. |img-pyAttributes-lib-rank| image:: https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes?logo=librariesdotio
-   :alt: Libraries.io SourceRank
-   :height: 22
-   :target: https://libraries.io/github/Paebbels/pyAttributes/sourcerank
-.. |img-pyAttributes-pypi-tag| image:: https://img.shields.io/pypi/v/pyAttributes?logo=PyPI&logoColor=FBE072
-   :alt: PyPI - Tag
-   :height: 22
-   :target: https://pypi.org/project/pyAttributes/
-.. |img-pyAttributes-pypi-python| image:: https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI&logoColor=FBE072
-   :alt: PyPI - Python Version
-   :height: 22
-.. |img-pyAttributes-pypi-status| image:: https://img.shields.io/pypi/status/pyAttributes?logo=PyPI&logoColor=FBE072
-   :alt: PyPI - Status
-   :height: 22
-.. |img-pyAttributes-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyAttributes?logo=librariesdotio
-   :alt: Libraries.io status for latest release
-   :height: 22
-   :target: https://libraries.io/github/Paebbels/pyAttributes
-.. |img-pyAttributes-req-status| image:: https://img.shields.io/requires/github/Paebbels/pyAttributes
-   :alt: Requires.io
-   :height: 22
-   :target: https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=master
-.. |img-pyAttributes-rtd| image:: https://img.shields.io/readthedocs/pyattributes?label=ReadTheDocs&logo=readthedocs
-   :alt: Read the Docs
-   :height: 22
-   :target: https://pyAttributes.readthedocs.io/
-.. |img-pyAttributes-doclicense| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?logo=readthedocs
-   :alt: Documentation License
-   :height: 22
-   :target: LICENSE.md
-.. |img-pyAttributes-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet?logo=readthedocs
-   :alt: Documentation - Read Now!
-   :height: 22
-   :target: https://pyAttributes.readthedocs.io/
+.. include:: shields.inc
 
-|img-pyAttributes-github| |img-pyAttributes-codelicense| |img-pyAttributes-tag| |img-pyAttributes-release| |img-pyAttributes-date| |img-pyAttributes-lib-dep| |br|
-|img-pyAttributes-gha-pipeline| |img-pyAttributes-codacy-quality| |img-pyAttributes-codacy-coverage| |img-pyAttributes-codecov-coverage| |img-pyAttributes-lib-rank| |br|
-|img-pyAttributes-pypi-tag| |img-pyAttributes-pypi-python| |img-pyAttributes-pypi-status| |img-pyAttributes-lib-status| |img-pyAttributes-req-status| |br|
-|img-pyAttributes-rtd| |img-pyAttributes-doclicense| |img-pyAttributes-doc|
+.. raw:: latex
 
-.. code-block::
+   \part{Introduction}
 
-                     _   _   _        _ _           _
-      _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___  ___
-     | '_ \| | | | / _ \| __| __| '__| | '_ \| | | | __/ _ \/ __|
-     | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/\__ \
-     | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
-     |_|    |___/
+.. only:: html
+
+   |  |SHIELD:svg:pyAttributes-github| |SHIELD:svg:pyAttributes-src-license| |SHIELD:svg:pyAttributes-tag| |SHIELD:svg:pyAttributes-release| |SHIELD:svg:pyAttributes-date| |SHIELD:svg:pyAttributes-lib-dep|
+   |  |SHIELD:svg:pyAttributes-gha-test| |SHIELD:svg:pyAttributes-codacy-quality| |SHIELD:svg:pyAttributes-codacy-coverage| |SHIELD:svg:pyAttributes-codecov-coverage| |SHIELD:svg:pyAttributes-lib-rank|
+   |  |SHIELD:svg:pyAttributes-pypi-tag| |SHIELD:svg:pyAttributes-pypi-status| |SHIELD:svg:pyAttributes-pypi-python| |SHIELD:svg:pyAttributes-lib-status| |SHIELD:svg:pyAttributes-req-status|
+   |  |SHIELD:svg:pyAttributes-doc-license| |SHIELD:svg:pyAttributes-ghp-doc|
+
+.. only:: latex
+
+   |SHIELD:png:pyAttributes-github| |SHIELD:png:pyAttributes-src-license| |SHIELD:png:pyAttributes-tag| |SHIELD:png:pyAttributes-release| |SHIELD:png:pyAttributes-date| |SHIELD:png:pyAttributes-lib-dep|
+   |SHIELD:png:pyAttributes-gha-test| |SHIELD:png:pyAttributes-codacy-quality| |SHIELD:png:pyAttributes-codacy-coverage| |SHIELD:png:pyAttributes-codecov-coverage| |SHIELD:png:pyAttributes-lib-rank|
+   |SHIELD:png:pyAttributes-pypi-tag| |SHIELD:png:pyAttributes-pypi-status| |SHIELD:png:pyAttributes-pypi-python| |SHIELD:png:pyAttributes-lib-status| |SHIELD:png:pyAttributes-req-status|
+   |SHIELD:png:pyAttributes-doc-license| |SHIELD:png:pyAttributes-ghp-doc|
+
 
 pyAttributes Documentation
 ##########################
@@ -107,14 +40,14 @@ Use Cases
 
 **Annotate properties and user-defined data to methods.**
 
-.. topic:: Derived use cases:
+.. rubric:: Derived use cases:
 
 * Describe a command line argument parser (argparse). |br|
   See `pyAttributes Documentation -> ArgParse Examples <https://pyattributes.readthedocs.io/en/latest/ArgParse.html>`_
 * Mark class members for documentation. |br|
   See `SphinxExtensions <https://sphinxextensions.readthedocs.io/en/latest/>`_ -> DocumentMemberAttribute
 
-.. topic:: Planned implementations:
+.. rubric:: Planned implementations:
 
 * Annotate user-defined data to classes.
 * Describe test cases and test suits to get a cleaner syntax for Python's unit
@@ -146,7 +79,7 @@ Contributors
 ************
 
 * `Patrick Lehmann <https://github.com/Paebbels>`__ (Maintainer)
-* `and more... <https://github.com/paebbels/pyCallBy/graphs/contributors>`__
+* `and more... <https://github.com/pyTooling/pyAttributes/graphs/contributors>`__
 
 
 
@@ -196,6 +129,9 @@ License
    :caption: Appendix
    :hidden:
 
+   Coverage Report ➚ <https://pyTooling.github.io/pyAttributes/coverage/>
+   Static Type Check Report ➚ <https://pyTooling.github.io/pyAttributes/typing/>
    License
+   Doc-License
    genindex
    py-modindex

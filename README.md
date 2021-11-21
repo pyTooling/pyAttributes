@@ -14,7 +14,7 @@
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes?logo=PyPI&logoColor=FBE072)
 [![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes?logo=librariesdotio)](https://libraries.io/github/pyTooling/pyAttributes)
 [![Requires.io](https://img.shields.io/requires/github/pyTooling/pyAttributes)](https://requires.io/github/pyTooling/pyAttributes/requirements/?branch=main)  
-[![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?logo=readthedocs)](Doc-License.rst)
+[![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?logo=readthedocs)](doc/Doc-License.rst)
 [![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet?logo=readthedocs)](https://pyTooling.GitHub.io/pyAttributes)
 
 # pyAttributes

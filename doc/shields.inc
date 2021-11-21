@@ -173,8 +173,8 @@
 .. |SHIELD:svg:pyAttributes-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet
    :alt: Documentation - Read Now!
    :height: 22
-   :target: https://pyAttributes.GitHub.io/pyAttributes/
+   :target: https://pyTooling.GitHub.io/pyAttributes/
 .. |SHIELD:png:pyAttributes-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet
    :alt: Documentation - Read Now!
    :height: 22
-   :target: https://pyAttributes.GitHub.io/pyAttributes/
+   :target: https://pyTooling.GitHub.io/pyAttributes/

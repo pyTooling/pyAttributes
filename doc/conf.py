@@ -88,7 +88,7 @@ try:
 	with open(prologPath, "r") as prologFile:
 		rst_prolog = prologFile.read()
 except Exception as ex:
-	print("[ERROR:] While reading '{0!s}'.".format(prologPath))
+	print(f"[ERROR:] While reading '{prologPath}'.")
 	print(ex)
 	rst_prolog = ""
 
@@ -231,10 +231,10 @@ autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
 # Sphinx.Ext.ExtLinks
 # ==============================================================================
 extlinks = {
-	'issue': ('https://github.com/pyTooling/pyAttributes/issues/%s', 'issue #'),
-	'pull':  ('https://github.com/pyTooling/pyAttributes/pull/%s', 'pull request #'),
-	'src':   ('https://github.com/pyTooling/pyAttributes/blob/master/pyAttributes/%s?ts=2', None),
-#	'test':  ('https://github.com/pyTooling/pyAttributes/blob/master/test/%s?ts=2', None)
+	'issue': ('https://GitHub.com/pyTooling/pyAttributes/issues/%s', 'issue #'),
+	'pull':  ('https://GitHub.com/pyTooling/pyAttributes/pull/%s', 'pull request #'),
+	'src':   ('https://GitHub.com/pyTooling/pyAttributes/blob/master/pyAttributes/%s?ts=2', None),
+#	'test':  ('https://GitHub.com/pyTooling/pyAttributes/blob/master/test/%s?ts=2', None)
 }
 
 

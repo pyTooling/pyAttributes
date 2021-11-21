@@ -6,11 +6,11 @@ Dependencies
 .. |img-pyAttributes-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyAttributes
    :alt: Libraries.io status for latest release
    :height: 22
-   :target: https://libraries.io/github/Paebbels/pyAttributes
-.. |img-pyAttributes-req-status| image:: https://img.shields.io/requires/github/Paebbels/pyAttributes
+   :target: https://libraries.io/github/pyTooling/pyAttributes
+.. |img-pyAttributes-req-status| image:: https://img.shields.io/requires/github/pyTooling/pyAttributes
    :alt: Requires.io
    :height: 22
-   :target: https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=master
+   :target: https://requires.io/github/pyTooling/pyAttributes/requirements/?branch=master
 
 +------------------------------------------+------------------------------------------+
 | `Libraries.io <https://libraries.io/>`_  | `Requires.io <https://requires.io/>`_    |
@@ -26,7 +26,7 @@ pyAttributes Package (Mandatory)
 .. rubric:: Manually Installing Package Requirements
 
 Use the :file:`requirements.txt` file to install all dependencies via ``pip3``
-or install the package directly from PyPI (see :ref:`INSTALL`).
+or install the package directly from PyPI (see :ref:`installation`).
 
 .. code-block:: shell
 
@@ -38,9 +38,9 @@ or install the package directly from PyPI (see :ref:`INSTALL`).
 +----------------------------------------------------------+-------------+-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 | **Package**                                              | **Version** | **License**                                                                               | **Dependencies**                                                                                                                |
 +==========================================================+=============+===========================================================================================+=================================================================================================================================+
-| `pyTooling <https://github.com/pyTooling/pyTooling>`__   | ≥1.4.3      | `Apache License, 2.0 <https://github.com/pyTooling/pyTooling/blob/master/LICENSE.txt>`__  | *None*                                                                                                                          |
+| `pyTooling <https://GitHub.com/pyTooling/pyTooling>`__   | ≥1.4.4      | `Apache License, 2.0 <https://GitHub.com/pyTooling/pyTooling/blob/master/LICENSE.txt>`__  | *None*                                                                                                                          |
 +----------------------------------------------------------+-------------+-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
-| `argcomplete <https://github.com/kislyuk/argcomplete>`__ | ≥1.12.3     | `Apache License, 2.0 <https://github.com/kislyuk/argcomplete/blob/develop/LICENSE.rst>`__ | *None*                                                                                                                          |
+| `argcomplete <https://GitHub.com/kislyuk/argcomplete>`__ | ≥1.12.3     | `Apache License, 2.0 <https://GitHub.com/kislyuk/argcomplete/blob/develop/LICENSE.rst>`__ | *None*                                                                                                                          |
 +----------------------------------------------------------+-------------+-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -69,11 +69,15 @@ Use the :file:`tests/requirements.txt` file to install all dependencies via
 +-----------------------------------------------------------+-------------+----------------------------------------------------------------------------------------+----------------------+
 | **Package**                                               | **Version** | **License**                                                                            | **Dependencies**     |
 +===========================================================+=============+========================================================================================+======================+
-| `pytest <https://github.com/pytest-dev/pytest>`__         | ≥6.2.4      | `MIT <https://github.com/pytest-dev/pytest/blob/master/LICENSE>`__                     | *Not yet evaluated.* |
+| `pytest <https://GitHub.com/pytest-dev/pytest>`__         | ≥6.2.5      | `MIT <https://GitHub.com/pytest-dev/pytest/blob/master/LICENSE>`__                     | *Not yet evaluated.* |
 +-----------------------------------------------------------+-------------+----------------------------------------------------------------------------------------+----------------------+
-| `pytest-cov <https://github.com/pytest-dev/pytest-cov>`__ | ≥2.12.1     | `MIT <https://github.com/pytest-dev/pytest-cov/blob/master/LICENSE>`__                 | *Not yet evaluated.* |
+| `pytest-cov <https://GitHub.com/pytest-dev/pytest-cov>`__ | ≥3.0.0      | `MIT <https://GitHub.com/pytest-dev/pytest-cov/blob/master/LICENSE>`__                 | *Not yet evaluated.* |
 +-----------------------------------------------------------+-------------+----------------------------------------------------------------------------------------+----------------------+
-| `Coverage <https://github.com/nedbat/coveragepy>`__       | ≥5.5        | `Apache License, 2.0 <https://github.com/nedbat/coveragepy/blob/master/LICENSE.txt>`__ | *Not yet evaluated.* |
+| `Coverage <https://GitHub.com/nedbat/coveragepy>`__       | ≥6.1        | `Apache License, 2.0 <https://GitHub.com/nedbat/coveragepy/blob/master/LICENSE.txt>`__ | *Not yet evaluated.* |
++-----------------------------------------------------------+-------------+----------------------------------------------------------------------------------------+----------------------+
+| `mypy <https://GitHub.com/python/mypy>`__                 | ≥0.910      | `MIT <https://GitHub.com/python/mypy/blob/master/LICENSE>`__                           | *Not yet evaluated.* |
++-----------------------------------------------------------+-------------+----------------------------------------------------------------------------------------+----------------------+
+| `lxml <https://GitHub.com/lxml/lxml>`__                   | ≥4.6.4      | `BSD 3-Clause <https://GitHub.com/lxml/lxml/blob/master/LICENSE.txt>`__                | *Not yet evaluated.* |
 +-----------------------------------------------------------+-------------+----------------------------------------------------------------------------------------+----------------------+
 
 
@@ -102,11 +106,11 @@ Use the :file:`doc/requirements.txt` file to install all dependencies via
 +-------------------------------------------------------------------------------------------------+--------------+----------------------------------------------------------------------------------------------------------+----------------------+
 | **Package**                                                                                     | **Version**  | **License**                                                                                              | **Dependencies**     |
 +=================================================================================================+==============+==========================================================================================================+======================+
-| `Sphinx <https://github.com/sphinx-doc/sphinx>`__                                               | ≥4.3.0       | `BSD 3-Clause <https://github.com/sphinx-doc/sphinx/blob/master/LICENSE>`__                              | *Not yet evaluated.* |
+| `Sphinx <https://GitHub.com/sphinx-doc/sphinx>`__                                               | ≥4.3.0       | `BSD 3-Clause <https://GitHub.com/sphinx-doc/sphinx/blob/master/LICENSE>`__                              | *Not yet evaluated.* |
 +-------------------------------------------------------------------------------------------------+--------------+----------------------------------------------------------------------------------------------------------+----------------------+
-| `sphinx_btd_theme <https://github.com/buildthedocs/sphinx.theme>`__                             | ≥0.5.2       | `MIT <https://github.com/buildthedocs/sphinx.theme/blob/master/LICENSE>`__                               | *Not yet evaluated.* |
+| `sphinx_btd_theme <https://GitHub.com/buildthedocs/sphinx.theme>`__                             | ≥0.5.2       | `MIT <https://GitHub.com/buildthedocs/sphinx.theme/blob/master/LICENSE>`__                               | *Not yet evaluated.* |
 +-------------------------------------------------------------------------------------------------+--------------+----------------------------------------------------------------------------------------------------------+----------------------+
-| !! `sphinx_fontawesome <https://github.com/fraoustin/sphinx_fontawesome>`__                     | ≥0.0.6       | `GPL 2.0 <https://github.com/fraoustin/sphinx_fontawesome/blob/master/LICENSE>`__                        | *Not yet evaluated.* |
+| !! `sphinx_fontawesome <https://GitHub.com/fraoustin/sphinx_fontawesome>`__                     | ≥0.0.6       | `GPL 2.0 <https://GitHub.com/fraoustin/sphinx_fontawesome/blob/master/LICENSE>`__                        | *Not yet evaluated.* |
 +-------------------------------------------------------------------------------------------------+--------------+----------------------------------------------------------------------------------------------------------+----------------------+
-| `sphinx_autodoc_typehints <https://github.com/agronholm/sphinx-autodoc-typehints>`__            | ≥1.12.0      | `MIT <https://github.com/agronholm/sphinx-autodoc-typehints/blob/master/LICENSE>`__                      | *Not yet evaluated.* |
+| `sphinx_autodoc_typehints <https://GitHub.com/agronholm/sphinx-autodoc-typehints>`__            | ≥1.12.0      | `MIT <https://GitHub.com/agronholm/sphinx-autodoc-typehints/blob/master/LICENSE>`__                      | *Not yet evaluated.* |
 +-------------------------------------------------------------------------------------------------+--------------+----------------------------------------------------------------------------------------------------------+----------------------+

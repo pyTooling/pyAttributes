@@ -1,22 +1,21 @@
-[![Sourcecode on GitHub](https://img.shields.io/badge/Paebbels-pyAttributes-323131.svg?logo=github&longCache=true)](https://github.com/Paebbels/pyAttributes)
+[![Sourcecode on GitHub](https://img.shields.io/badge/pyTooling-pyAttributes-323131.svg?logo=github&longCache=true)](https://GitHub.com/pyTooling/pyAttributes)
 [![Sourcecode License](https://img.shields.io/pypi/l/pyAttributes?logo=GitHub&label=code%20license)](LICENSE.md)
-[![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/tags)
-[![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/Paebbels/pyAttributes?logo=GitHub&include_prereleases)](https://github.com/Paebbels/pyAttributes/releases/latest)
-[![GitHub release date](https://img.shields.io/github/release-date/Paebbels/pyAttributes?logo=GitHub)](https://github.com/Paebbels/pyAttributes/releases)
-[![Dependents (via libraries.io)](https://img.shields.io/librariesio/dependents/pypi/pyAttributes?logo=librariesdotio)](https://github.com/Paebbels/pyAttributes/network/dependents)  
-[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/Paebbels/pyAttributes/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Pipeline&logo=GitHub%20Actions&logoColor=FFFFFF)](https://github.com/Paebbels/pyAttributes/actions/workflows/Pipeline.yml)
-[![Codacy - Quality](https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/Paebbels/pyAttributes)
-[![Codacy - Coverage](https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/Paebbels/pyAttributes)
-[![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/Paebbels/pyAttributes?logo=Codecov)](https://codecov.io/gh/Paebbels/pyAttributes)
-[![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes?logo=librariesdotio)](https://libraries.io/github/Paebbels/pyAttributes/sourcerank)  
+[![GitHub tag (latest SemVer incl. pre-release)](https://img.shields.io/github/v/tag/pyTooling/pyAttributes?logo=GitHub&include_prereleases)](https://GitHub.com/pyTooling/pyAttributes/tags)
+[![GitHub release (latest SemVer incl. including pre-releases)](https://img.shields.io/github/v/release/pyTooling/pyAttributes?logo=GitHub&include_prereleases)](https://GitHub.com/pyTooling/pyAttributes/releases/latest)
+[![GitHub release date](https://img.shields.io/github/release-date/pyTooling/pyAttributes?logo=GitHub)](https://GitHub.com/pyTooling/pyAttributes/releases)
+[![Dependents (via libraries.io)](https://img.shields.io/librariesio/dependents/pypi/pyAttributes?logo=librariesdotio)](https://GitHub.com/pyTooling/pyAttributes/network/dependents)  
+[![GitHub Workflow - Build and Test Status](https://img.shields.io/github/workflow/status/pyTooling/pyAttributes/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Pipeline&logo=GitHub%20Actions&logoColor=FFFFFF)](https://GitHub.com/pyTooling/pyAttributes/actions/workflows/Pipeline.yml)
+[![Codacy - Quality](https://img.shields.io/codacy/grade/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/pyTooling/pyAttributes)
+[![Codacy - Coverage](https://img.shields.io/codacy/coverage/b63aac7ef7e34baf829f11a61574bbaf?logo=Codacy)](https://www.codacy.com/manual/pyTooling/pyAttributes)
+[![Codecov - Branch Coverage](https://img.shields.io/codecov/c/github/pyTooling/pyAttributes?logo=Codecov)](https://codecov.io/gh/pyTooling/pyAttributes)
+[![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes?logo=librariesdotio)](https://libraries.io/github/pyTooling/pyAttributes/sourcerank)  
 [![PyPI](https://img.shields.io/pypi/v/pyAttributes?logo=PyPI&logoColor=FBE072)](https://pypi.org/project/pyAttributes/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI&logoColor=FBE072)
 ![PyPI - Status](https://img.shields.io/pypi/status/pyAttributes?logo=PyPI&logoColor=FBE072)
-[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes?logo=librariesdotio)](https://libraries.io/github/Paebbels/pyAttributes)
-[![Requires.io](https://img.shields.io/requires/github/Paebbels/pyAttributes)](https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=main)  
-[![Read the Docs](https://img.shields.io/readthedocs/pyattributes?label=ReadTheDocs&logo=readthedocs)](https://pyAttributes.readthedocs.io/)
-[![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?logo=readthedocs)](LICENSE.md)
-[![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet?logo=readthedocs)](https://pyAttributes.readthedocs.io/)
+[![Libraries.io status for latest release](https://img.shields.io/librariesio/release/pypi/pyAttributes?logo=librariesdotio)](https://libraries.io/github/pyTooling/pyAttributes)
+[![Requires.io](https://img.shields.io/requires/github/pyTooling/pyAttributes)](https://requires.io/github/pyTooling/pyAttributes/requirements/?branch=main)  
+[![Documentation License](https://img.shields.io/badge/doc%20license-CC--BY%204.0-green?logo=readthedocs)](Doc-License.rst)
+[![Documentation - Read Now!](https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet?logo=readthedocs)](https://pyTooling.GitHub.io/pyAttributes)
 
 # pyAttributes
 
@@ -132,8 +131,8 @@ class ProgramWithHelper(AttributeHelperMixin):
 
 ## Contributors
 
-* [Patrick Lehmann](https://github.com/Paebbels) (Maintainer)
-* [and more...](https://github.com/Paebbels/pyAttributes/graphs/contributors) 
+* [Patrick Lehmann](https://GitHub.com/Paebbels) (Maintainer)
+* [and more...](https://GitHub.com/pyTooling/pyAttributes/graphs/contributors) 
 
 
 ## License

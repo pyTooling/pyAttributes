@@ -44,7 +44,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleDefault(self, args):
 		self.PrintHeadline()
 
-		print("HandleDefault:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}".format(args.quiet, args.verbose, args.debug))
+		print(f"HandleDefault:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}")
 
 
 	@CommandAttribute("help", help="Display help page(s) for the given command name.")
@@ -52,7 +52,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleHelp(self, args):
 		self.PrintHeadline()
 
-		print("HandleHelp:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  command={3!s}\n\n".format(args.quiet, args.verbose, args.debug, args.Command))
+		print(f"HandleHelp:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  command={args.Command!s}\n\n")
 
 		if (args.Command is None):
 			self.MainParser.print_help()
@@ -62,7 +62,7 @@ class Program(ProgramBase, ArgParseMixin):
 			try:
 				self.SubParsers[args.Command].print_help()
 			except KeyError:
-				print("Command {0} is unknown.".format(args.Command))
+				print(f"Command {args.Command} is unknown.")
 
 
 	@CommandAttribute("new-user", help="Create a new user.")
@@ -71,7 +71,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleNewUser(self, args):
 		self.PrintHeadline()
 
-		print("HandleNewUser:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}  Name={4!s}  Limit={5!s}".format(args.quiet, args.verbose, args.debug, args.UserID, args.Name, args.Limit))
+		print(f"HandleNewUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  UserID={args.UserID!s}  Name={args.Name!s}  Limit={args.Limit!s}")
 
 
 	@CommandAttribute("delete-user", help="Delete a user.")
@@ -79,7 +79,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleDeleteUser(self, args):
 		self.PrintHeadline()
 
-		print("HandleDeleteUser:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  UserID={3!s}".format(args.quiet, args.verbose, args.debug, args.UserID))
+		print(f"HandleDeleteUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  UserID={args.UserID!s}")
 
 
 	@CommandAttribute("list-user", help="List users.")
@@ -87,7 +87,7 @@ class Program(ProgramBase, ArgParseMixin):
 	def HandleListUser(self, args):
 		self.PrintHeadline()
 
-		print("HandleListUser:\n  quiet={0!s}\n  verbose={1!s}\n  debug={2!s}\n\n  all={3!s}".format(args.quiet, args.verbose, args.debug, args.all))
+		print(f"HandleListUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  all={args.all!s}")
 
 
 if __name__ == "__main__":

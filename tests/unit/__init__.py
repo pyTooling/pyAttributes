@@ -54,9 +54,9 @@ def zip(dict1: Dict[K1, V1], dict2: Dict[K2, V2]) -> Generator[Tuple[K1, K2, V1,
 
 	if (l1 != l2):
 		if (l1 < l2):
-			raise ValueError("'dict1' (len={}) has less elements than 'dict2' (len={}).".format(l1, l2))
+			raise ValueError(f"'dict1' (len={l1}) has less elements than 'dict2' (len={l2}).")
 		else:
-			raise ValueError("'dict1' (len={}) has more elements than 'dict2' (len={}).".format(l1, l2))
+			raise ValueError(f"'dict1' (len={l1}) has more elements than 'dict2' (len={l2}).")
 
 	iter1 = iter(dict1.items())
 	iter2 = iter(dict2.items())

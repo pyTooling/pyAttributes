@@ -114,7 +114,7 @@ class prog(MyBase, ArgParseMixin):
 
 	@DefaultAttribute()
 	def HandleDefault(self, args):
-		print("DefaultHandler: verbose={0}  debug={1}".format(str(args.verbose), str(args.debug)))
+		print(f"DefaultHandler: verbose={args.verbose!s}  debug={args.debug!s}")
 
 	@CommandAttribute('help', help="help help")
 	def HandleHelp(self, _):
@@ -124,12 +124,12 @@ class prog(MyBase, ArgParseMixin):
 	@ArgumentAttribute(metavar='<DeviceID>', dest="DeviceID", type=str, help='todo help')
 	@ArgumentAttribute(metavar='<BitFile>', dest="Filename", type=str, help='todo help')
 	def HandleProg(self, args):
-		print("HandleProg: DeviceID={0}  BitFile={1}".format(args.DeviceID, args.Filename))
+		print(f"HandleProg: DeviceID={args.DeviceID}  BitFile={args.Filename}")
 
 	@CommandAttribute("list", help="my new command")
 	@SwitchArgumentAttribute('--all', dest="all", help='show all devices, otherwise only available')
 	def HandleList(self, args):
-		print("HandleList: all={0}".format(str(args.all)))
+		print(f"HandleList: all={args.all}")
 
 
 p = prog()

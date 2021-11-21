@@ -42,35 +42,9 @@ from typing     import Callable, Dict, Tuple, List
 
 from pyTooling.Decorators import export
 
-from pyAttributes import Attribute, AttributeHelperMixin
+from .          import Attribute, AttributeHelperMixin
 
 
-@export
-class AbstractClassError(RuntimeError):
-	"""Raised when an abstract class is instantiated."""
-
-
-@export
-def abstract(abstract_cls):
-	def new_decorator(old__new__):
-		"""will decorate the __new__ method"""
-
-		def new__new__(cls, *a, **k):
-			""" will wraps (or replace) __new__ method"""
-			if abstract_cls is cls:
-				# if tried to directly instanciate it
-				raise AbstractClassError("An abstract class can't be instantiated.")
-			# else cls is a derived class
-			return old__new__(cls, *a, **k)
-		return new__new__
-
-	# decorate
-	abstract_cls.__new__ = new_decorator(abstract_cls.__new__)
-
-	return abstract_cls
-
-
-#@abstract
 @export
 class ArgParseAttribute(Attribute):
 	"""

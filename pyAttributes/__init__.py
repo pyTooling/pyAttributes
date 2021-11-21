@@ -43,17 +43,17 @@ The decorators in pyAttributes are implemented as class-based decorators.
 The annotated data is stored in an additional ``__dict__`` entry for each
 annotated method. By default the entry is called ``__pyattr__``.
 """
-# load dependencies
-from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
-from collections  import OrderedDict
-
-from pyTooling.Decorators import export
 
 __author__ =    "Patrick Lehmann"
 __copyright__ = "2007-2021, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
 __version__ =   "2.3.0"
 
+# load dependencies
+from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
+from collections  import OrderedDict
+
+from pyTooling.Decorators import export
 
 # TODO: implement class, method, function attributes
 # TODO: implement unique attributes

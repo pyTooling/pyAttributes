@@ -79,7 +79,7 @@ Contributors
 ************
 
 * `Patrick Lehmann <https://github.com/Paebbels>`__ (Maintainer)
-* `and more... <https://github.com/pyAttributes/pyAttributes/graphs/contributors>`__
+* `and more... <https://github.com/pyTooling/pyAttributes/graphs/contributors>`__
 
 
 

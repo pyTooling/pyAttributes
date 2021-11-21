@@ -182,13 +182,13 @@ class FromClassInstance(TestCase):
 		for attribute, count in ((Attribute1, 7), (Attribute2, 4), (Attribute3, 2), (Attribute4, 2), (Attribute5, 1)):
 			methodList = attribute.GetMethods(self.uut)
 
-			self.assertEqual(count, len(methodList), "GetMethods(...) doesn't return a list of {count} elements.".format(count=count))
+			self.assertEqual(count, len(methodList), f"GetMethods(...) doesn't return a list of {count} elements.")
 
 	def test_GetMethods_ExcludeDerivedAttributes(self):
 		for attribute, count in ((Attribute1, 3), (Attribute2, 4), (Attribute3, 2), (Attribute4, 2), (Attribute5, 1)):
 			methodList = attribute.GetMethods(self.uut, includeDerivedAttributes=False)
 
-			self.assertEqual(count, len(methodList), "GetMethods(...) doesn't return a list of {count} elements.".format(count=count))
+			self.assertEqual(count, len(methodList), f"GetMethods(...) doesn't return a list of {count} elements.")
 
 	def test_GetAttributes_Method1(self):
 		attributeList = self.uut.GetAttributes(self.uut.method_1)

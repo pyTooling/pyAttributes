@@ -39,7 +39,7 @@ class. Therefore the provided helper-mixin should be inherited.
 
 **Derived use cases:**
 * Describe a command line argument parser (argparse).  
-  See [pyAttributes Documentation -> ArgParse Examples](https://pyattributes.readthedocs.io/en/latest/ArgParse.html)
+  See [pyAttributes Documentation -> ArgParse Examples](https://pyTooling.GitHub.io/pyAttributes/ArgParse.html)
 * Mark class members for documentation.  
   See [SphinxExtensions](https://sphinxextensions.readthedocs.io/en/latest/) -> DocumentMemberAttribute
 

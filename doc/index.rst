@@ -43,7 +43,7 @@ Use Cases
 .. rubric:: Derived use cases:
 
 * Describe a command line argument parser (argparse). |br|
-  See `pyAttributes Documentation -> ArgParse Examples <https://pyattributes.readthedocs.io/en/latest/ArgParse.html>`_
+  See `pyAttributes Documentation -> ArgParse Examples <https://pyTooling.GitHub.io/ArgParse.html>`_
 * Mark class members for documentation. |br|
   See `SphinxExtensions <https://sphinxextensions.readthedocs.io/en/latest/>`_ -> DocumentMemberAttribute
 
@@ -78,8 +78,8 @@ This package brings special attribute implementations for:
 Contributors
 ************
 
-* `Patrick Lehmann <https://github.com/Paebbels>`__ (Maintainer)
-* `and more... <https://github.com/pyTooling/pyAttributes/graphs/contributors>`__
+* `Patrick Lehmann <https://GitHub.com/Paebbels>`__ (Maintainer)
+* `and more... <https://GitHub.com/pyTooling/pyAttributes/graphs/contributors>`__
 
 
 
@@ -129,8 +129,8 @@ License
    :caption: Appendix
    :hidden:
 
-   Coverage Report ➚ <https://pyTooling.github.io/pyAttributes/coverage/>
-   Static Type Check Report ➚ <https://pyTooling.github.io/pyAttributes/typing/>
+   Coverage Report ➚ <https://pyTooling.GitHub.io/pyAttributes/coverage/>
+   Static Type Check Report ➚ <https://pyTooling.GitHub.io/pyAttributes/typing/>
    License
    Doc-License
    genindex

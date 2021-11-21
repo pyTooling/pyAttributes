@@ -6,11 +6,11 @@ Dependencies
 .. |img-pyAttributes-lib-status| image:: https://img.shields.io/librariesio/release/pypi/pyAttributes
    :alt: Libraries.io status for latest release
    :height: 22
-   :target: https://libraries.io/github/Paebbels/pyAttributes
-.. |img-pyAttributes-req-status| image:: https://img.shields.io/requires/github/Paebbels/pyAttributes
+   :target: https://libraries.io/github/pyTooling/pyAttributes
+.. |img-pyAttributes-req-status| image:: https://img.shields.io/requires/github/pyTooling/pyAttributes
    :alt: Requires.io
    :height: 22
-   :target: https://requires.io/github/Paebbels/pyAttributes/requirements/?branch=master
+   :target: https://requires.io/github/pyTooling/pyAttributes/requirements/?branch=master
 
 +------------------------------------------+------------------------------------------+
 | `Libraries.io <https://libraries.io/>`_  | `Requires.io <https://requires.io/>`_    |

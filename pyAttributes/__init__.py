@@ -49,8 +49,10 @@ from collections  import OrderedDict
 
 from pyTooling.Decorators import export
 
-
-__version__ = "2.3.0"
+__author__ =    "Patrick Lehmann"
+__copyright__ = "2007-2021, Patrick Lehmann"
+__license__ =   "Apache License, Version 2.0"
+__version__ =   "2.3.0"
 
 
 # TODO: implement class, method, function attributes

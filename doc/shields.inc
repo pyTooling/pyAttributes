@@ -170,11 +170,11 @@
    :target: https://github.com/pyTooling/pyAttributes/blob/main/doc/Doc-License.rst
 
 .. # GHPages - read now
-.. |SHIELD:svg:pyAttributes-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet
+.. |SHIELD:svg:pyAttributes-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet
    :alt: Documentation - Read Now!
    :height: 22
    :target: https://pyAttributes.github.io/pyAttributes/
-.. |SHIELD:png:pyAttributes-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%94-blueviolet
+.. |SHIELD:png:pyAttributes-ghp-doc| image:: https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet
    :alt: Documentation - Read Now!
    :height: 22
    :target: https://pyAttributes.github.io/pyAttributes/

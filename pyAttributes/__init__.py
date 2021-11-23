@@ -84,7 +84,7 @@ class Attribute:
 		return func
 
 	@staticmethod
-	def _AppendAttribute(func: Callable, attribute: 'Attribute'):
+	def _AppendAttribute(func: Callable, attribute: 'Attribute') -> None:
 		# inherit attributes and prepend myself or create a new attributes list
 		if (Attribute.__AttributesMemberName__ in func.__dict__):
 			func.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)

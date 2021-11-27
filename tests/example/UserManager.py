@@ -36,7 +36,7 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommonSwitchArgumentAttribute("-q", "--quiet",   dest="quiet",   help="Reduce messages to a minimum.")
 	@CommonSwitchArgumentAttribute("-v", "--verbose", dest="verbose", help="Print out detailed messages.")
 	@CommonSwitchArgumentAttribute("-d", "--debug",   dest="debug",   help="Enable debug mode.")
-	def Run(self):
+	def Run(self) -> None:
 		ArgParseMixin.Run(self)
 
 
@@ -68,7 +68,7 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommandAttribute("new-user", help="Create a new user.")
 	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
 	@ArgumentAttribute(metavar='<Name>', dest="Name", type=str, help="The user's display name.")
-	def HandleNewUser(self, args):
+	def HandleNewUser(self, args) -> None:
 		self.PrintHeadline()
 
 		print(f"HandleNewUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  UserID={args.UserID!s}  Name={args.Name!s}  Limit={args.Limit!s}")

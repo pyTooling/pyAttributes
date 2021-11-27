@@ -233,8 +233,8 @@ autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
 extlinks = {
 	'issue': ('https://GitHub.com/pyTooling/pyAttributes/issues/%s', 'issue #'),
 	'pull':  ('https://GitHub.com/pyTooling/pyAttributes/pull/%s', 'pull request #'),
-	'src':   ('https://GitHub.com/pyTooling/pyAttributes/blob/master/pyAttributes/%s?ts=2', None),
-#	'test':  ('https://GitHub.com/pyTooling/pyAttributes/blob/master/test/%s?ts=2', None)
+	'src':   ('https://GitHub.com/pyTooling/pyAttributes/blob/main/pyAttributes/%s?ts=2', None),
+#	'test':  ('https://GitHub.com/pyTooling/pyAttributes/blob/main/test/%s?ts=2', None)
 }
 
 

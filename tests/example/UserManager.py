@@ -6,17 +6,17 @@ from pyAttributes.ArgParseAttributes import ArgParseMixin, CommonSwitchArgumentA
 class ProgramBase():
 	HeadLine = "Simple ArgParse Test Program"
 
-	def __init__(self):
+	def __init__(self) -> None:
 		pass
 
-	def PrintHeadline(self):
+	def PrintHeadline(self) -> None:
 		print("{line}".format(line="="*80))
 		print("{headline: ^80s}".format(headline=self.HeadLine))
 		print("{line}".format(line="="*80))
 
 
 class Program(ProgramBase, ArgParseMixin):
-	def __init__(self):
+	def __init__(self) -> None:
 		import textwrap
 
 		# call constructor of the main inheritance tree
@@ -36,12 +36,12 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommonSwitchArgumentAttribute("-q", "--quiet",   dest="quiet",   help="Reduce messages to a minimum.")
 	@CommonSwitchArgumentAttribute("-v", "--verbose", dest="verbose", help="Print out detailed messages.")
 	@CommonSwitchArgumentAttribute("-d", "--debug",   dest="debug",   help="Enable debug mode.")
-	def Run(self):
+	def Run(self) -> None:
 		ArgParseMixin.Run(self)
 
 
 	@DefaultAttribute()
-	def HandleDefault(self, args):
+	def HandleDefault(self, args) -> None:
 		self.PrintHeadline()
 
 		print(f"HandleDefault:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}")
@@ -49,7 +49,7 @@ class Program(ProgramBase, ArgParseMixin):
 
 	@CommandAttribute("help", help="Display help page(s) for the given command name.")
 	@ArgumentAttribute(metavar="Command", dest="Command", type=str, nargs="?", help="Print help page(s) for a command.")
-	def HandleHelp(self, args):
+	def HandleHelp(self, args) -> None:
 		self.PrintHeadline()
 
 		print(f"HandleHelp:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  command={args.Command!s}\n\n")
@@ -68,7 +68,7 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommandAttribute("new-user", help="Create a new user.")
 	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
 	@ArgumentAttribute(metavar='<Name>', dest="Name", type=str, help="The user's display name.")
-	def HandleNewUser(self, args):
+	def HandleNewUser(self, args) -> None:
 		self.PrintHeadline()
 
 		print(f"HandleNewUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  UserID={args.UserID!s}  Name={args.Name!s}  Limit={args.Limit!s}")
@@ -76,7 +76,7 @@ class Program(ProgramBase, ArgParseMixin):
 
 	@CommandAttribute("delete-user", help="Delete a user.")
 	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
-	def HandleDeleteUser(self, args):
+	def HandleDeleteUser(self, args) -> None:
 		self.PrintHeadline()
 
 		print(f"HandleDeleteUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  UserID={args.UserID!s}")
@@ -84,7 +84,7 @@ class Program(ProgramBase, ArgParseMixin):
 
 	@CommandAttribute("list-user", help="List users.")
 	@SwitchArgumentAttribute('--all', dest="all", help='List all users.')
-	def HandleListUser(self, args):
+	def HandleListUser(self, args) -> None:
 		self.PrintHeadline()
 
 		print(f"HandleListUser:\n  quiet={args.quiet!s}\n  verbose={args.verbose!s}\n  debug={args.debug!s}\n\n  all={args.all!s}")

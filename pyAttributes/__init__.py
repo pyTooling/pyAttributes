@@ -48,7 +48,7 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2007-2021, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "2.3.1"
+__version__ =   "2.3.2"
 
 # load dependencies
 from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
@@ -84,7 +84,7 @@ class Attribute:
 		return func
 
 	@staticmethod
-	def _AppendAttribute(func: Callable, attribute: 'Attribute'):
+	def _AppendAttribute(func: Callable, attribute: 'Attribute') -> None:
 		# inherit attributes and prepend myself or create a new attributes list
 		if (Attribute.__AttributesMemberName__ in func.__dict__):
 			func.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)

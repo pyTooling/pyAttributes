@@ -43,7 +43,7 @@ Use Cases
 .. rubric:: Derived use cases:
 
 * Describe a command line argument parser (argparse). |br|
-  See `pyAttributes Documentation -> ArgParse Examples <https://pyTooling.GitHub.io/ArgParse.html>`_
+  See `pyAttributes Documentation -> ArgParse Examples <https://pyTooling.GitHub.io/pyAttributes/ArgParse.html>`_
 * Mark class members for documentation. |br|
   See `SphinxExtensions <https://sphinxextensions.readthedocs.io/en/latest/>`_ -> DocumentMemberAttribute
 

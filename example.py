@@ -10,10 +10,6 @@
 #
 # Python Executable:	pyAttributes - Testcase 1
 #
-# Description:
-# ------------------------------------
-#		TODO
-#
 # License:
 # ============================================================================
 # Copyright 2007-2015 Patrick Lehmann - Dresden, Germany
@@ -36,7 +32,7 @@ from pyAttribute.ArgParseAttributes import DefaultAttribute, CommandAttribute, A
 
 
 class MyBase():
-	def __init__(self):
+	def __init__(self) -> None:
 		pass
 
 
@@ -45,7 +41,7 @@ class ArgParseMixin(AttributeHelperMixin):
 	__subParser =		None
 	__subParsers =	{}
 
-	def __init__(self, **kwargs):
+	def __init__(self, **kwargs) -> None:
 		super().__init__()
 
 		# create a commandline argument parser
@@ -72,7 +68,7 @@ class ArgParseMixin(AttributeHelperMixin):
 				self.__subParsers[cmdAttribute.Command] = subParser
 				continue
 
-	def Run(self):
+	def Run(self) -> None:
 		# parse command line options and process splitted arguments in callback functions
 		args = self.__mainParser.parse_args()
 		# because func is a function (unbound to an object), it MUST be called with self as a first parameter
@@ -88,7 +84,7 @@ class ArgParseMixin(AttributeHelperMixin):
 
 
 class prog(MyBase, ArgParseMixin):
-	def __init__(self):
+	def __init__(self) -> None:
 		import argparse
 		import textwrap
 
@@ -109,26 +105,26 @@ class prog(MyBase, ArgParseMixin):
 		self.MainParser.add_argument('-v', '--verbose',	dest="verbose",	help='print out detailed messages',	action='store_const', const=True, default=False)
 		self.MainParser.add_argument('-d', '--debug',		dest="debug",		help='enable debug mode',						action='store_const', const=True, default=False)
 
-	def Run(self):
+	def Run(self) -> None:
 		ArgParseMixin.Run(self)
 
 	@DefaultAttribute()
-	def HandleDefault(self, args):
+	def HandleDefault(self, args) -> None:
 		print(f"DefaultHandler: verbose={args.verbose!s}  debug={args.debug!s}")
 
 	@CommandAttribute('help', help="help help")
-	def HandleHelp(self, _):
+	def HandleHelp(self, _) -> None:
 		print("HandleHelp:")
 
 	@CommandAttribute("prog", help="my new command")
 	@ArgumentAttribute(metavar='<DeviceID>', dest="DeviceID", type=str, help='todo help')
 	@ArgumentAttribute(metavar='<BitFile>', dest="Filename", type=str, help='todo help')
-	def HandleProg(self, args):
+	def HandleProg(self, args) -> None:
 		print(f"HandleProg: DeviceID={args.DeviceID}  BitFile={args.Filename}")
 
 	@CommandAttribute("list", help="my new command")
 	@SwitchArgumentAttribute('--all', dest="all", help='show all devices, otherwise only available')
-	def HandleList(self, args):
+	def HandleList(self, args) -> None:
 		print(f"HandleList: all={args.all}")
 
 

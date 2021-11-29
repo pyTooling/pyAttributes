@@ -71,7 +71,7 @@ class Attribute5(Attribute1):
 
 
 class NoAttributes(AttributeHelperMixin):
-	def __init__(self):
+	def __init__(self) -> None:
 		AttributeHelperMixin.__init__(self)
 
 	def method_1(self):
@@ -118,7 +118,7 @@ class BaseClass3(BaseClass2):
 
 
 class MainClass(AttributeHelperMixin, BaseClass1, BaseClass3):
-	def __init__(self):
+	def __init__(self) -> None:
 		AttributeHelperMixin.__init__(self)
 
 	def method_0(self):
@@ -140,16 +140,16 @@ class HasHelperMixin_NoAttributes(TestCase):
 	def setUp(self) -> None:
 		self.uut = NoAttributes()
 
-	def test_GetAttributesIsAnEmptyList(self):
+	def test_GetAttributesIsAnEmptyList(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_1)
 		self.assertIsInstance(attributeList, list, "GetAttributes(...) doesn't return a list.")
 		self.assertEqual(len(attributeList), 0, "GetAttributes(...) doesn't return an empty list (len=0).")
 
-	def test_HasAttributeIsFalse(self):
+	def test_HasAttributeIsFalse(self) -> None:
 		hasAttribute = self.uut.HasAttribute(self.uut.method_1)
 		self.assertFalse(hasAttribute, "HasAttribute should be False on a non-attributed method.")
 
-	def test_GetMethodsIsAnEmptyList(self):
+	def test_GetMethodsIsAnEmptyList(self) -> None:
 		methodList = self.uut.GetMethods()
 		# self.assertIsInstance(methodList, dict_items, "GetMethods(...) doesn't return dict_items.")
 		self.assertEqual(0, len(methodList), "GetMethods(...) doesn't return an empty list (len=0).")
@@ -161,14 +161,14 @@ class NoHelperMixin_HasAttributes(TestCase):
 	def setUp(self) -> None:
 		self.uut = NoMixIn()
 
-	def test_GetMethodsHasOneElement(self):
+	def test_GetMethodsHasOneElement(self) -> None:
 		methodList = Attribute1.GetMethods(self.uut)
 
 		#self.assertIsInstance(methodList, dict_items, "GetMethods(...) doesn't return list.")
 		self.assertEqual(1, len(methodList), "GetMethods(...) doesn't return a list with 1 element (len=1).")
 		self.assertIn(NoMixIn.method_1, methodList, "GetMethods didn't list 'method_1'.")
 
-	def test_GetAttributes(self):
+	def test_GetAttributes(self) -> None:
 		attributeList = Attribute1.GetAttributes(self.uut.method_1)
 
 
@@ -178,61 +178,61 @@ class FromClassInstance(TestCase):
 	def setUp(self) -> None:
 		self.uut = MainClass()
 
-	def test_GetMethods_IncludeDevicedAttributes(self):
+	def test_GetMethods_IncludeDevicedAttributes(self) -> None:
 		for attribute, count in ((Attribute1, 7), (Attribute2, 4), (Attribute3, 2), (Attribute4, 2), (Attribute5, 1)):
 			methodList = attribute.GetMethods(self.uut)
 
 			self.assertEqual(count, len(methodList), f"GetMethods(...) doesn't return a list of {count} elements.")
 
-	def test_GetMethods_ExcludeDerivedAttributes(self):
+	def test_GetMethods_ExcludeDerivedAttributes(self) -> None:
 		for attribute, count in ((Attribute1, 3), (Attribute2, 4), (Attribute3, 2), (Attribute4, 2), (Attribute5, 1)):
 			methodList = attribute.GetMethods(self.uut, includeDerivedAttributes=False)
 
 			self.assertEqual(count, len(methodList), f"GetMethods(...) doesn't return a list of {count} elements.")
 
-	def test_GetAttributes_Method1(self):
+	def test_GetAttributes_Method1(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_1)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [Attribute1])
 
-	def test_GetAttributes_Method2(self):
+	def test_GetAttributes_Method2(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_2)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [Attribute2])
 
-	def test_GetAttributes_Method6_DefaultFilter(self):
+	def test_GetAttributes_Method6_DefaultFilter(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_6)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [Attribute2, Attribute3, Attribute4])
 
-	def test_GetAttributes_Method6_FilterNone(self):
+	def test_GetAttributes_Method6_FilterNone(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_6, None)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [Attribute2, Attribute3, Attribute4])
 
-	def test_GetAttributes_Method6_FilterAttribute5(self):
+	def test_GetAttributes_Method6_FilterAttribute5(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_6, Attribute5)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [])
 
-	def test_GetAttributes_Method6_FilterAttribute2(self):
+	def test_GetAttributes_Method6_FilterAttribute2(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_6, Attribute2)
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [Attribute2])
 
-	def test_GetAttributes_Method6_FilterAttribute3OrAttribute4(self):
+	def test_GetAttributes_Method6_FilterAttribute3OrAttribute4(self) -> None:
 		attributeList = self.uut.GetAttributes(self.uut.method_6, (Attribute3, Attribute4))
 
 		attributes = [attribute.__class__ for attribute in attributeList]
 		self.assertListEqual(attributes, [Attribute3, Attribute4])
 
-	def test_GetMethods_DefaultFilter(self):
+	def test_GetMethods_DefaultFilter(self) -> None:
 		methodList = self.uut.GetMethods()
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
@@ -254,7 +254,7 @@ class FromClassInstance(TestCase):
 			attributes = [attribute.__class__ for attribute in actualAttributes]
 			self.assertListEqual(attributes, expectedAttributes)
 
-	def test_GetMethods_FilterNone(self):
+	def test_GetMethods_FilterNone(self) -> None:
 		methodList = self.uut.GetMethods(None)
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
@@ -276,7 +276,7 @@ class FromClassInstance(TestCase):
 			attributes = [attribute.__class__ for attribute in actualAttributes]
 			self.assertListEqual(attributes, expectedAttributes)
 
-	def test_GetMethods_FilterAttribute1(self):
+	def test_GetMethods_FilterAttribute1(self) -> None:
 		methodList = self.uut.GetMethods(Attribute1)
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
@@ -297,7 +297,7 @@ class FromClassInstance(TestCase):
 			attributes = [attribute.__class__ for attribute in actualAttributes]
 			self.assertListEqual(attributes, expectedAttributes)
 
-	def test_GetMethods_FilterAttribute2(self):
+	def test_GetMethods_FilterAttribute2(self) -> None:
 		methodList = self.uut.GetMethods(Attribute2)
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
@@ -315,7 +315,7 @@ class FromClassInstance(TestCase):
 			attributes = [attribute.__class__ for attribute in actualAttributes]
 			self.assertListEqual(attributes, expectedAttributes)
 
-	def test_GetMethods_FilterAttribute3(self):
+	def test_GetMethods_FilterAttribute3(self) -> None:
 		methodList = self.uut.GetMethods(Attribute3)
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
@@ -331,7 +331,7 @@ class FromClassInstance(TestCase):
 			attributes = [attribute.__class__ for attribute in actualAttributes]
 			self.assertListEqual(attributes, expectedAttributes)
 
-	def test_GetMethods_FilterAttribute4(self):
+	def test_GetMethods_FilterAttribute4(self) -> None:
 		methodList = self.uut.GetMethods(Attribute4)
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")
@@ -347,7 +347,7 @@ class FromClassInstance(TestCase):
 			attributes = [attribute.__class__ for attribute in actualAttributes]
 			self.assertListEqual(attributes, expectedAttributes)
 
-	def test_GetMethods_FilterAttribute5(self):
+	def test_GetMethods_FilterAttribute5(self) -> None:
 		methodList = self.uut.GetMethods(Attribute5)
 
 		self.assertIsNot(methodList, False, "GetMethods(...) doesn't return a dict.")

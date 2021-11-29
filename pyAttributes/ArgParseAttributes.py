@@ -61,7 +61,7 @@ class CommandGroupAttribute(ArgParseAttribute):
 	"""
 	__groupName: str = None
 
-	def __init__(self, groupName: str):
+	def __init__(self, groupName: str) -> None:
 		"""
 		The constructor expects a 'groupName' which can be used to group sub-commands
 		for better readability.
@@ -147,7 +147,7 @@ class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
 	"""
 	_command: str =  None
 
-	def __init__(self, command: str, **kwargs):
+	def __init__(self, command: str, **kwargs) -> None:
 		"""
 		The constructor expects a 'command' and an optional list of named parameters
 		(keyword arguments) which are passed without modification to :meth:`~ArgumentParser.add_subparsers`.
@@ -170,7 +170,7 @@ class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
 class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 	"""Base-class for all attributes storing arguments."""
 
-	def __init__(self, *args, **kwargs):
+	def __init__(self, *args, **kwargs) -> None:
 		"""
 		The constructor expects positional (``*args``) and/or named parameters
 		(``**kwargs``) which are passed without modification to :meth:`~ArgumentParser.add_argument`.
@@ -191,7 +191,7 @@ class SwitchArgumentAttribute(ArgumentAttribute):
 	argument is present in the commandline arguments, otherwise ``False``.
 	"""
 
-	def __init__(self, *args, dest:str, **kwargs):
+	def __init__(self, *args, dest:str, **kwargs) -> None:
 		"""
 		The constructor expects positional (``*args``), the destination parameter
 		name ``dest`` and/or named parameters	(``**kwargs``) which are passed to
@@ -234,7 +234,7 @@ class ArgParseMixin(AttributeHelperMixin):
 	__formatter =   None
 	__subParsers =  {}
 
-	def __init__(self, **kwargs):
+	def __init__(self, **kwargs) -> None:
 		"""
 		The mixin-constructor expects an optional list of named parameters which
 		are passed without modification to the :class:`ArgumentParser` constructor.

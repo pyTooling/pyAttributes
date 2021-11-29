@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
 
 class ProgramBase():
-	def __init__(self):
+	def __init__(self) -> None:
 		pass
 
 
@@ -60,7 +60,7 @@ class Program(ProgramBase, ArgParseMixin):
 	handler: Callable = None
 	args:    Any =      None
 
-	def __init__(self):
+	def __init__(self) -> None:
 		import argparse
 		import textwrap
 
@@ -84,19 +84,19 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommonSwitchArgumentAttribute("-q", "--quiet",   dest="quiet",   help="Reduce messages to a minimum.")
 	@CommonSwitchArgumentAttribute("-v", "--verbose", dest="verbose", help="Print out detailed messages.")
 	@CommonSwitchArgumentAttribute("-d", "--debug",   dest="debug",   help="Enable debug mode.")
-	def Run(self, testVector):
+	def Run(self, testVector) -> None:
 		ArgParseMixin.Run(self)
 
 
 	@DefaultAttribute()
-	def HandleDefault(self, args):
+	def HandleDefault(self, args) -> None:
 		self.handler = self.HandleDefault
 		self.args =    args
 
 
 	@CommandAttribute("help", help="Display help page(s) for the given command name.")
 	@ArgumentAttribute(metavar="Command", dest="Command", type=str, nargs="?", help="Print help page(s) for a command.")
-	def HandleHelp(self, args):
+	def HandleHelp(self, args) -> None:
 		self.handler = self.HandleHelp
 		self.args =    args
 
@@ -104,21 +104,21 @@ class Program(ProgramBase, ArgParseMixin):
 	@CommandAttribute("new-user", help="Create a new user.")
 	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=int, help="UserID - unique identifier")
 	@ArgumentAttribute(metavar='<Name>', dest="Name", type=str, help="The user's display name.")
-	def HandleNewUser(self, args):
+	def HandleNewUser(self, args) -> None:
 		self.handler = self.HandleNewUser
 		self.args =    args
 
 
 	@CommandAttribute("delete-user", help="Delete a user.")
 	@ArgumentAttribute(metavar='<UserID>', dest="UserID", type=str, help="UserID - unique identifier")
-	def HandleDeleteUser(self, args):
+	def HandleDeleteUser(self, args) -> None:
 		self.handler = self.HandleDeleteUser
 		self.args =    args
 
 
 	@CommandAttribute("list-user", help="List users.")
 	@SwitchArgumentAttribute('--all', dest="all", help='List all users.')
-	def HandleListUser(self, args):
+	def HandleListUser(self, args) -> None:
 		self.handler = self.HandleListUser
 		self.args =    args
 
@@ -129,7 +129,7 @@ class Test(TestCase):
 	def setUp(self) -> None:
 		self.prog = Program()
 
-	def test_DefaultAttribute_NoArguments(self):
+	def test_DefaultAttribute_NoArguments(self) -> None:
 		arguments = []
 
 		parsed = self.prog.MainParser.parse_args(arguments)
@@ -140,7 +140,7 @@ class Test(TestCase):
 		self.assertFalse(self.prog.args.verbose)
 		self.assertFalse(self.prog.args.debug)
 
-	def test_HelpCommand_NoArguments(self):
+	def test_HelpCommand_NoArguments(self) -> None:
 		arguments = ["help"]
 
 		parsed = self.prog.MainParser.parse_args(arguments)
@@ -151,7 +151,7 @@ class Test(TestCase):
 		self.assertFalse(self.prog.args.verbose)
 		self.assertFalse(self.prog.args.debug)
 
-	def test_HelpCommand_ShortQuiet(self):
+	def test_HelpCommand_ShortQuiet(self) -> None:
 		arguments = ["-q", "help"]
 
 		parsed = self.prog.MainParser.parse_args(arguments)
@@ -162,7 +162,7 @@ class Test(TestCase):
 		self.assertFalse(self.prog.args.verbose)
 		self.assertFalse(self.prog.args.debug)
 
-	def test_HelpCommand_ShortVerbose(self):
+	def test_HelpCommand_ShortVerbose(self) -> None:
 		arguments = ["-v", "help"]
 
 		parsed = self.prog.MainParser.parse_args(arguments)
@@ -173,7 +173,7 @@ class Test(TestCase):
 		self.assertTrue(self.prog.args.verbose)
 		self.assertFalse(self.prog.args.debug)
 
-	def test_HelpCommand_ShortDebug(self):
+	def test_HelpCommand_ShortDebug(self) -> None:
 		arguments = ["-d", "help"]
 
 		parsed = self.prog.MainParser.parse_args(arguments)
@@ -184,7 +184,7 @@ class Test(TestCase):
 		self.assertFalse(self.prog.args.verbose)
 		self.assertTrue(self.prog.args.debug)
 
-	def test_NewUserCommand_NoArguments(self):
+	def test_NewUserCommand_NoArguments(self) -> None:
 		arguments = ["new-user"]
 
 		with CapturePrintContext() as (_, ErrorCapture):
@@ -197,7 +197,7 @@ class Test(TestCase):
 		error = ErrorCapture.getvalue().strip()
 		self.assertTrue("the following arguments are required: <UserID>, <Name>" in error)
 
-	def test_NewUserCommand_UserID(self):
+	def test_NewUserCommand_UserID(self) -> None:
 		arguments = ["new-user", "25", "argparse"]
 
 		parsed = self.prog.MainParser.parse_args(arguments)

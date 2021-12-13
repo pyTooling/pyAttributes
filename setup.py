@@ -42,6 +42,5 @@ DescribePythonPackageHostedOnGitHub(
 	packageName=packageName,
 	description=".NET-like Attributes implemented as Python decorators.",
 	gitHubNamespace=gitHubNamespace,
-	keywords="Python3 Decorators Attributes",
 	sourceFileWithVersion=packageInformationFile,
 )

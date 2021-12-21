@@ -31,9 +31,6 @@
 # ============================================================================
 #
 """
-pyAttributes
-############
-
 This Python module offers the base implementation of .NET-like attributes
 realized with Python decorators. This module comes also with a mixin-class
 to ease using classes having annotated methods.
@@ -80,6 +77,7 @@ class Attribute:
 	_classes: List[Any]           = []             #: List of classes, this pyAttribute was attached to.
 
 	def __init_subclass__(cls, **kwargs):
+		"""Ensure each derived class has its own instance of ``_classes`` to register the usage of that pyAttribute."""
 		super().__init_subclass__(**kwargs)
 		cls._classes = []
 
@@ -92,9 +90,7 @@ class Attribute:
 
 		if isinstance(entity, Type):
 			self._classes.append(entity)
-			print(f"Class:    {entity}")
-		elif isinstance(entity, Callable):
-			print(f"Callable: {entity}")
+#		elif isinstance(entity, Callable):
 
 		return entity
 

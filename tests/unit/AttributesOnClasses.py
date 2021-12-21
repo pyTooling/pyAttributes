@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany                                                             #
+# Copyright 2017-2021 Patrick Lehmann - BÃ¶tzingen, Germany                                                             #
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany                                                               #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
@@ -32,14 +32,12 @@
 """\
 Unit tests for attributes attached to methods.
 
-:copyright: Copyright 2007-2021 Patrick Lehmann - Bötzingen, Germany
+:copyright: Copyright 2007-2021 Patrick Lehmann - BÃ¶tzingen, Germany
 :license: Apache License, Version 2.0
 """
 from unittest     import TestCase
 
-from pyAttributes import Attribute, AttributeHelperMixin
-
-from .            import zip
+from pyAttributes import Attribute
 
 
 if __name__ == "__main__": # pragma: no cover
@@ -78,18 +76,5 @@ class Classes(TestCase):
 		self.assertIs(Class1, Attribute1.GetClasses()[0])
 
 	def test_FindSubClasses(self):
-		print("Attribute")
-		for c in Attribute._classes:
-			print(c)
-		print("Attribute1")
-		for c in Attribute1._classes:
-			print(c)
-		print("Attribute2")
-		for c in Attribute2._classes:
-			print(c)
-		print("Attribute3")
-		for c in Attribute3._classes:
-			print(c)
-
 		self.assertIs(Class11, Attribute2.GetClasses(Class1)[0])
 		self.assertIs(Class12, Attribute2.GetClasses(Class1)[1])

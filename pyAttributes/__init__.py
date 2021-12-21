@@ -52,7 +52,7 @@ __version__ =   "2.3.5"
 __keywords__ =  ["decorators", "attributes", "argparse"]
 
 # load dependencies
-from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union
+from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union, Type, Tuple
 from collections  import OrderedDict
 
 from pyTooling.Decorators import export
@@ -63,8 +63,8 @@ from pyTooling.Decorators import export
 # TODO: implement a static HasAttribute method
 
 
-Func =  TypeVar("Func")
-"""A type variable for functions. Here it's used for methods."""
+Entity =  TypeVar("Entity", bound=Union[Type, Callable])
+"""A type variable for functions, methods or classes."""
 
 TAttr = TypeVar("TAttr", bound='Attribute')
 """A type variable for :class:`~pyAttributes.Attribute`."""
@@ -76,22 +76,34 @@ TAttributeFilter = Union[TAttr, Iterable[TAttr], None]
 @export
 class Attribute:
 	"""Base-class for all pyAttributes."""
+	__AttributesMemberName__: str = "__pyattr__"   #: Field name on entities (function, class, method) to store pyAttributes.
+	_classes: List[Any]           = []             #: List of classes, this pyAttribute was attached to.
 
-	__AttributesMemberName__ = "__pyattr__"   #: Field name on objects to store pyAttributes
+	def __init_subclass__(cls, **kwargs):
+		super().__init_subclass__(**kwargs)
+		cls._classes = []
 
-	def __call__(self, func: Func) -> Func:
+	def __call__(self, entity: Entity) -> Entity:
 		"""Make all classes derived from ``Attribute`` callable, so they can be used as a decorator."""
-		self._AppendAttribute(func, self)
-		return func
-
-	@staticmethod
-	def _AppendAttribute(func: Callable, attribute: 'Attribute') -> None:
-		# inherit attributes and prepend myself or create a new attributes list
-		if (Attribute.__AttributesMemberName__ in func.__dict__):
-			func.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)
+		if (Attribute.__AttributesMemberName__ in entity.__dict__):
+			entity.__dict__[Attribute.__AttributesMemberName__].insert(0, self)
 		else:
-			func.__setattr__(Attribute.__AttributesMemberName__, [attribute])
+			setattr(entity, Attribute.__AttributesMemberName__, [self, ])
 
+		if isinstance(entity, Type):
+			self._classes.append(entity)
+			print(f"Class:    {entity}")
+		elif isinstance(entity, Callable):
+			print(f"Callable: {entity}")
+
+		return entity
+
+	@classmethod
+	def GetClasses(cls, filter: Union[Type, Tuple] = None):
+		if filter is not None:
+			return [c for c in cls._classes if issubclass(c, filter)]
+		else:
+			return cls._classes
 
 	@classmethod
 	def GetMethods(cls, inst: Any, includeDerivedAttributes: bool=True) -> Dict[Callable, List['Attribute']]:

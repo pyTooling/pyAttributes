@@ -35,6 +35,7 @@ Unit tests for attributes attached to methods.
 :copyright: Copyright 2007-2021 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
+from typing import List, Type
 from unittest     import TestCase
 
 from pyAttributes import Attribute
@@ -67,9 +68,36 @@ class Class11(Class1):
 class Class12(Class11):
 	pass
 
-@Attribute3()
 class Class2():
-	pass
+	_cls: List[Type]
+
+	def __init__(self):
+		self._cls = []
+		for c in Attribute3.GetClasses():
+			self._cls.append(c)
+			print(c)
+			print(c.__name__)
+			print(c.__class__)
+			print(c.__base__)
+			print(c.__dict__)
+			print(c.__qualname__)
+			print(c.__module__)
+			print(dir(c))
+			print()
+
+	@Attribute3()
+	class Class21():
+		pass
+
+	@Attribute3()
+	class Class22():
+		pass
+
+	class Class23():
+		@Attribute3()
+		class Class231():
+			pass
+
 
 class Classes(TestCase):
 	def test_FindClasses(self):
@@ -78,3 +106,7 @@ class Classes(TestCase):
 	def test_FindSubClasses(self):
 		self.assertIs(Class11, Attribute2.GetClasses(Class1)[0])
 		self.assertIs(Class12, Attribute2.GetClasses(Class1)[1])
+
+	def test_FindNestedClasses(self):
+		c = Class2()
+		self.assertEqual(3, len(c._cls))

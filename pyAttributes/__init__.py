@@ -45,7 +45,7 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2007-2021, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "2.3.5"
+__version__ =   "2.4.0"
 __keywords__ =  ["decorators", "attributes", "argparse"]
 
 # load dependencies
@@ -53,11 +53,6 @@ from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union, Ty
 from collections  import OrderedDict
 
 from pyTooling.Decorators import export
-
-# TODO: implement class, method, function attributes
-# TODO: implement unique attributes
-# TODO: add an attacheHelper methods option
-# TODO: implement a static HasAttribute method
 
 
 Entity =  TypeVar("Entity", bound=Union[Type, Callable])
@@ -83,16 +78,20 @@ class Attribute:
 
 	def __call__(self, entity: Entity) -> Entity:
 		"""Make all classes derived from ``Attribute`` callable, so they can be used as a decorator."""
+		self._AppendAttribute(entity, self)
+		return entity
+
+	@staticmethod
+	def _AppendAttribute(entity: Entity, attribute: 'Attribute') -> None:
 		if (Attribute.__AttributesMemberName__ in entity.__dict__):
-			entity.__dict__[Attribute.__AttributesMemberName__].insert(0, self)
+			entity.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)
 		else:
-			setattr(entity, Attribute.__AttributesMemberName__, [self, ])
+			setattr(entity, Attribute.__AttributesMemberName__, [attribute, ])
 
 		if isinstance(entity, Type):
-			self._classes.append(entity)
-#		elif isinstance(entity, Callable):
+			attribute._classes.append(entity)
 
-		return entity
+	#		elif isinstance(entity, Callable):
 
 	@classmethod
 	def GetClasses(cls, filter: Union[Type, Tuple] = None):

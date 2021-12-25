@@ -52,6 +52,7 @@ __keywords__ =  ["decorators", "attributes", "argparse"]
 from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union, Type, Tuple
 from collections  import OrderedDict
 
+from pyTooling.Common import isnestedclass
 from pyTooling.Decorators import export
 
 
@@ -91,14 +92,25 @@ class Attribute:
 		if isinstance(entity, Type):
 			attribute._classes.append(entity)
 
-	#		elif isinstance(entity, Callable):
-
 	@classmethod
-	def GetClasses(cls, filter: Union[Type, Tuple] = None):
-		if filter is not None:
-			return [c for c in cls._classes if issubclass(c, filter)]
+	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None):
+		if scope is None:
+			if filter is None:
+				for c in cls._classes:
+					yield c
+			else:
+				for c in cls._classes:
+					if issubclass(c, filter):
+						yield c
 		else:
-			return cls._classes
+			if filter is None:
+				for c in cls._classes:
+					if isnestedclass(c, scope):
+						yield c
+			else:
+				for c in cls._classes:
+					if isnestedclass(c, scope) and issubclass(c, filter):
+						yield c
 
 	@classmethod
 	def GetMethods(cls, inst: Any, includeDerivedAttributes: bool=True) -> Dict[Callable, List['Attribute']]:

@@ -49,7 +49,7 @@ __version__ =   "2.4.1"
 __keywords__ =  ["decorators", "attributes", "argparse"]
 
 # load dependencies
-from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union, Type, Tuple
+from typing import Callable, List, TypeVar, Dict, Any, Iterable, Union, Type, Tuple, Generator
 from collections  import OrderedDict
 
 from pyTooling.Common import isnestedclass
@@ -84,6 +84,7 @@ class Attribute:
 
 	@staticmethod
 	def _AppendAttribute(entity: Entity, attribute: 'Attribute') -> None:
+		"""Helper method, to attach a given pyAttribute to an entity (function, class, method)."""
 		if (Attribute.__AttributesMemberName__ in entity.__dict__):
 			entity.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)
 		else:
@@ -93,7 +94,14 @@ class Attribute:
 			attribute._classes.append(entity)
 
 	@classmethod
-	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None):
+	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None) -> Generator[Type, None, None]:
+		"""\
+		Return a generator for all classes, where this attribute was attached to.
+
+		The resulting item stream can be filtered by:
+		 * ``scope`` - when the item is a nested class in scope ``scope``.
+		 * ``filter`` - when the item is a subclass of ``filter``.
+		"""
 		if scope is None:
 			if filter is None:
 				for c in cls._classes:

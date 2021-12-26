@@ -77,21 +77,21 @@
 .. |SHIELD:svg:pyAttributes-codacy-quality| image:: https://img.shields.io/codacy/grade/08ef744c0b70490289712b02a7a4cebe?logo=codacy
    :alt: Codacy - Quality
    :height: 22
-   :target: https://www.codacy.com/manual/pyTooling/pyAttributes
+   :target: https://www.codacy.com/gh/pyTooling/pyAttributes
 .. |SHIELD:png:pyAttributes-codacy-quality| image:: https://raster.shields.io/codacy/grade/08ef744c0b70490289712b02a7a4cebe?logo=codacy
    :alt: Codacy - Quality
    :height: 22
-   :target: https://www.codacy.com/manual/pyTooling/pyAttributes
+   :target: https://www.codacy.com/gh/pyTooling/pyAttributes
 
 .. # Codacy - coverage
 .. |SHIELD:svg:pyAttributes-codacy-coverage| image:: https://img.shields.io/codacy/coverage/08ef744c0b70490289712b02a7a4cebe?logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
-   :target: https://www.codacy.com/manual/pyTooling/pyAttributes
+   :target: https://www.codacy.com/gh/pyTooling/pyAttributes
 .. |SHIELD:png:pyAttributes-codacy-coverage| image:: https://raster.shields.io/codacy/coverage/08ef744c0b70490289712b02a7a4cebe?logo=codacy
    :alt: Codacy - Line Coverage
    :height: 22
-   :target: https://www.codacy.com/manual/pyTooling/pyAttributes
+   :target: https://www.codacy.com/gh/pyTooling/pyAttributes
 
 .. # Codecov - coverage
 .. |SHIELD:svg:pyAttributes-codecov-coverage| image:: https://img.shields.io/codecov/c/github/pyTooling/pyAttributes

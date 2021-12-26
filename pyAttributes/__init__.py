@@ -45,13 +45,14 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2007-2021, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "2.4.0"
+__version__ =   "2.5.0"
 __keywords__ =  ["decorators", "attributes", "argparse"]
 
 # load dependencies
-from typing       import Callable, List, TypeVar, Dict, Any, Iterable, Union, Type, Tuple
+from typing import Callable, List, TypeVar, Dict, Any, Iterable, Union, Type, Tuple, Generator
 from collections  import OrderedDict
 
+from pyTooling.Common import isnestedclass
 from pyTooling.Decorators import export
 
 
@@ -83,6 +84,7 @@ class Attribute:
 
 	@staticmethod
 	def _AppendAttribute(entity: Entity, attribute: 'Attribute') -> None:
+		"""Helper method, to attach a given pyAttribute to an entity (function, class, method)."""
 		if (Attribute.__AttributesMemberName__ in entity.__dict__):
 			entity.__dict__[Attribute.__AttributesMemberName__].insert(0, attribute)
 		else:
@@ -91,14 +93,32 @@ class Attribute:
 		if isinstance(entity, Type):
 			attribute._classes.append(entity)
 
-	#		elif isinstance(entity, Callable):
-
 	@classmethod
-	def GetClasses(cls, filter: Union[Type, Tuple] = None):
-		if filter is not None:
-			return [c for c in cls._classes if issubclass(c, filter)]
+	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None) -> Generator[Type, None, None]:
+		"""\
+		Return a generator for all classes, where this attribute was attached to.
+
+		The resulting item stream can be filtered by:
+		 * ``scope`` - when the item is a nested class in scope ``scope``.
+		 * ``filter`` - when the item is a subclass of ``filter``.
+		"""
+		if scope is None:
+			if filter is None:
+				for c in cls._classes:
+					yield c
+			else:
+				for c in cls._classes:
+					if issubclass(c, filter):
+						yield c
 		else:
-			return cls._classes
+			if filter is None:
+				for c in cls._classes:
+					if isnestedclass(c, scope):
+						yield c
+			else:
+				for c in cls._classes:
+					if isnestedclass(c, scope) and issubclass(c, filter):
+						yield c
 
 	@classmethod
 	def GetMethods(cls, inst: Any, includeDerivedAttributes: bool=True) -> Dict[Callable, List['Attribute']]:

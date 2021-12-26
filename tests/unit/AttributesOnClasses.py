@@ -75,15 +75,6 @@ class Class2():
 		self._cls = []
 		for c in Attribute3.GetClasses():
 			self._cls.append(c)
-			print(c)
-			print(c.__name__)
-			print(c.__class__)
-			print(c.__base__)
-			print(c.__dict__)
-			print(c.__qualname__)
-			print(c.__module__)
-			print(dir(c))
-			print()
 
 	@Attribute3()
 	class Class21():
@@ -101,11 +92,15 @@ class Class2():
 
 class Classes(TestCase):
 	def test_FindClasses(self):
-		self.assertIs(Class1, Attribute1.GetClasses()[0])
+		foundClasses = [c for c in Attribute1.GetClasses()]
+
+		self.assertIs(Class1, foundClasses[0])
 
 	def test_FindSubClasses(self):
-		self.assertIs(Class11, Attribute2.GetClasses(Class1)[0])
-		self.assertIs(Class12, Attribute2.GetClasses(Class1)[1])
+		foundClasses = [c for c in Attribute2.GetClasses(filter=Class1)]
+
+		self.assertIs(Class11, foundClasses[0])
+		self.assertIs(Class12, foundClasses[1])
 
 	def test_FindNestedClasses(self):
 		c = Class2()

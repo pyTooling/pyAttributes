@@ -29,7 +29,7 @@
 # SPDX-License-Identifier: Apache-2.0                                                                                  #
 # ==================================================================================================================== #
 #
-"""\
+"""
 Unit tests for attributes attached to methods.
 
 :copyright: Copyright 2007-2021 Patrick Lehmann - Bötzingen, Germany

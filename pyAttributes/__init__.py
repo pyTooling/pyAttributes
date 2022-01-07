@@ -95,7 +95,7 @@ class Attribute:
 
 	@classmethod
 	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None) -> Generator[Type, None, None]:
-		"""\
+		"""
 		Return a generator for all classes, where this attribute was attached to.
 
 		The resulting item stream can be filtered by:

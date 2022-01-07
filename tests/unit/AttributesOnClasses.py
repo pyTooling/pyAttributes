@@ -35,7 +35,7 @@ Unit tests for attributes attached to methods.
 :copyright: Copyright 2007-2021 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
-from typing import List, Type
+from typing       import List, Type
 from unittest     import TestCase
 
 from pyAttributes import Attribute

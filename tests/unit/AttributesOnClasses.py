@@ -11,7 +11,7 @@
 #                                                                                                                      #
 # License:                                                                                                             #
 # ==================================================================================================================== #
-# Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany                                                             #
+# Copyright 2017-2022 Patrick Lehmann - Bötzingen, Germany                                                             #
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany                                                               #
 #                                                                                                                      #
 # Licensed under the Apache License, Version 2.0 (the "License");                                                      #
@@ -32,7 +32,7 @@
 """
 Unit tests for attributes attached to methods.
 
-:copyright: Copyright 2007-2021 Patrick Lehmann - Bötzingen, Germany
+:copyright: Copyright 2007-2022 Patrick Lehmann - Bötzingen, Germany
 :license: Apache License, Version 2.0
 """
 from typing       import List, Type

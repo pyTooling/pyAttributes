@@ -12,7 +12,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2017-2022 Patrick Lehmann - Bötzingen, Germany
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ annotated method. By default the entry is called ``__pyattr__``.
 
 __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
-__copyright__ = "2007-2021, Patrick Lehmann"
+__copyright__ = "2007-2022, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
 __version__ =   "2.5.1"
 __keywords__ =  ["decorators", "attributes", "argparse"]

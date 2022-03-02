@@ -6,13 +6,12 @@
 #  | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/
 #  |_|    |___/
 # =============================================================================
-# Authors:            Patrick Lehmann
-#
-# Python package:     pyAttributes Implementation
+# Authors:
+#   Patrick Lehmann
 #
 # License:
 # ============================================================================
-# Copyright 2017-2021 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2017-2022 Patrick Lehmann - Bötzingen, Germany
 # Copyright 2007-2016 Patrick Lehmann - Dresden, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,9 +42,9 @@ annotated method. By default the entry is called ``__pyattr__``.
 
 __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
-__copyright__ = "2007-2021, Patrick Lehmann"
+__copyright__ = "2007-2022, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "2.5.0"
+__version__ =   "2.5.1"
 __keywords__ =  ["decorators", "attributes", "argparse"]
 
 # load dependencies
@@ -95,7 +94,7 @@ class Attribute:
 
 	@classmethod
 	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None) -> Generator[Type, None, None]:
-		"""\
+		"""
 		Return a generator for all classes, where this attribute was attached to.
 
 		The resulting item stream can be filtered by:

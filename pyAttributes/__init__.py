@@ -44,7 +44,7 @@ __author__ =    "Patrick Lehmann"
 __email__ =     "Paebbels@gmail.com"
 __copyright__ = "2007-2022, Patrick Lehmann"
 __license__ =   "Apache License, Version 2.0"
-__version__ =   "2.5.1"
+__version__ =   "2.5.2"
 __keywords__ =  ["decorators", "attributes", "argparse"]
 
 # load dependencies

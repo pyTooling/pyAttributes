@@ -69,7 +69,7 @@ class Attribute5(Attribute1):
 
 
 class NoAttributes(AttributeHelperMixin):
-	def __init__(self) -> None:
+	def __init__(self):
 		AttributeHelperMixin.__init__(self)
 
 	def method_1(self):
@@ -116,7 +116,7 @@ class BaseClass3(BaseClass2):
 
 
 class MainClass(AttributeHelperMixin, BaseClass1, BaseClass3):
-	def __init__(self) -> None:
+	def __init__(self):
 		AttributeHelperMixin.__init__(self)
 
 	def method_0(self):

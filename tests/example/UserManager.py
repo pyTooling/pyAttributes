@@ -6,7 +6,7 @@ from pyAttributes.ArgParseAttributes import ArgParseMixin, CommonSwitchArgumentA
 class ProgramBase():
 	HeadLine = "Simple ArgParse Test Program"
 
-	def __init__(self) -> None:
+	def __init__(self):
 		pass
 
 	def PrintHeadline(self) -> None:
@@ -16,7 +16,7 @@ class ProgramBase():
 
 
 class Program(ProgramBase, ArgParseMixin):
-	def __init__(self) -> None:
+	def __init__(self):
 		import textwrap
 
 		# call constructor of the main inheritance tree

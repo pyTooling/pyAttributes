@@ -32,7 +32,7 @@ from pyAttribute.ArgParseAttributes import DefaultAttribute, CommandAttribute, A
 
 
 class MyBase():
-	def __init__(self) -> None:
+	def __init__(self):
 		pass
 
 
@@ -41,7 +41,7 @@ class ArgParseMixin(AttributeHelperMixin):
 	__subParser =		None
 	__subParsers =	{}
 
-	def __init__(self, **kwargs) -> None:
+	def __init__(self, **kwargs):
 		super().__init__()
 
 		# create a commandline argument parser
@@ -84,7 +84,7 @@ class ArgParseMixin(AttributeHelperMixin):
 
 
 class prog(MyBase, ArgParseMixin):
-	def __init__(self) -> None:
+	def __init__(self):
 		import argparse
 		import textwrap
 

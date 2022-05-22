@@ -52,7 +52,7 @@ if __name__ == "__main__": # pragma: no cover
 
 
 class ProgramBase():
-	def __init__(self) -> None:
+	def __init__(self):
 		pass
 
 
@@ -60,7 +60,7 @@ class Program(ProgramBase, ArgParseMixin):
 	handler: Callable = None
 	args:    Any =      None
 
-	def __init__(self) -> None:
+	def __init__(self):
 		import argparse
 		import textwrap
 

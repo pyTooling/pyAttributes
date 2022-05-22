@@ -63,7 +63,7 @@ def handle_exception(func):
 
 def filter_summary(obj):
     """
-    Jinja2 filter that allows to extract the documentation summary of an
+    Jinja2 predicate that allows to extract the documentation summary of an
     object.
     """
     try:

@@ -62,7 +62,7 @@ TAttr = TypeVar("TAttr", bound='Attribute')
 """A type variable for :class:`~pyAttributes.Attribute`."""
 
 TAttributeFilter = Union[TAttr, Iterable[TAttr], None]
-"""A type hint for a filter parameter that accepts either a single :class:`~pyAttributes.Attribute` or an iterable of those."""
+"""A type hint for a predicate parameter that accepts either a single :class:`~pyAttributes.Attribute` or an iterable of those."""
 
 
 @export
@@ -93,30 +93,30 @@ class Attribute:
 			attribute._classes.append(entity)
 
 	@classmethod
-	def GetClasses(cls, scope: Type = None, filter: Union[Type, Tuple] = None) -> Generator[Type, None, None]:
+	def GetClasses(cls, scope: Type = None, predicate: Union[Type, Tuple] = None) -> Generator[Type, None, None]:
 		"""
 		Return a generator for all classes, where this attribute was attached to.
 
 		The resulting item stream can be filtered by:
 		 * ``scope`` - when the item is a nested class in scope ``scope``.
-		 * ``filter`` - when the item is a subclass of ``filter``.
+		 * ``predicate`` - when the item is a subclass of ``predicate``.
 		"""
 		if scope is None:
-			if filter is None:
+			if predicate is None:
 				for c in cls._classes:
 					yield c
 			else:
 				for c in cls._classes:
-					if issubclass(c, filter):
+					if issubclass(c, predicate):
 						yield c
 		else:
-			if filter is None:
+			if predicate is None:
 				for c in cls._classes:
 					if isnestedclass(c, scope):
 						yield c
 			else:
 				for c in cls._classes:
-					if isnestedclass(c, scope) and issubclass(c, filter):
+					if isnestedclass(c, scope) and issubclass(c, predicate):
 						yield c
 
 	@classmethod
@@ -177,13 +177,13 @@ class Attribute:
 class AttributeHelperMixin:
 	"""A mixin class to ease finding methods with attached pyAttributes."""
 
-	def GetMethods(self, filter: TAttributeFilter[TAttr]=Attribute) -> Union[Dict[Callable, List[TAttr]], bool]:
-		if (filter is Attribute):
+	def GetMethods(self, predicate: TAttributeFilter[TAttr]=Attribute) -> Union[Dict[Callable, List[TAttr]], bool]:
+		if (predicate is Attribute):
 			pass
-		elif (filter is None):
-			filter = Attribute
-		elif isinstance(filter, Iterable):
-			filter = tuple([attribute for attribute in filter])
+		elif (predicate is None):
+			predicate = Attribute
+		elif isinstance(predicate, Iterable):
+			predicate = tuple([attribute for attribute in predicate])
 
 		# print("-----------------------------------")
 		mro = self.__class__.mro()
@@ -199,7 +199,7 @@ class AttributeHelperMixin:
 					try:
 						attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 						for attribute in attributeList:
-							if isinstance(attribute, filter):
+							if isinstance(attribute, predicate):
 								try:
 									attributedMethods[method].append(attribute)
 								except KeyError:
@@ -213,20 +213,20 @@ class AttributeHelperMixin:
 		return attributedMethods
 
 	@staticmethod
-	def HasAttribute(method: Callable, filter: TAttributeFilter[TAttr]=Attribute) -> bool: # TODO: add a tuple based type filter
+	def HasAttribute(method: Callable, predicate: TAttributeFilter[TAttr]=Attribute) -> bool: # TODO: add a tuple based type predicate
 		"""Returns true, if the given method has pyAttributes attached."""
 		try:
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
 			if (len(attributeList) == 0):
 				return False
-			elif (filter is not None):
-				if isinstance(filter, Attribute):
+			elif (predicate is not None):
+				if isinstance(predicate, Attribute):
 					pass
-				elif isinstance(filter, Iterable):
-					filter = tuple([attribute for attribute in filter])
+				elif isinstance(predicate, Iterable):
+					predicate = tuple([attribute for attribute in predicate])
 
 				for attribute in attributeList:
-					if isinstance(attribute, filter):
+					if isinstance(attribute, predicate):
 						return True
 				else:
 					return False
@@ -238,21 +238,21 @@ class AttributeHelperMixin:
 			return False
 
 	@staticmethod
-	def GetAttributes(method: Callable, filter: TAttributeFilter[TAttr]=Attribute) -> List[TAttr]: # TODO: add a tuple based type filter
+	def GetAttributes(method: Callable, predicate: TAttributeFilter[TAttr]=Attribute) -> List[TAttr]: # TODO: add a tuple based type predicate
 		"""Returns a list of pyAttributes attached to the given method."""
 
 		try:
 			attributeList = method.__dict__[Attribute.__AttributesMemberName__]
-			if (filter is Attribute):
+			if (predicate is Attribute):
 				pass
-			elif (filter is None):
-				filter = Attribute
-			elif isinstance(filter, Iterable):
-				filter = tuple([attribute for attribute in filter])
+			elif (predicate is None):
+				predicate = Attribute
+			elif isinstance(predicate, Iterable):
+				predicate = tuple([attribute for attribute in predicate])
 
 			attributes = []
 			for attribute in attributeList:
-				if isinstance(attribute, filter):
+				if isinstance(attribute, predicate):
 					attributes.append(attribute)
 
 			return attributes

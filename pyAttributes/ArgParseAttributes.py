@@ -61,7 +61,7 @@ class CommandGroupAttribute(ArgParseAttribute):
 	"""
 	__groupName: str = None
 
-	def __init__(self, groupName: str) -> None:
+	def __init__(self, groupName: str):
 		"""
 		The constructor expects a 'groupName' which can be used to group sub-commands
 		for better readability.
@@ -170,7 +170,7 @@ class CommandAttribute(ArgParseAttribute, _HandlerMixin, _KwArgsMixin):
 class ArgumentAttribute(ArgParseAttribute, _ArgsMixin):
 	"""Base-class for all attributes storing arguments."""
 
-	def __init__(self, *args, **kwargs) -> None:
+	def __init__(self, *args, **kwargs):
 		"""
 		The constructor expects positional (``*args``) and/or named parameters
 		(``**kwargs``) which are passed without modification to :meth:`~ArgumentParser.add_argument`.
@@ -191,7 +191,7 @@ class SwitchArgumentAttribute(ArgumentAttribute):
 	argument is present in the commandline arguments, otherwise ``False``.
 	"""
 
-	def __init__(self, *args, dest:str, **kwargs) -> None:
+	def __init__(self, *args, dest:str, **kwargs):
 		"""
 		The constructor expects positional (``*args``), the destination parameter
 		name ``dest`` and/or named parameters	(``**kwargs``) which are passed to
@@ -234,7 +234,7 @@ class ArgParseMixin(AttributeHelperMixin):
 	__formatter =   None
 	__subParsers =  {}
 
-	def __init__(self, **kwargs) -> None:
+	def __init__(self, **kwargs):
 		"""
 		The mixin-constructor expects an optional list of named parameters which
 		are passed without modification to the :class:`ArgumentParser` constructor.
@@ -248,20 +248,20 @@ class ArgParseMixin(AttributeHelperMixin):
 		self.__mainParser = ArgumentParser(**kwargs)
 		self.__subParser = self.__mainParser.add_subparsers(help='sub-command help')
 
-		methods = self.GetMethods(filter=CommonArgumentAttribute)
+		methods = self.GetMethods(predicate=CommonArgumentAttribute)
 		# QUESTION: should 'CommonArgumentAttribute's be limited to only one method?
 		for method, attributes in methods.items():
 			for attribute in attributes:
 				self.__mainParser.add_argument(*(attribute.Args), **(attribute.KWArgs))
 
-		methods = self.GetMethods(filter=CommonSwitchArgumentAttribute)
+		methods = self.GetMethods(predicate=CommonSwitchArgumentAttribute)
 		# QUESTION: should 'CommonSwitchArgumentAttribute's be limited to only one method?
 		# QUESTION: should 'CommonSwitchArgumentAttribute's be limited to same method as 'CommonArgumentAttribute's
 		for method, attributes in methods.items():
 			for attribute in attributes:
 				self.__mainParser.add_argument(*(attribute.Args), **(attribute.KWArgs))
 
-		methods = self.GetMethods(filter=DefaultAttribute)
+		methods = self.GetMethods(predicate=DefaultAttribute)
 		l = len(methods)
 		if (l == 0):
 			pass
@@ -271,7 +271,7 @@ class ArgParseMixin(AttributeHelperMixin):
 		else:
 			raise Exception("Marked more then one handler as default handler with 'DefaultAttribute'.")
 
-		methods = self.GetMethods(filter=CommandAttribute)
+		methods = self.GetMethods(predicate=CommandAttribute)
 		for method, attributes in methods.items():
 			if (len(attributes) == 1):
 				attribute : CommandAttribute = attributes[0]
@@ -281,7 +281,7 @@ class ArgParseMixin(AttributeHelperMixin):
 				subParser = self.__subParser.add_parser(attribute.Command, **kwArgs)
 				subParser.set_defaults(func=attribute.Handler)
 
-				attributes2: List[ArgumentAttribute] = self.GetAttributes(method, filter=ArgumentAttribute)
+				attributes2: List[ArgumentAttribute] = self.GetAttributes(method, predicate=ArgumentAttribute)
 				for attribute2 in attributes2:
 					subParser.add_argument(*(attribute2.Args), **(attribute2.KWArgs))
 

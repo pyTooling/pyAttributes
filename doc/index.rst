@@ -8,14 +8,14 @@
 
    |  |SHIELD:svg:pyAttributes-github| |SHIELD:svg:pyAttributes-src-license| |SHIELD:svg:pyAttributes-tag| |SHIELD:svg:pyAttributes-release| |SHIELD:svg:pyAttributes-date| |SHIELD:svg:pyAttributes-lib-dep|
    |  |SHIELD:svg:pyAttributes-gha-test| |SHIELD:svg:pyAttributes-codacy-quality| |SHIELD:svg:pyAttributes-codacy-coverage| |SHIELD:svg:pyAttributes-codecov-coverage| |SHIELD:svg:pyAttributes-lib-rank|
-   |  |SHIELD:svg:pyAttributes-pypi-tag| |SHIELD:svg:pyAttributes-pypi-status| |SHIELD:svg:pyAttributes-pypi-python| |SHIELD:svg:pyAttributes-lib-status| |SHIELD:svg:pyAttributes-req-status|
+   |  |SHIELD:svg:pyAttributes-pypi-tag| |SHIELD:svg:pyAttributes-pypi-status| |SHIELD:svg:pyAttributes-pypi-python| |SHIELD:svg:pyAttributes-lib-status|
    |  |SHIELD:svg:pyAttributes-doc-license| |SHIELD:svg:pyAttributes-ghp-doc|
 
 .. only:: latex
 
    |SHIELD:png:pyAttributes-github| |SHIELD:png:pyAttributes-src-license| |SHIELD:png:pyAttributes-tag| |SHIELD:png:pyAttributes-release| |SHIELD:png:pyAttributes-date| |SHIELD:png:pyAttributes-lib-dep|
    |SHIELD:png:pyAttributes-gha-test| |SHIELD:png:pyAttributes-codacy-quality| |SHIELD:png:pyAttributes-codacy-coverage| |SHIELD:png:pyAttributes-codecov-coverage| |SHIELD:png:pyAttributes-lib-rank|
-   |SHIELD:png:pyAttributes-pypi-tag| |SHIELD:png:pyAttributes-pypi-status| |SHIELD:png:pyAttributes-pypi-python| |SHIELD:png:pyAttributes-lib-status| |SHIELD:png:pyAttributes-req-status|
+   |SHIELD:png:pyAttributes-pypi-tag| |SHIELD:png:pyAttributes-pypi-status| |SHIELD:png:pyAttributes-pypi-python| |SHIELD:png:pyAttributes-lib-status|
    |SHIELD:png:pyAttributes-doc-license| |SHIELD:png:pyAttributes-ghp-doc|
 
 

@@ -149,16 +149,6 @@
    :height: 22
    :target: https://libraries.io/github/pyTooling/pyAttributes
 
-.. # Requires - status
-.. |SHIELD:svg:pyAttributes-req-status| image:: https://img.shields.io/requires/github/pyTooling/pyAttributes
-   :alt: Requires.io
-   :height: 22
-   :target: https://requires.io/github/pyTooling/pyAttributes/requirements/?branch=main
-.. |SHIELD:png:pyAttributes-req-status| image:: https://raster.shields.io/requires/github/pyTooling/pyAttributes
-   :alt: Requires.io
-   :height: 22
-   :target: https://requires.io/github/pyTooling/pyAttributes/requirements/?branch=main
-
 .. # Documentation license
 .. |SHIELD:svg:pyAttributes-doc-license| image:: https://img.shields.io/badge/doc%20license-CC--BY%204.0-green
    :alt: Documentation License

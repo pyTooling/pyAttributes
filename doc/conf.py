@@ -215,6 +215,7 @@ autodoc_member_order = "bysource"       # alphabetical, groupwise, bysource
 # Sphinx.Ext.ExtLinks
 # ==============================================================================
 extlinks = {
+	"gh":      ("https://GitHub.com/%s", "gh:"),
 	"ghissue": ('https://GitHub.com/pyTooling/pyAttributes/issues/%s', 'issue #'),
 	"ghpull":  ('https://GitHub.com/pyTooling/pyAttributes/pull/%s', 'pull request #'),
 	"ghsrc":   ('https://GitHub.com/pyTooling/pyAttributes/blob/main/pyAttributes/%s?ts=2', None),

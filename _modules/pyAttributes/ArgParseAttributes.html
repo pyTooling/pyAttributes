@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyAttributes.ArgParseAttributes &mdash; pyAttributes 2.5.2 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> pyAttributes
+          </a>
+              <div class="version">
+                2.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ArgParse.html">ArgParse</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Attribute Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyAttributes.html">pyAttributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyAttributes.ArgParseAttributes.html">ArgParseAttributes Module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/coverage/">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/typing/">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Python Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyAttributes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../pyAttributes.html">pyAttributes</a> &raquo;</li>
+      <li>pyAttributes.ArgParseAttributes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyAttributes.ArgParseAttributes</h1><div class="highlight"><pre>
+<span></span><span class="c1"># =============================================================================</span>
+<span class="c1">#                  _   _   _        _ _           _</span>
+<span class="c1">#   _ __  _   _   / \ | |_| |_ _ __(_) |__  _   _| |_ ___  ___</span>
+<span class="c1">#  | &#39;_ \| | | | / _ \| __| __| &#39;__| | &#39;_ \| | | | __/ _ \/ __|</span>
+<span class="c1">#  | |_) | |_| |/ ___ \ |_| |_| |  | | |_) | |_| | ||  __/\__ \</span>
+<span class="c1">#  | .__/ \__, /_/   \_\__|\__|_|  |_|_.__/ \__,_|\__\___||___/</span>
+<span class="c1">#  |_|    |___/</span>
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Authors:            Patrick Lehmann</span>
+<span class="c1">#</span>
+<span class="c1"># Python module:      pyAttribute for Python&#39;s argparse Package.</span>
+<span class="c1">#</span>
+<span class="c1"># License:</span>
+<span class="c1"># ============================================================================</span>
+<span class="c1"># Copyright 2017-2022 Patrick Lehmann - Bötzingen, Germany</span>
+<span class="c1"># Copyright 2007-2016 Patrick Lehmann - Dresden, Germany</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
+<span class="c1"># ============================================================================</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements attribute-classes and a mixin-class which describe</span>
+<span class="sd">options to construct a :mod:`argparse`-based command line processor. All</span>
+<span class="sd">attributes in this module are sub-classes of :class:`Attribute`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># load dependencies</span>
+<span class="kn">from</span> <span class="nn">argparse</span>   <span class="kn">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span> <span class="nn">typing</span>     <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">pyTooling.Decorators</span> <span class="kn">import</span> <span class="n">export</span>
+
+<span class="kn">from</span> <span class="nn">.</span>          <span class="kn">import</span> <span class="n">Attribute</span><span class="p">,</span> <span class="n">AttributeHelperMixin</span>
+
+
+<div class="viewcode-block" id="ArgParseAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.ArgParseAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">ArgParseAttribute</span><span class="p">(</span><span class="n">Attribute</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Base-class for all attributes to describe a :mod:`argparse`-base command line</span>
+<span class="sd">	argument parser.</span>
+<span class="sd">	&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="CommandGroupAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.CommandGroupAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">CommandGroupAttribute</span><span class="p">(</span><span class="n">ArgParseAttribute</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	*Experimental* attribute to group sub-commands in groups for better readability</span>
+<span class="sd">	in a ``prog.py --help`` call.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">__groupName</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="CommandGroupAttribute.__init__"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.CommandGroupAttribute.__init__">[docs]</a>	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groupName</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		The constructor expects a &#39;groupName&#39; which can be used to group sub-commands</span>
+<span class="sd">		for better readability.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__groupName</span> <span class="o">=</span> <span class="n">groupName</span></div>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">GroupName</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;Returns the name of the command group.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__groupName</span></div>
+
+
+<div class="viewcode-block" id="_HandlerMixin"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes._HandlerMixin">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">_HandlerMixin</span><span class="p">:</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A mixin-class that offers a class field for a reference to a handler method</span>
+<span class="sd">	and a matching property.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_handler</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1">#: Reference to a method that is called to handle e.g. a sub-command.</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">Handler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;Returns the handler method.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span></div>
+
+
+<div class="viewcode-block" id="_KwArgsMixin"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes._KwArgsMixin">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">_KwArgsMixin</span><span class="p">:</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A mixin-class that offers a class field for named parameters (```**kwargs``)</span>
+<span class="sd">	and a matching property.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_kwargs</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span>        <span class="c1">#: A dictionary of additional keyword parameters.</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">KWArgs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		A dictionary of additional named parameters (``**kwargs``) passed to the</span>
+<span class="sd">		attribute. These additional parameters are passed without modification to</span>
+<span class="sd">		:class:`~ArgumentParser`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span></div>
+
+
+<div class="viewcode-block" id="_ArgsMixin"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes._ArgsMixin">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">_ArgsMixin</span><span class="p">(</span><span class="n">_KwArgsMixin</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A mixin-class that offers a class field for positional parameters (```*args``)</span>
+<span class="sd">	and a matching property.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="n">_args</span><span class="p">:</span> <span class="n">Tuple</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1">#: A tuple of additional positional parameters.</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">Args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		A tuple of additional positional parameters (``*args``) passed to the</span>
+<span class="sd">		attribute. These additional parameters are passed without modification to</span>
+<span class="sd">		:class:`~ArgumentParser`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span></div>
+
+
+<div class="viewcode-block" id="DefaultAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.DefaultAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">DefaultAttribute</span><span class="p">(</span><span class="n">ArgParseAttribute</span><span class="p">,</span> <span class="n">_HandlerMixin</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Marks a handler method is *default* handler. This method is called if no</span>
+<span class="sd">	sub-command is given. It&#39;s an error if more then one method is annotated with</span>
+<span class="sd">	this attribute.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">func</span>
+		<span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CommandAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.CommandAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">CommandAttribute</span><span class="p">(</span><span class="n">ArgParseAttribute</span><span class="p">,</span> <span class="n">_HandlerMixin</span><span class="p">,</span> <span class="n">_KwArgsMixin</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Marks a handler method as responsible for the given &#39;command&#39;. This constructs</span>
+<span class="sd">	a sub-command parser using :meth:`~ArgumentParser.add_subparsers`.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_command</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span>  <span class="kc">None</span>
+
+<div class="viewcode-block" id="CommandAttribute.__init__"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.CommandAttribute.__init__">[docs]</a>	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		The constructor expects a &#39;command&#39; and an optional list of named parameters</span>
+<span class="sd">		(keyword arguments) which are passed without modification to :meth:`~ArgumentParser.add_subparsers`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span>  <span class="n">command</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span>   <span class="n">kwargs</span></div>
+
+	<span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span>  <span class="n">func</span>
+		<span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">Command</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;Returns the &#39;command&#39; a sub-command parser adheres to.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span></div>
+
+
+<div class="viewcode-block" id="ArgumentAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.ArgumentAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">ArgumentAttribute</span><span class="p">(</span><span class="n">ArgParseAttribute</span><span class="p">,</span> <span class="n">_ArgsMixin</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Base-class for all attributes storing arguments.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ArgumentAttribute.__init__"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.ArgumentAttribute.__init__">[docs]</a>	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		The constructor expects positional (``*args``) and/or named parameters</span>
+<span class="sd">		(``**kwargs``) which are passed without modification to :meth:`~ArgumentParser.add_argument`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span>   <span class="n">args</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div></div>
+
+
+<div class="viewcode-block" id="SwitchArgumentAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">SwitchArgumentAttribute</span><span class="p">(</span><span class="n">ArgumentAttribute</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Defines a switch argument like ``--help``.</span>
+
+<span class="sd">	Some of the named parameters passed to :meth:`~ArgumentParser.add_argument`</span>
+<span class="sd">	are predefined (or overwritten) to create a boolean parameter passed to the</span>
+<span class="sd">	registered handler method. The boolean parameter is ``True`` if the switch</span>
+<span class="sd">	argument is present in the commandline arguments, otherwise ``False``.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SwitchArgumentAttribute.__init__"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute.__init__">[docs]</a>	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		The constructor expects positional (``*args``), the destination parameter</span>
+<span class="sd">		name ``dest`` and/or named parameters	(``**kwargs``) which are passed to</span>
+<span class="sd">		:meth:`~ArgumentParser.add_argument`.</span>
+
+<span class="sd">		To implement a switch argument, the following named parameters are</span>
+<span class="sd">		predefined:</span>
+
+<span class="sd">		* ``action=&quot;store_const&quot;``</span>
+<span class="sd">		* ``const=True``</span>
+<span class="sd">		* ``default=False``</span>
+
+<span class="sd">		This implements a boolean parameter passed to the handler method.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dest&#39;</span><span class="p">]</span> <span class="o">=</span>    <span class="n">dest</span>
+		<span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="s2">&quot;store_const&quot;</span>
+		<span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">]</span> <span class="o">=</span>   <span class="kc">True</span>
+		<span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="CommonArgumentAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.CommonArgumentAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">CommonArgumentAttribute</span><span class="p">(</span><span class="n">ArgumentAttribute</span><span class="p">):</span>
+	<span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="CommonSwitchArgumentAttribute"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">CommonSwitchArgumentAttribute</span><span class="p">(</span><span class="n">SwitchArgumentAttribute</span><span class="p">):</span>
+	<span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ArgParseMixin"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.ArgParseMixin">[docs]</a><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">ArgParseMixin</span><span class="p">(</span><span class="n">AttributeHelperMixin</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Mixin-class to implement an :mod:`argparse`-base command line argument</span>
+<span class="sd">	processor.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">__mainParser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span>  <span class="kc">None</span>
+	<span class="n">__subParser</span> <span class="o">=</span>   <span class="kc">None</span>
+	<span class="n">__formatter</span> <span class="o">=</span>   <span class="kc">None</span>
+	<span class="n">__subParsers</span> <span class="o">=</span>  <span class="p">{}</span>
+
+<div class="viewcode-block" id="ArgParseMixin.__init__"><a class="viewcode-back" href="../../pyAttributes.ArgParseAttributes.html#pyAttributes.ArgParseAttributes.ArgParseMixin.__init__">[docs]</a>	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		The mixin-constructor expects an optional list of named parameters which</span>
+<span class="sd">		are passed without modification to the :class:`ArgumentParser` constructor.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="s2">&quot;formatter_class&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">__formatter</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;formatter_class&quot;</span><span class="p">]</span>
+
+		<span class="c1"># create a commandline argument parser</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__subParser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s1">&#39;sub-command help&#39;</span><span class="p">)</span>
+
+		<span class="n">methods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMethods</span><span class="p">(</span><span class="n">predicate</span><span class="o">=</span><span class="n">CommonArgumentAttribute</span><span class="p">)</span>
+		<span class="c1"># QUESTION: should &#39;CommonArgumentAttribute&#39;s be limited to only one method?</span>
+		<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">attributes</span> <span class="ow">in</span> <span class="n">methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">attribute</span><span class="o">.</span><span class="n">Args</span><span class="p">),</span> <span class="o">**</span><span class="p">(</span><span class="n">attribute</span><span class="o">.</span><span class="n">KWArgs</span><span class="p">))</span>
+
+		<span class="n">methods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMethods</span><span class="p">(</span><span class="n">predicate</span><span class="o">=</span><span class="n">CommonSwitchArgumentAttribute</span><span class="p">)</span>
+		<span class="c1"># QUESTION: should &#39;CommonSwitchArgumentAttribute&#39;s be limited to only one method?</span>
+		<span class="c1"># QUESTION: should &#39;CommonSwitchArgumentAttribute&#39;s be limited to same method as &#39;CommonArgumentAttribute&#39;s</span>
+		<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">attributes</span> <span class="ow">in</span> <span class="n">methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">attribute</span><span class="o">.</span><span class="n">Args</span><span class="p">),</span> <span class="o">**</span><span class="p">(</span><span class="n">attribute</span><span class="o">.</span><span class="n">KWArgs</span><span class="p">))</span>
+
+		<span class="n">methods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMethods</span><span class="p">(</span><span class="n">predicate</span><span class="o">=</span><span class="n">DefaultAttribute</span><span class="p">)</span>
+		<span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">methods</span><span class="p">)</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+			<span class="k">pass</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+			<span class="n">attribute</span> <span class="o">=</span> <span class="n">methods</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">attribute</span><span class="o">.</span><span class="n">Handler</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Marked more then one handler as default handler with &#39;DefaultAttribute&#39;.&quot;</span><span class="p">)</span>
+
+		<span class="n">methods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMethods</span><span class="p">(</span><span class="n">predicate</span><span class="o">=</span><span class="n">CommandAttribute</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">attributes</span> <span class="ow">in</span> <span class="n">methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+				<span class="n">attribute</span> <span class="p">:</span> <span class="n">CommandAttribute</span> <span class="o">=</span> <span class="n">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+				<span class="n">kwArgs</span> <span class="o">=</span> <span class="n">attribute</span><span class="o">.</span><span class="n">KWArgs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+				<span class="k">if</span> <span class="p">(</span><span class="s2">&quot;formatter_class&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwArgs</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__formatter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+					<span class="n">kwArgs</span><span class="p">[</span><span class="s2">&quot;formatter_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__formatter</span>
+				<span class="n">subParser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__subParser</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="n">attribute</span><span class="o">.</span><span class="n">Command</span><span class="p">,</span> <span class="o">**</span><span class="n">kwArgs</span><span class="p">)</span>
+				<span class="n">subParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">attribute</span><span class="o">.</span><span class="n">Handler</span><span class="p">)</span>
+
+				<span class="n">attributes2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ArgumentAttribute</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetAttributes</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="n">ArgumentAttribute</span><span class="p">)</span>
+				<span class="k">for</span> <span class="n">attribute2</span> <span class="ow">in</span> <span class="n">attributes2</span><span class="p">:</span>
+					<span class="n">subParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">attribute2</span><span class="o">.</span><span class="n">Args</span><span class="p">),</span> <span class="o">**</span><span class="p">(</span><span class="n">attribute2</span><span class="o">.</span><span class="n">KWArgs</span><span class="p">))</span>
+
+				<span class="bp">self</span><span class="o">.</span><span class="n">__subParsers</span><span class="p">[</span><span class="n">attribute</span><span class="o">.</span><span class="n">Command</span><span class="p">]</span> <span class="o">=</span> <span class="n">subParser</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Defined more then one &#39;CommandAttribute&#39; per handler method.&quot;</span><span class="p">)</span></div>
+
+
+	<span class="k">def</span> <span class="nf">Run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enableAutoComplete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">enableAutoComplete</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_EnabledAutoComplete</span><span class="p">()</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_ParseArguments</span><span class="p">()</span>
+
+	<span class="k">def</span> <span class="nf">_EnabledAutoComplete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="kn">from</span> <span class="nn">argcomplete</span>  <span class="kn">import</span> <span class="n">autocomplete</span>
+			<span class="n">autocomplete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span><span class="p">)</span>
+		<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+			<span class="k">pass</span>
+
+	<span class="k">def</span> <span class="nf">_ParseArguments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="c1"># parse command line options and process split arguments in callback functions</span>
+		<span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_RouteToHandler</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_RouteToHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+		<span class="c1"># because func is a function (unbound to an object), it MUST be called with self as a first parameter</span>
+		<span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">MainParser</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>
+		<span class="sd">&quot;&quot;&quot;Returns the main parser.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mainParser</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">SubParsers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Returns the sub-parsers.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__subParsers</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022, Patrick Lehmann.
+      <span class="lastupdated">Last updated on 05.10.2022.
+      </span></p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

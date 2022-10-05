@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArgParseAttributes Module &mdash; pyAttributes 2.5.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Apache License 2.0" href="License.html" />
+    <link rel="prev" title="pyAttributes Module" href="pyAttributes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyAttributes
+          </a>
+              <div class="version">
+                2.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ArgParse.html">ArgParse</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Attribute Classes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pyAttributes.html">pyAttributes Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ArgParseAttributes Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#base-classes">Base-Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#argparseattribute">ArgParseAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute"><code class="docutils literal notranslate"><span class="pre">ArgParseAttribute</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mixins">MixIns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#handlermixin">_HandlerMixin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes._HandlerMixin"><code class="docutils literal notranslate"><span class="pre">_HandlerMixin</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#kwargsmixin">_KwArgsMixin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes._KwArgsMixin"><code class="docutils literal notranslate"><span class="pre">_KwArgsMixin</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#argsmixin">_ArgsMixin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes._ArgsMixin"><code class="docutils literal notranslate"><span class="pre">_ArgsMixin</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#helper-classes">Helper-Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#argparsemixin">ArgParseMixin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgParseMixin"><code class="docutils literal notranslate"><span class="pre">ArgParseMixin</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commandgroupattribute">CommandGroupAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.CommandGroupAttribute"><code class="docutils literal notranslate"><span class="pre">CommandGroupAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#defaultattribute">DefaultAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.DefaultAttribute"><code class="docutils literal notranslate"><span class="pre">DefaultAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#commandattribute">CommandAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.CommandAttribute"><code class="docutils literal notranslate"><span class="pre">CommandAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#argumentattribute">ArgumentAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgumentAttribute"><code class="docutils literal notranslate"><span class="pre">ArgumentAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#switchargumentattribute">SwitchArgumentAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute"><code class="docutils literal notranslate"><span class="pre">SwitchArgumentAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#commonargumentattribute">CommonArgumentAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.CommonArgumentAttribute"><code class="docutils literal notranslate"><span class="pre">CommonArgumentAttribute</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#commonswitchargumentattribute">CommonSwitchArgumentAttribute</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute"><code class="docutils literal notranslate"><span class="pre">CommonSwitchArgumentAttribute</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/coverage/">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/typing/">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Python Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyAttributes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ArgParseAttributes Module</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pyTooling/pyAttributes/blob/refactoring/doc/pyAttributes.ArgParseAttributes.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.xlarge {font-size: x-large; }
+</style><section id="module-pyAttributes.ArgParseAttributes">
+<span id="argparseattributes-module"></span><h1>ArgParseAttributes Module<a class="headerlink" href="#module-pyAttributes.ArgParseAttributes" title="Permalink to this heading">¶</a></h1>
+<p>This module implements attribute-classes and a mixin-class which describe
+options to construct a <a class="reference external" href="https://docs.python.org/3/library/argparse.html#module-argparse" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>-based command line processor. All
+attributes in this module are sub-classes of <code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code>.</p>
+<section id="base-classes">
+<h2>Base-Classes<a class="headerlink" href="#base-classes" title="Permalink to this heading">¶</a></h2>
+<section id="argparseattribute">
+<h3>ArgParseAttribute<a class="headerlink" href="#argparseattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgParseAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">ArgParseAttribute</span></span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#ArgParseAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyAttributes.html#pyAttributes.Attribute" title="pyAttributes.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a></p>
+<p>Base-class for all attributes to describe a <a class="reference external" href="https://docs.python.org/3/library/argparse.html#module-argparse" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>-base command line
+argument parser.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgParseAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Inheritance diagram:</p>
+<div class="graphviz"><object data="_images/inheritance-87aba13e735a297522e6c3df44ebcdea7da4d6fd.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of pyAttributes.ArgParseAttributes.ArgumentAttribute, pyAttributes.ArgParseAttributes.SwitchArgumentAttribute, pyAttributes.ArgParseAttributes.CommonArgumentAttribute, pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute, pyAttributes.ArgParseAttributes.CommandAttribute, pyAttributes.ArgParseAttributes.DefaultAttribute, pyAttributes.ArgParseAttributes.CommandGroupAttribute</p></object></div>
+</section>
+</section>
+<section id="mixins">
+<h2>MixIns<a class="headerlink" href="#mixins" title="Permalink to this heading">¶</a></h2>
+<section id="handlermixin">
+<h3>_HandlerMixin<a class="headerlink" href="#handlermixin" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._HandlerMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">_HandlerMixin</span></span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#_HandlerMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes._HandlerMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A mixin-class that offers a class field for a reference to a handler method
+and a matching property.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._HandlerMixin._handler">
+<span class="sig-name descname"><span class="pre">_handler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes._HandlerMixin._handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference to a method that is called to handle e.g. a sub-command.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._HandlerMixin.Handler">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Handler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes._HandlerMixin.Handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the handler method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="kwargsmixin">
+<h3>_KwArgsMixin<a class="headerlink" href="#kwargsmixin" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._KwArgsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">_KwArgsMixin</span></span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#_KwArgsMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes._KwArgsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A mixin-class that offers a class field for named parameters (<code class="docutils literal notranslate"><span class="pre">`**kwargs</span></code>)
+and a matching property.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._KwArgsMixin._kwargs">
+<span class="sig-name descname"><span class="pre">_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes._KwArgsMixin._kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary of additional keyword parameters.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._KwArgsMixin.KWArgs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KWArgs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes._KwArgsMixin.KWArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary of additional named parameters (<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>) passed to the
+attribute. These additional parameters are passed without modification to
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="argsmixin">
+<h3>_ArgsMixin<a class="headerlink" href="#argsmixin" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._ArgsMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">_ArgsMixin</span></span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#_ArgsMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes._ArgsMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes._KwArgsMixin" title="pyAttributes.ArgParseAttributes._KwArgsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">_KwArgsMixin</span></code></a></p>
+<p>A mixin-class that offers a class field for positional parameters (<code class="docutils literal notranslate"><span class="pre">`*args</span></code>)
+and a matching property.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._ArgsMixin._args">
+<span class="sig-name descname"><span class="pre">_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><span class="pre">Tuple</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes._ArgsMixin._args" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple of additional positional parameters.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes._ArgsMixin.Args">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><span class="pre">Tuple</span></a></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes._ArgsMixin.Args" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple of additional positional parameters (<code class="docutils literal notranslate"><span class="pre">*args</span></code>) passed to the
+attribute. These additional parameters are passed without modification to
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="helper-classes">
+<h2>Helper-Classes<a class="headerlink" href="#helper-classes" title="Permalink to this heading">¶</a></h2>
+<section id="argparsemixin">
+<h3>ArgParseMixin<a class="headerlink" href="#argparsemixin" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgParseMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">ArgParseMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#ArgParseMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgParseMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyAttributes.html#pyAttributes.AttributeHelperMixin" title="pyAttributes.AttributeHelperMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeHelperMixin</span></code></a></p>
+<p>Mixin-class to implement an <a class="reference external" href="https://docs.python.org/3/library/argparse.html#module-argparse" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a>-base command line argument
+processor.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgParseMixin.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#ArgParseMixin.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgParseMixin.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mixin-constructor expects an optional list of named parameters which
+are passed without modification to the <code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code> constructor.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgParseMixin.MainParser">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MainParser</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.10)"><span class="pre">ArgumentParser</span></a></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgParseMixin.MainParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the main parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgParseMixin.SubParsers">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SubParsers</span></span><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgParseMixin.SubParsers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sub-parsers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h2>
+<section id="commandgroupattribute">
+<h3>CommandGroupAttribute<a class="headerlink" href="#commandgroupattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandGroupAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">CommandGroupAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#CommandGroupAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandGroupAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute" title="pyAttributes.ArgParseAttributes.ArgParseAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgParseAttribute</span></code></a></p>
+<p><em>Experimental</em> attribute to group sub-commands in groups for better readability
+in a <code class="docutils literal notranslate"><span class="pre">prog.py</span> <span class="pre">--help</span></code> call.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandGroupAttribute.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#CommandGroupAttribute.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandGroupAttribute.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The constructor expects a ‘groupName’ which can be used to group sub-commands
+for better readability.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandGroupAttribute.GroupName">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GroupName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandGroupAttribute.GroupName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the command group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandGroupAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandGroupAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="defaultattribute">
+<h3>DefaultAttribute<a class="headerlink" href="#defaultattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.DefaultAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">DefaultAttribute</span></span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#DefaultAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.DefaultAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute" title="pyAttributes.ArgParseAttributes.ArgParseAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgParseAttribute</span></code></a>, <a class="reference internal" href="#pyAttributes.ArgParseAttributes._HandlerMixin" title="pyAttributes.ArgParseAttributes._HandlerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">_HandlerMixin</span></code></a></p>
+<p>Marks a handler method is <em>default</em> handler. This method is called if no
+sub-command is given. It’s an error if more then one method is annotated with
+this attribute.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.DefaultAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.DefaultAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="commandattribute">
+<h3>CommandAttribute<a class="headerlink" href="#commandattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">CommandAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#CommandAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute" title="pyAttributes.ArgParseAttributes.ArgParseAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgParseAttribute</span></code></a>, <a class="reference internal" href="#pyAttributes.ArgParseAttributes._HandlerMixin" title="pyAttributes.ArgParseAttributes._HandlerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">_HandlerMixin</span></code></a>, <a class="reference internal" href="#pyAttributes.ArgParseAttributes._KwArgsMixin" title="pyAttributes.ArgParseAttributes._KwArgsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">_KwArgsMixin</span></code></a></p>
+<p>Marks a handler method as responsible for the given ‘command’. This constructs
+a sub-command parser using <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandAttribute.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#CommandAttribute.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandAttribute.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The constructor expects a ‘command’ and an optional list of named parameters
+(keyword arguments) which are passed without modification to <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandAttribute.Command">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Command</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandAttribute.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the ‘command’ a sub-command parser adheres to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommandAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommandAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="argumentattribute">
+<h3>ArgumentAttribute<a class="headerlink" href="#argumentattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgumentAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">ArgumentAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#ArgumentAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgumentAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgParseAttribute" title="pyAttributes.ArgParseAttributes.ArgParseAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgParseAttribute</span></code></a>, <a class="reference internal" href="#pyAttributes.ArgParseAttributes._ArgsMixin" title="pyAttributes.ArgParseAttributes._ArgsMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">_ArgsMixin</span></code></a></p>
+<p>Base-class for all attributes storing arguments.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgumentAttribute.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#ArgumentAttribute.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgumentAttribute.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The constructor expects positional (<code class="docutils literal notranslate"><span class="pre">*args</span></code>) and/or named parameters
+(<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>) which are passed without modification to <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.ArgumentAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.ArgumentAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="switchargumentattribute">
+<h3>SwitchArgumentAttribute<a class="headerlink" href="#switchargumentattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.SwitchArgumentAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">SwitchArgumentAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#SwitchArgumentAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgumentAttribute" title="pyAttributes.ArgParseAttributes.ArgumentAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentAttribute</span></code></a></p>
+<p>Defines a switch argument like <code class="docutils literal notranslate"><span class="pre">--help</span></code>.</p>
+<p>Some of the named parameters passed to <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code>
+are predefined (or overwritten) to create a boolean parameter passed to the
+registered handler method. The boolean parameter is <code class="docutils literal notranslate"><span class="pre">True</span></code> if the switch
+argument is present in the commandline arguments, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.SwitchArgumentAttribute.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#SwitchArgumentAttribute.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The constructor expects positional (<code class="docutils literal notranslate"><span class="pre">*args</span></code>), the destination parameter
+name <code class="docutils literal notranslate"><span class="pre">dest</span></code> and/or named parameters   (<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>) which are passed to
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code>.</p>
+<p>To implement a switch argument, the following named parameters are
+predefined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">action=&quot;store_const&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const=True</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default=False</span></code></p></li>
+</ul>
+<p>This implements a boolean parameter passed to the handler method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.SwitchArgumentAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="commonargumentattribute">
+<h3>CommonArgumentAttribute<a class="headerlink" href="#commonargumentattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommonArgumentAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">CommonArgumentAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#CommonArgumentAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommonArgumentAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.ArgumentAttribute" title="pyAttributes.ArgParseAttributes.ArgumentAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentAttribute</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommonArgumentAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommonArgumentAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="commonswitchargumentattribute">
+<h3>CommonSwitchArgumentAttribute<a class="headerlink" href="#commonswitchargumentattribute" title="Permalink to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyAttributes.ArgParseAttributes.</span></span><span class="sig-name descname"><span class="pre">CommonSwitchArgumentAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyAttributes/ArgParseAttributes.html#CommonSwitchArgumentAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyAttributes.ArgParseAttributes.SwitchArgumentAttribute" title="pyAttributes.ArgParseAttributes.SwitchArgumentAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">SwitchArgumentAttribute</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute._classes">
+<span class="sig-name descname"><span class="pre">_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#pyAttributes.ArgParseAttributes.CommonSwitchArgumentAttribute._classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of classes, this pyAttribute was attached to.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt>Base attribute class <a class="reference internal" href="pyAttributes.html#pyAttributes.Attribute" title="pyAttributes.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a></dt><dd><p>Base-class for all attributes.</p>
+</dd>
+<dt>Helper mixin class <a class="reference internal" href="pyAttributes.html#pyAttributes.AttributeHelperMixin" title="pyAttributes.AttributeHelperMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeHelperMixin</span></code></a></dt><dd><p>Base-class for all helper mixins.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pyAttributes.html" class="btn btn-neutral float-left" title="pyAttributes Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="License.html" class="btn btn-neutral float-right" title="Apache License 2.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022, Patrick Lehmann.
+      <span class="lastupdated">Last updated on 05.10.2022.
+      </span></p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

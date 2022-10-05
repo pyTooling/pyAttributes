@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyAttributes Documentation &mdash; pyAttributes 2.5.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation/Updates" href="Installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> pyAttributes
+          </a>
+              <div class="version">
+                2.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ArgParse.html">ArgParse</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Attribute Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyAttributes.html">pyAttributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyAttributes.ArgParseAttributes.html">ArgParseAttributes Module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/coverage/">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/typing/">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Python Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pyAttributes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>pyAttributes Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pyTooling/pyAttributes/blob/refactoring/doc/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.xlarge {font-size: x-large; }
+</style><div class="line-block">
+<div class="line"><a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes"><img alt="Sourcecode on GitHub" src="https://img.shields.io/badge/pyTooling-pyAttributes-323131?logo=github&amp;longCache=true" style="height: 22px;" /></a> <a class="reference external" href="Code-License.html"><img alt="Code license" src="https://img.shields.io/pypi/l/pyAttributes?logo=GitHub&amp;label=code%20license" style="height: 22px;" /></a> <a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes/tags"><img alt="GitHub tag (latest SemVer incl. pre-release" src="https://img.shields.io/github/v/tag/pyTooling/pyAttributes?logo=GitHub&amp;include_prereleases" style="height: 22px;" /></a> <a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes/releases/latest"><img alt="GitHub release (latest SemVer incl. including pre-releases" src="https://img.shields.io/github/v/release/pyTooling/pyAttributes?logo=GitHub&amp;include_prereleases" style="height: 22px;" /></a> <a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes/releases"><img alt="GitHub release date" src="https://img.shields.io/github/release-date/pyTooling/pyAttributes?logo=GitHub" style="height: 22px;" /></a> <a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes/network/dependents"><img alt="Dependent repos (via libraries.io)" src="https://img.shields.io/librariesio/dependent-repos/pypi/pyAttributes" style="height: 22px;" /></a></div>
+<div class="line"><a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes/actions?query=workflow%3A%22Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish%22"><img alt="GitHub Workflow - Build and Test Status" src="https://img.shields.io/github/workflow/status/pyTooling/pyAttributes/Unit%20Testing,%20Coverage%20Collection,%20Package,%20Release,%20Documentation%20and%20Publish?label=Build%20and%20Test&amp;logo=GitHub%20Actions&amp;logoColor=FFFFFF" style="height: 22px;" /></a> <a class="reference external" href="https://www.codacy.com/gh/pyTooling/pyAttributes"><img alt="Codacy - Quality" src="https://img.shields.io/codacy/grade/08ef744c0b70490289712b02a7a4cebe?logo=codacy" style="height: 22px;" /></a> <a class="reference external" href="https://www.codacy.com/gh/pyTooling/pyAttributes"><img alt="Codacy - Line Coverage" src="https://img.shields.io/codacy/coverage/08ef744c0b70490289712b02a7a4cebe?logo=codacy" style="height: 22px;" /></a> <a class="reference external" href="https://codecov.io/gh/pyTooling/pyAttributes"><img alt="Codecov - Branch Coverage" src="https://img.shields.io/codecov/c/github/pyTooling/pyAttributes" style="height: 22px;" /></a> <a class="reference external" href="https://libraries.io/github/pyTooling/pyAttributes/sourcerank"><img alt="Libraries.io SourceRank" src="https://img.shields.io/librariesio/sourcerank/pypi/pyAttributes" style="height: 22px;" /></a></div>
+<div class="line"><a class="reference external" href="https://pypi.org/project/pyAttributes/"><img alt="PyPI - Tag" src="https://img.shields.io/pypi/v/pyAttributes?logo=PyPI" style="height: 22px;" /></a> <a class="reference internal" href="https://img.shields.io/pypi/status/pyAttributes?logo=PyPI"><img alt="PyPI - Status" src="https://img.shields.io/pypi/status/pyAttributes?logo=PyPI" style="height: 22px;" /></a> <a class="reference internal" href="https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pyAttributes?logo=PyPI" style="height: 22px;" /></a> <a class="reference external" href="https://libraries.io/github/pyTooling/pyAttributes"><img alt="Libraries.io status for latest release" src="https://img.shields.io/librariesio/release/pypi/pyAttributes" style="height: 22px;" /></a></div>
+<div class="line"><a class="reference external" href="Doc-License.html"><img alt="Documentation License" src="https://img.shields.io/badge/doc%20license-CC--BY%204.0-green" style="height: 22px;" /></a> <a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/"><img alt="Documentation - Read Now!" src="https://img.shields.io/badge/doc-read%20now%20%E2%9E%9A-blueviolet" style="height: 22px;" /></a></div>
+</div>
+<section id="pyattributes-documentation">
+<h1>pyAttributes Documentation<a class="headerlink" href="#pyattributes-documentation" title="Permalink to this heading">¶</a></h1>
+<p>The Python package pyAttributes offers implementations of .NET-like attributes
+realized with Python decorators. The package also offers a mixin-class to ease
+using classes having annotated methods.</p>
+<p>In addition, an ArgParseAttributes module is provided, which allows users to
+describe complex argparse commond-line argument parser structures in a
+declarative way.</p>
+<p>Attributes can create a complex class hierarchy. This helps in finding and
+filtering for annotated properties and user-defined data. These search
+operations can be called globally on the attribute classes or locally within
+an annotated class. Therefore the provided helper-mixin should be inherited.</p>
+<section id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this heading">¶</a></h2>
+<p><strong>Annotate properties and user-defined data to methods.</strong></p>
+<p class="rubric">Derived use cases:</p>
+<ul class="simple">
+<li><p>Describe a command line argument parser (argparse). <br />
+See <a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/ArgParse.html">pyAttributes Documentation -&gt; ArgParse Examples</a></p></li>
+<li><p>Mark class members for documentation. <br />
+See <a class="reference external" href="https://sphinxextensions.readthedocs.io/en/latest/">SphinxExtensions</a> -&gt; DocumentMemberAttribute</p></li>
+</ul>
+<p class="rubric">Planned implementations:</p>
+<ul class="simple">
+<li><p>Annotate user-defined data to classes.</p></li>
+<li><p>Describe test cases and test suits to get a cleaner syntax for Python’s unit
+tests.</p></li>
+</ul>
+</section>
+<section id="technique">
+<h2>Technique<a class="headerlink" href="#technique" title="Permalink to this heading">¶</a></h2>
+<p>The annotated data is stored in an additional <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> entry for each
+annotated method. By default the entry is called <code class="docutils literal notranslate"><span class="pre">__pyattr__</span></code>. Multiple
+attributes can be applied to the same method.</p>
+</section>
+<section id="common-attributes">
+<h2>Common Attributes<a class="headerlink" href="#common-attributes" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code> class</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeHelperMixin</span></code> class</p></li>
+</ul>
+</section>
+<section id="special-attributes">
+<h2>Special Attributes<a class="headerlink" href="#special-attributes" title="Permalink to this heading">¶</a></h2>
+<p>This package brings special attribute implementations for:</p>
+<ul class="simple">
+<li><p>Python’s <code class="xref py py-mod docutils literal notranslate"><span class="pre">ArgParse</span></code> including sub-parser support.</p></li>
+</ul>
+</section>
+<section id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://GitHub.com/Paebbels">Patrick Lehmann</a> (Maintainer)</p></li>
+<li><p><a class="reference external" href="https://GitHub.com/pyTooling/pyAttributes/graphs/contributors">and more…</a></p></li>
+</ul>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading">¶</a></h2>
+<p>This Python package (source code) is licensed under <a class="reference external" href="Code-License.html">Apache License 2.0</a>. <br />
+The accompanying documentation is licensed under <a class="reference external" href="Doc-License.html">Creative Commons - Attribution 4.0 (CC-BY 4.0)</a>.</p>
+<hr class="docutils" />
+<p>This document was generated on Oct 05, 2022 - 22:17.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation/Updates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022, Patrick Lehmann.
+      <span class="lastupdated">Last updated on 05.10.2022.
+      </span></p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArgParse &mdash; pyAttributes 2.5.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyAttributes Module" href="pyAttributes.html" />
+    <link rel="prev" title="Dependencies" href="Dependencies.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyAttributes
+          </a>
+              <div class="version">
+                2.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependencies.html">Dependencies</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ArgParse</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classic-argparse-example">Classic <code class="docutils literal notranslate"><span class="pre">argparse</span></code> Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#new-pyattributes-approach">New <code class="docutils literal notranslate"><span class="pre">pyAttributes</span></code> Approach</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Attribute Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyAttributes.html">pyAttributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyAttributes.ArgParseAttributes.html">ArgParseAttributes Module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/coverage/">Coverage Report ➚</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pyTooling.GitHub.io/pyAttributes/typing/">Static Type Check Report ➚</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Python Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyAttributes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ArgParse</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pyTooling/pyAttributes/blob/refactoring/doc/ArgParse.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.xlarge {font-size: x-large; }
+</style><section id="argparse">
+<h1>ArgParse<a class="headerlink" href="#argparse" title="Permalink to this heading">¶</a></h1>
+<p>Many people use Python’s <a class="reference external" href="https://docs.python.org/3/library/argparse.html#module-argparse" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> command line argument parser. This parser
+can handle sub-commands like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;message&quot;</span></code> where <em>commit</em> is a
+sub-command and <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">&lt;message&gt;</span></code> is an argument of this sub-command parser. It’s
+possible to assign a callback function to each individual sub-command parser.</p>
+<p class="rubric">Advantages</p>
+<ul class="simple">
+<li><p>Declarative description instead of imperative form.</p></li>
+<li><p>All options from argparse can be used.</p></li>
+<li><p>Declare accepted command-line arguments close to the responsible handler method</p></li>
+<li><p>Complex parsers can be distributed accross multiple classes and merged via multiple inheritance.</p></li>
+<li><p>Pre-defined argument templates like switch parameters (<code class="docutils literal notranslate"><span class="pre">--help</span></code>).</p></li>
+</ul>
+<section id="classic-argparse-example">
+<h2>Classic <code class="docutils literal notranslate"><span class="pre">argparse</span></code> Example<a class="headerlink" href="#classic-argparse-example" title="Permalink to this heading">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">tests/example/OldStyle.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="linenos">  2</span><span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span><span class="p">,</span> <span class="n">RawDescriptionHelpFormatter</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="linenos">  4</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="k">class</span> <span class="nc">ProgramBase</span><span class="p">():</span>
+<span class="linenos">  7</span>  <span class="n">HeadLine</span> <span class="o">=</span> <span class="s2">&quot;Simple ArgParse Test Program&quot;</span>
+<span class="linenos">  8</span>
+<span class="linenos">  9</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 10</span>    <span class="k">pass</span>
+<span class="linenos"> 11</span>
+<span class="linenos"> 12</span>  <span class="k">def</span> <span class="nf">PrintHeadline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 13</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{line}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">))</span>
+<span class="linenos"> 14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{headline: ^80s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">headline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HeadLine</span><span class="p">))</span>
+<span class="linenos"> 15</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{line}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">))</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span>
+<span class="linenos"> 18</span><span class="k">class</span> <span class="nc">Program</span><span class="p">(</span><span class="n">ProgramBase</span><span class="p">):</span>
+<span class="linenos"> 19</span>  <span class="n">MainParser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 20</span>  <span class="n">SubParsers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ArgumentParser</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 23</span>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span>    <span class="bp">self</span><span class="o">.</span><span class="n">_ConstructParser</span><span class="p">()</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span>  <span class="k">def</span> <span class="nf">_ConstructParser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 28</span>    <span class="c1"># create a commandline argument parser</span>
+<span class="linenos"> 29</span>    <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span>
+<span class="linenos"> 30</span>      <span class="n">description</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\</span>
+<span class="linenos"> 31</span><span class="s1">        This is the test program.</span>
+<span class="linenos"> 32</span><span class="s1">        &#39;&#39;&#39;</span><span class="p">),</span>
+<span class="linenos"> 33</span>      <span class="n">epilog</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.&quot;</span><span class="p">),</span>
+<span class="linenos"> 34</span>      <span class="n">formatter_class</span><span class="o">=</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+<span class="linenos"> 35</span>      <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span>
+<span class="linenos"> 36</span>    <span class="p">)</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span>    <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-q&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span>   <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;quiet&quot;</span><span class="p">,</span>   <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Reduce messages to a minimum.&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span>    <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;verbose&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print out detailed messages.&quot;</span><span class="p">)</span>
+<span class="linenos"> 40</span>    <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;--debug&quot;</span><span class="p">,</span>   <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>   <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable debug mode.&quot;</span><span class="p">)</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span>    <span class="c1"># create subparsers</span>
+<span class="linenos"> 43</span>    <span class="n">subParsers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s1">&#39;sub-command help&#39;</span><span class="p">)</span>
+<span class="linenos"> 44</span>    <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 45</span>
+<span class="linenos"> 46</span>    <span class="c1"># Default handler</span>
+<span class="linenos"> 47</span>    <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HandleDefault</span><span class="p">)</span>
+<span class="linenos"> 48</span>
+<span class="linenos"> 49</span>    <span class="c1"># Help handler</span>
+<span class="linenos"> 50</span>    <span class="n">HelpParser</span> <span class="o">=</span> <span class="n">subParsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Display help page(s) for the given command name.&quot;</span><span class="p">)</span>
+<span class="linenos"> 51</span>    <span class="n">HelpParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">metavar</span> <span class="o">=</span> <span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nargs</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;Print help page(s) for a command.&quot;</span><span class="p">)</span>
+<span class="linenos"> 52</span>    <span class="n">HelpParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HandleHelp</span><span class="p">)</span>
+<span class="linenos"> 53</span>    <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span><span class="p">[</span><span class="s2">&quot;help&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">HelpParser</span>
+<span class="linenos"> 54</span>
+<span class="linenos"> 55</span>    <span class="c1"># UserManagement commands</span>
+<span class="linenos"> 56</span>    <span class="n">CreateUserParser</span> <span class="o">=</span> <span class="n">subParsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;new-user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Create a new user.&quot;</span><span class="p">)</span>
+<span class="linenos"> 57</span>    <span class="n">CreateUserParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&lt;UserID&gt;&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;UserID&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;UserID - unique identifier&quot;</span><span class="p">)</span>
+<span class="linenos"> 58</span>    <span class="n">CreateUserParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&lt;Name&gt;&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The user&#39;s display name.&quot;</span><span class="p">)</span>
+<span class="linenos"> 59</span>    <span class="n">CreateUserParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HandleNewUser</span><span class="p">)</span>
+<span class="linenos"> 60</span>    <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span><span class="p">[</span><span class="s2">&quot;new-user&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CreateUserParser</span>
+<span class="linenos"> 61</span>
+<span class="linenos"> 62</span>    <span class="n">RemoveUserParser</span> <span class="o">=</span> <span class="n">subParsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;delete-user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Delete a user.&quot;</span><span class="p">)</span>
+<span class="linenos"> 63</span>    <span class="n">RemoveUserParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&lt;UserID&gt;&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;UserID&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;UserID - unique identifier&quot;</span><span class="p">)</span>
+<span class="linenos"> 64</span>    <span class="n">RemoveUserParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HandleDeleteUser</span><span class="p">)</span>
+<span class="linenos"> 65</span>    <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span><span class="p">[</span><span class="s2">&quot;delete-user&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">RemoveUserParser</span>
+<span class="linenos"> 66</span>
+<span class="linenos"> 67</span>    <span class="n">RemoveUserParser</span> <span class="o">=</span> <span class="n">subParsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;list-user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;List users.&quot;</span><span class="p">)</span>
+<span class="linenos"> 68</span>    <span class="n">RemoveUserParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--all&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;List all users.&#39;</span><span class="p">)</span>
+<span class="linenos"> 69</span>    <span class="n">RemoveUserParser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HandleListUser</span><span class="p">)</span>
+<span class="linenos"> 70</span>    <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span><span class="p">[</span><span class="s2">&quot;list-user&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">RemoveUserParser</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span>  <span class="k">def</span> <span class="nf">Run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 73</span>    <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="linenos"> 74</span>    <span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span>  <span class="k">def</span> <span class="nf">HandleDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="linenos"> 77</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos"> 78</span>    <span class="c1"># TODO: use dedent() and multi-line string</span>
+<span class="linenos"> 79</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleDefault:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span>  <span class="k">def</span> <span class="nf">HandleHelp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="linenos"> 82</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>    <span class="c1"># TODO: use dedent() and multi-line string</span>
+<span class="linenos"> 85</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleHelp:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  command=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 86</span>
+<span class="linenos"> 87</span>    <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 88</span>      <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+<span class="linenos"> 89</span>    <span class="k">elif</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">):</span>
+<span class="linenos"> 90</span>      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a recursion ...&quot;</span><span class="p">)</span>
+<span class="linenos"> 91</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 92</span>      <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 93</span>        <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span><span class="p">]</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+<span class="linenos"> 94</span>      <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+<span class="linenos"> 95</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span><span class="si">}</span><span class="s2"> is unknown.&quot;</span><span class="p">)</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>  <span class="k">def</span> <span class="nf">HandleNewUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="linenos"> 98</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos"> 99</span>
+<span class="linenos">100</span>    <span class="c1"># TODO: use dedent() and multi-line string</span>
+<span class="linenos">101</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleHelp:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  UserID=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">UserID</span><span class="si">!s}</span><span class="s2">  Name=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Name</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>
+<span class="linenos">103</span>  <span class="k">def</span> <span class="nf">HandleDeleteUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="linenos">104</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">105</span>
+<span class="linenos">106</span>    <span class="c1"># TODO: use dedent() and multi-line string</span>
+<span class="linenos">107</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleHelp:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  UserID=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">UserID</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">108</span>
+<span class="linenos">109</span>  <span class="k">def</span> <span class="nf">HandleListUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="linenos">110</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">111</span>
+<span class="linenos">112</span>    <span class="c1"># TODO: use dedent() and multi-line string</span>
+<span class="linenos">113</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleHelp:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  all=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">all</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">114</span>
+<span class="linenos">115</span>
+<span class="linenos">116</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">117</span>  <span class="n">prog</span> <span class="o">=</span> <span class="n">Program</span><span class="p">()</span>
+<span class="linenos">118</span>  <span class="n">prog</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="new-pyattributes-approach">
+<h2>New <code class="docutils literal notranslate"><span class="pre">pyAttributes</span></code> Approach<a class="headerlink" href="#new-pyattributes-approach" title="Permalink to this heading">¶</a></h2>
+<p>A better and more descriptive solution could look like this:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">tests/example/UserManager.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentDefaultsHelpFormatter</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">pyAttributes.ArgParseAttributes</span> <span class="kn">import</span> <span class="n">ArgParseMixin</span><span class="p">,</span> <span class="n">CommonSwitchArgumentAttribute</span><span class="p">,</span> <span class="n">DefaultAttribute</span><span class="p">,</span> <span class="n">CommandAttribute</span><span class="p">,</span> <span class="n">CommonArgumentAttribute</span><span class="p">,</span> <span class="n">ArgumentAttribute</span><span class="p">,</span> <span class="n">SwitchArgumentAttribute</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">class</span> <span class="nc">ProgramBase</span><span class="p">():</span>
+<span class="linenos"> 7</span>  <span class="n">HeadLine</span> <span class="o">=</span> <span class="s2">&quot;Simple ArgParse Test Program&quot;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="k">pass</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>  <span class="k">def</span> <span class="nf">PrintHeadline</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">13</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{line}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">))</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{headline: ^80s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">headline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">HeadLine</span><span class="p">))</span>
+<span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{line}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">))</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">class</span> <span class="nc">Program</span><span class="p">(</span><span class="n">ProgramBase</span><span class="p">,</span> <span class="n">ArgParseMixin</span><span class="p">):</span>
+<span class="linenos">19</span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">20</span>    <span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="c1"># call constructor of the main inheritance tree</span>
+<span class="linenos">23</span>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>    <span class="c1"># Call the constructor of the ArgParseMixin</span>
+<span class="linenos">26</span>    <span class="n">ArgParseMixin</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="linenos">27</span>      <span class="bp">self</span><span class="p">,</span>
+<span class="linenos">28</span>      <span class="n">description</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\</span>
+<span class="linenos">29</span><span class="s1">        This is the test program.</span>
+<span class="linenos">30</span><span class="s1">        &#39;&#39;&#39;</span><span class="p">),</span>
+<span class="linenos">31</span>      <span class="n">epilog</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">&quot;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.&quot;</span><span class="p">),</span>
+<span class="linenos">32</span>      <span class="n">formatter_class</span><span class="o">=</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">,</span>
+<span class="linenos">33</span>      <span class="n">add_help</span><span class="o">=</span><span class="kc">False</span>
+<span class="linenos">34</span>    <span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>  <span class="nd">@CommonSwitchArgumentAttribute</span><span class="p">(</span><span class="s2">&quot;-q&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">,</span>   <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;quiet&quot;</span><span class="p">,</span>   <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Reduce messages to a minimum.&quot;</span><span class="p">)</span>
+<span class="linenos">37</span>  <span class="nd">@CommonSwitchArgumentAttribute</span><span class="p">(</span><span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;verbose&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print out detailed messages.&quot;</span><span class="p">)</span>
+<span class="linenos">38</span>  <span class="nd">@CommonSwitchArgumentAttribute</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;--debug&quot;</span><span class="p">,</span>   <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>   <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable debug mode.&quot;</span><span class="p">)</span>
+<span class="linenos">39</span>  <span class="k">def</span> <span class="nf">Run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">40</span>    <span class="n">ArgParseMixin</span><span class="o">.</span><span class="n">Run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span>  <span class="nd">@DefaultAttribute</span><span class="p">()</span>
+<span class="linenos">44</span>  <span class="k">def</span> <span class="nf">HandleDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">45</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleDefault:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>  <span class="nd">@CommandAttribute</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Display help page(s) for the given command name.&quot;</span><span class="p">)</span>
+<span class="linenos">51</span>  <span class="nd">@ArgumentAttribute</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print help page(s) for a command.&quot;</span><span class="p">)</span>
+<span class="linenos">52</span>  <span class="k">def</span> <span class="nf">HandleHelp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">53</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleHelp:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  command=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span>    <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+<span class="linenos">58</span>      <span class="bp">self</span><span class="o">.</span><span class="n">MainParser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+<span class="linenos">59</span>    <span class="k">elif</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">):</span>
+<span class="linenos">60</span>      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a recursion ...&quot;</span><span class="p">)</span>
+<span class="linenos">61</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">62</span>      <span class="k">try</span><span class="p">:</span>
+<span class="linenos">63</span>        <span class="bp">self</span><span class="o">.</span><span class="n">SubParsers</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span><span class="p">]</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+<span class="linenos">64</span>      <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+<span class="linenos">65</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Command</span><span class="si">}</span><span class="s2"> is unknown.&quot;</span><span class="p">)</span>
+<span class="linenos">66</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span>  <span class="nd">@CommandAttribute</span><span class="p">(</span><span class="s2">&quot;new-user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Create a new user.&quot;</span><span class="p">)</span>
+<span class="linenos">69</span>  <span class="nd">@ArgumentAttribute</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&lt;UserID&gt;&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;UserID&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;UserID - unique identifier&quot;</span><span class="p">)</span>
+<span class="linenos">70</span>  <span class="nd">@ArgumentAttribute</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&lt;Name&gt;&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The user&#39;s display name.&quot;</span><span class="p">)</span>
+<span class="linenos">71</span>  <span class="k">def</span> <span class="nf">HandleNewUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">72</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleNewUser:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  UserID=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">UserID</span><span class="si">!s}</span><span class="s2">  Name=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Name</span><span class="si">!s}</span><span class="s2">  Limit=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">Limit</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">75</span>
+<span class="linenos">76</span>
+<span class="linenos">77</span>  <span class="nd">@CommandAttribute</span><span class="p">(</span><span class="s2">&quot;delete-user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Delete a user.&quot;</span><span class="p">)</span>
+<span class="linenos">78</span>  <span class="nd">@ArgumentAttribute</span><span class="p">(</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&lt;UserID&gt;&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;UserID&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;UserID - unique identifier&quot;</span><span class="p">)</span>
+<span class="linenos">79</span>  <span class="k">def</span> <span class="nf">HandleDeleteUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">80</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">81</span>
+<span class="linenos">82</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleDeleteUser:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  UserID=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">UserID</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">83</span>
+<span class="linenos">84</span>
+<span class="linenos">85</span>  <span class="nd">@CommandAttribute</span><span class="p">(</span><span class="s2">&quot;list-user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;List users.&quot;</span><span class="p">)</span>
+<span class="linenos">86</span>  <span class="nd">@SwitchArgumentAttribute</span><span class="p">(</span><span class="s1">&#39;--all&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;List all users.&#39;</span><span class="p">)</span>
+<span class="linenos">87</span>  <span class="k">def</span> <span class="nf">HandleListUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">88</span>    <span class="bp">self</span><span class="o">.</span><span class="n">PrintHeadline</span><span class="p">()</span>
+<span class="linenos">89</span>
+<span class="linenos">90</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HandleListUser:</span><span class="se">\n</span><span class="s2">  quiet=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">quiet</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  verbose=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="si">!s}</span><span class="se">\n</span><span class="s2">  debug=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">debug</span><span class="si">!s}</span><span class="se">\n\n</span><span class="s2">  all=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">all</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">91</span>
+<span class="linenos">92</span>
+<span class="linenos">93</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">94</span>  <span class="n">prog</span> <span class="o">=</span> <span class="n">Program</span><span class="p">()</span>
+<span class="linenos">95</span>  <span class="n">prog</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Dependencies.html" class="btn btn-neutral float-left" title="Dependencies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyAttributes.html" class="btn btn-neutral float-right" title="pyAttributes Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022, Patrick Lehmann.
+      <span class="lastupdated">Last updated on 05.10.2022.
+      </span></p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
